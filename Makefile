@@ -1,4 +1,5 @@
-CXXFLAGS = -std=c++14 -Wall
+CXXFLAGS = -Ofast -std=c++14 -Wall
+#CXXFLAGS = -g -std=c++14 -Wall
 
 all: hash
 
