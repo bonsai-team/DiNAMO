@@ -1,10 +1,9 @@
-COMP=g++
-OPT=-std=c++14 -Wall
+CXXFLAGS = -std=c++14 -Wall
 
 all: hash
 
 hash: hash.cpp
-	$(COMP) $(OPT) $^ -o $@
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
 	rm hash
