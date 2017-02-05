@@ -2,6 +2,8 @@
 #include <ios>
 #include <fstream>
 #include <string>
+#include <vector>
+
 using std::endl;
 using std::cout;
 using std::cin;
