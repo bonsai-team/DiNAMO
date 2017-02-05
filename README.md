@@ -3,9 +3,13 @@
 C++ implementation of Chadi Saad's algorithm
 
 Pour compiler :
+
     make std
+
 pour utiliser la librairie standard
+
     make sparse
+
 pour utiliser sparsepp
 
 Pour lancer un test de rapidité de la librairie standard (remplacer filename par le nom de fichier et X par la taille de k-mère désirée) :
