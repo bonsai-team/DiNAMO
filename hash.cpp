@@ -51,16 +51,6 @@ int main(int argc, char **argv) {
 
     InputParser input(argc, argv);
 
-
-/* Non fonctionnel, encounters devient out of scope
-    if(input.cmdOptionExists("-std")){
-        map<string, int> encounters;
-    }
-    else {
-        sparse_hash_map<string, int> encounters;
-    }
-
-*/
     /* Parsing filename */
 
     const std::string &filename = input.getCmdOption("-f");
@@ -80,10 +70,8 @@ int main(int argc, char **argv) {
     ifstream infile;
     infile.open(filename);
 
-    string data;
-    
-    sparse_hash_map<string, int> encounters;
-//  map<string, int> encounters;
+    string data; 
+    _MAP encounters;  //_MAP is defined at compilation time, check Makefile
 
     while(getline(infile, data)) {
         if(data.begin() == data.end() || *data.begin() == '>')
