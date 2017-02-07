@@ -12,4 +12,4 @@ std: hash.cpp
 clean:
 	rm hash
 
-.PHONY: all hash
+.PHONY: all sparse std clean
