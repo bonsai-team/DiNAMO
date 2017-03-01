@@ -10,6 +10,7 @@ using std::cin;
 using std::ifstream;
 using std::string;
 using std::atoi;
+using std::vector;
 
 /* Standard Library */
 #include <map>
@@ -28,11 +29,11 @@ class InputParser{
     public:
         InputParser (int &argc, char **argv){
             for (int i=1; i < argc; ++i)
-                this->tokens.push_back(std::string(argv[i]));
+                this->tokens.push_back(string(argv[i]));
         }
 
-        const std::string& getCmdOption(const std::string &option) const{
-            std::vector<std::string>::const_iterator itr;
+        const string& getCmdOption(const string &option) const{
+            vector<string>::const_iterator itr;
             itr =  std::find(this->tokens.begin(), this->tokens.end(), option);
             if (itr != this->tokens.end() && ++itr != this->tokens.end()){
                 return *itr;
@@ -40,13 +41,13 @@ class InputParser{
             return empty_string;
         }
 
-        bool cmdOptionExists(const std::string &option) const{
+        bool cmdOptionExists(const string &option) const{
             return std::find(this->tokens.begin(), this->tokens.end(), option)
                    != this->tokens.end();
         }
     private:
-        std::vector <std::string> tokens;
-        std::string empty_string;
+        vector <string> tokens;
+        string empty_string;
 };
 
 int main(int argc, char **argv) {
@@ -55,14 +56,14 @@ int main(int argc, char **argv) {
 
     /* Parsing filename */
 
-    const std::string &filename = input.getCmdOption("-f");
+    const string &filename = input.getCmdOption("-f");
     if (filename.empty()){
         exit(EXIT_FAILURE);
     }
 
     /* Parsing kmere's size */
 
-    const std::string &kmString = input.getCmdOption("-k");
+    const string &kmString = input.getCmdOption("-k");
     if (kmString.empty()){
         exit(EXIT_FAILURE);
     }
@@ -80,12 +81,13 @@ int main(int argc, char **argv) {
             continue;
         //data.pop_back(); //TODO second type of km parsing
 
-        for (unsigned int i=0; i <= data.size() - k; i++) {
+        for (unsigned long int i=0; i <= data.size() - k; i++) {
             string km = data.substr(i, k);
+            for (auto & c: km) c = toupper(c);
             ++encounters[km]; //pre-incrementing avoids unnecessary copies
-        }
+        }// maybe switch to readsome 50 for large files
     }
- 
+
     infile.close();
 
     for (auto const& iterator : encounters) {
