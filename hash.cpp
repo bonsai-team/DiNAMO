@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <deque>
 
 using std::endl;
 using std::cout;
@@ -11,6 +12,7 @@ using std::ifstream;
 using std::string;
 using std::atoi;
 using std::vector;
+using std::deque;
 
 /* Standard Library */
 #include <map>
@@ -68,24 +70,46 @@ int main(int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
 
-    int k = stoi(kmString);
+    unsigned int k = stoi(kmString);
 
     ifstream infile;
     infile.open(filename);
 
     string data; 
     _MAP encounters;  //_MAP is defined at compilation time, check Makefile
+    deque<char> deque(k);
+    bool dequeReady = false;
 
     while(getline(infile, data)) {
-        if(data.begin() == data.end() || *data.begin() == '>')
-            continue;
-        //data.pop_back(); //TODO second type of km parsing
+        if(data.begin() == data.end() || *data.begin() == '>') {
+            dequeReady = false;
+            deque.clear();
+        }
+        else {
 
-        for (unsigned long int i=0; i <= data.size() - k; i++) {
+            /* -- Important note --
+            The next for-loop is invalid for k=1, because the deque is set to ready at the end of the loop.
+            But having k=1 is not supposed to happen since it means user wants to count single nucleotides,
+            basically asking the count of A, T, C, G. It is not the goal of the programm.
+            */
+
+            for (unsigned int i = 0; i < data.size(); i++) {
+                deque.emplace_back(data[i]); //TODO check whether data[i] is valid
+                if (dequeReady) {
+                    string kmere(deque.begin(), deque.end());
+                    ++encounters[kmere];
+                    deque.pop_front();
+                }
+                else 
+                    if (deque.size() == (k-1))
+                        dequeReady = true;
+            }
+        }
+/*
             string km = data.substr(i, k);
             for (auto & c: km) c = toupper(c);
             ++encounters[km]; //pre-incrementing avoids unnecessary copies
-        }// maybe switch to readsome 50 for large files
+*/
     }
 
     infile.close();
@@ -95,4 +119,4 @@ int main(int argc, char **argv) {
     }
 }
 
-/* valgrind */
+
