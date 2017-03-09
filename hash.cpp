@@ -105,11 +105,6 @@ int main(int argc, char **argv) {
                         dequeReady = true;
             }
         }
-/*
-            string km = data.substr(i, k);
-            for (auto & c: km) c = toupper(c);
-            ++encounters[km]; //pre-incrementing avoids unnecessary copies
-*/
     }
 
     infile.close();
@@ -118,5 +113,4 @@ int main(int argc, char **argv) {
         cout << iterator.first << '\t' << iterator.second << endl;
     }
 }
-
 
