@@ -2,13 +2,13 @@ TIMECMD=/usr/bin/time
 FILE1=small.fasta
 FILE2=medium.fasta
 FILE3=chr22.fa
+SCRIPTDIR=`dirname "$(readlink -f "$0")"`
 
 if [[ $1 = "exec_time" ]]
 then
     yaxis="Secondes d'éxécution"
     graphTitle="Temps d'exécution en fonction de la taille des fichiers et de la taille des k-mères"
     TIMEOPT="-f %e"
-    echo "Bonjour"
 else
     yaxis="Mémoire maximum utilisée (en Ko)"
     graphTitle="Mémoire maximum utilisée en fonction de la taille des fichiers et de la taille des k-mères"
@@ -16,7 +16,7 @@ else
 fi
 
 #OTZ
-header="<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\n\n\t<title></title>\n</head>\n<body>\n\t<script src=\"https://code.highcharts.com/highcharts.js\"></script>\n\t<script src=\"https://code.highcharts.com/modules/exporting.js\"></script>\n\n\t<div id=\"container\" style=\"min-width: 400px; height: 400px; margin: 0 auto\"></div>\n\n\t<script type='text/javascript'>\n\nHighcharts.chart('container', {\n\tchart: {\n\t\ttype: 'column'\n\t},\n\ttitle: {\n\t\ttext: \"$graphTitle\"\n\t},\n\txAxis: {\n\t\tcategories: [\n\t\t\t'Petit fichier',\n\t\t\t'Fichier moyen',\n\t\t\t'Grand fichier'\n\t\t]\n\t},\n\tyAxis: [{\n\t\tmin: 0,\n\t\ttitle: {\n\t\t\ttext: \"$yaxis\"\n\t\t}\n\t}],\n\tplotOptions: {\n\t\tseries: {\n\t\t\tgrouping: false,\n\t\t\tshadow: false\n\t\t}\n\t},\n\tseries: [{\n\t\tname: 'Librairie Standard',\n\t\tid: 'S'\n\t}, {\n\t\tname: 'Sparsepp',\n\t\tid: 'C'\n\t}"
+header="<!DOCTYPE html>\n<html>\n<head>\n\t<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\">\n\n\t<title></title>\n</head>\n<body>\n\t<script src=\"$SCRIPTDIR/lib/highcharts.js\"></script>\n\t<script src=\"$SCRIPTDIR/lib/exporting.js\"></script>\n\n\t<div id=\"container\" style=\"min-width: 400px; height: 400px; margin: 0 auto\"></div>\n\n\t<script type='text/javascript'>\n\nHighcharts.chart('container', {\n\tchart: {\n\t\ttype: 'column'\n\t},\n\ttitle: {\n\t\ttext: \"$graphTitle\"\n\t},\n\txAxis: {\n\t\tcategories: [\n\t\t\t'Petit fichier',\n\t\t\t'Fichier moyen',\n\t\t\t'Grand fichier'\n\t\t]\n\t},\n\tyAxis: [{\n\t\tmin: 0,\n\t\ttitle: {\n\t\t\ttext: \"$yaxis\"\n\t\t}\n\t}],\n\tplotOptions: {\n\t\tseries: {\n\t\t\tgrouping: false,\n\t\t\tshadow: false\n\t\t}\n\t},\n\tseries: [{\n\t\tname: 'Librairie Standard',\n\t\tid: 'S'\n\t}, {\n\t\tname: 'Sparsepp',\n\t\tid: 'C'\n\t}"
 
 footer="]\n});\n\n</script>\n\n</body>\n\n</html>"
 
@@ -48,7 +48,7 @@ do
     echo -en "$($TIMECMD "$TIMEOPT" ./sparse -f $FILE2 -k $i 2>&1 >/dev/null), " >> graph.html
     echo -en "$($TIMECMD "$TIMEOPT" ./sparse -f $FILE3 -k $i 2>&1 >/dev/null)],\n" >> graph.html
     echo -en "\t\tpointPlacement: $pointPlacement,\n\t\tpointWidth: $sparse_pointWidth,\n\t\tlinkedTo: \"$sparse_id\"\n\t}" >> graph.html
-    
+
 done
 
 echo -e $footer >> graph.html
