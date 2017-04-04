@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <deque>
+#include "optionsParser.hpp"
 
 using std::endl;
 using std::cout;
@@ -15,43 +16,21 @@ using std::atoi;
 using std::vector;
 using std::deque;
 
-/* Standard Library */
-#include <map>
-using std::map;
+//=========================
+//  Library to use
+//=========================
 
-/* Sparsepp Library */
+/* Use Standard library */
+#if defined(__USE_STD_UNORDERED_MAP__)
+#include <unordered_map>
+using std::unordered_map;
+#define __MAP__ unordered_map<string, int>
+
+#else
 #include "lib/sparsepp.h"
 using spp::sparse_hash_map;
-
-/* Class to ease parsing
-see http://stackoverflow.com/questions/865668/how-to-parse-command-line-arguments-in-c */
-// TODO separate file for parser
-
-
-class InputParser{
-    public:
-        InputParser (int &argc, char **argv){
-            for (int i=1; i < argc; ++i)
-                this->tokens.emplace_back(string(argv[i]));
-        }
-
-        const string& getCmdOption(const string &option) const{
-            vector<string>::const_iterator itr;
-            itr =  std::find(this->tokens.begin(), this->tokens.end(), option);
-            if (itr != this->tokens.end() && ++itr != this->tokens.end()){
-                return *itr;
-            }
-            return empty_string;
-        }
-
-        bool cmdOptionExists(const string &option) const{
-            return std::find(this->tokens.begin(), this->tokens.end(), option)
-                   != this->tokens.end();
-        }
-    private:
-        vector <string> tokens;
-        string empty_string;
-};
+#define __MAP__ sparse_hash_map<string, int>
+#endif
 
 int main(int argc, char **argv) {
 
@@ -101,7 +80,7 @@ int main(int argc, char **argv) {
     }
 
     string data;
-    _MAP encounters;  //_MAP is defined at compilation time, check Makefile
+    __MAP__ encounters;  //__MAP__ is defined at compilation time, check Makefile
     deque<char> deque(k);
     bool dequeReady = false;
 
@@ -157,4 +136,17 @@ int main(int argc, char **argv) {
     for (auto const& iterator : encounters) {
         cout << iterator.first << '\t' << iterator.second << endl;
     }
+
+/*
+    vector<string> keys;
+    keys.reserve(encounters.size());
+    for (auto& it : encounters) {
+        keys.emplace_back(it.first);
+    }
+
+    std::sort (keys.begin(), keys.end());
+    for (auto& it : keys) {
+        cout << it << "\t" << encounters[it] << endl;
+    }
+*/
 }

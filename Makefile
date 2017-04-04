@@ -1,23 +1,34 @@
-CXXFLAGS = -Ofast -std=c++14 -Wall 
-#CXXFLAGS = -g -std=c++14 -Wall
+CXX = g++
+CXXFLAGS = -Ofast -std=c++14 -Wall
+CXXADDFLAGS = -MP -MD
+
+SRCS=hash.cpp optionsParser.cpp
+OBJS=$(subst .cpp,.o,$(SRCS))
+DEPS=$(subst .cpp,.d,$(SRCS))
 
 all: sparse
 
-sparse: hash.cpp lib/sparsepp.h
-	$(CXX) $(CXXFLAGS) -D_MAP="sparse_hash_map<string, int>" hash.cpp -o $@
+sparse: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(CXXADDFLAGS) -o $@ $(OBJS)
 
-std: hash.cpp
-	$(CXX) $(CXXFLAGS) -D_MAP="map<string, int>" $^ -o $@
+std: hash.cpp optionsParser.cpp
+	$(CXX) $(CXXFLAGS) -D __USE_STD_UNORDERED_MAP__ -c -o hash.o hash.cpp
+	$(CXX) $(CXXFLAGS) -c -o optionsParser.o optionsParser.cpp
+	$(CXX) -o $@ optionsParser.o hash.o
+	rm -f $(OBJS)
 
-exectime: hash.cpp test.sh
-	bash ./test.sh exec_time
+exectime: test.sh
+	./test.sh exec_time
 
-maxmemory: hash.cpp test.sh
-	bash ./test.sh max_memory
+maxmemory: test.sh
+	./test.sh max_memory
 
 clean:
-	rm std
-	rm sparse
-	rm graph.html
+	rm -f $(OBJS) $(DEPS)
 
-.PHONY: all clean exectime maxmemory
+realclean: clean
+	rm -f ./std
+	rm -f ./sparse
+	rm -f ./graph.html
+
+.PHONY: all clean realclean exectime maxmemory sparse std

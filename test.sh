@@ -1,3 +1,5 @@
+#!/bin/bash
+
 TIMECMD=/usr/bin/time
 FILE1=small.fasta
 FILE2=medium.fasta
