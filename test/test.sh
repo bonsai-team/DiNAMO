@@ -1,9 +1,9 @@
 #!/bin/bash
 
 TIMECMD=/usr/bin/time
-FILE1=small.fasta
-FILE2=medium.fasta
-FILE3=chr22.fa
+FILE1=../sequences/small.fasta
+FILE2=../sequences/medium.fasta
+FILE3=../sequences/chr22.fa
 SCRIPTDIR=`dirname "$(readlink -f "$0")"`
 
 if [[ $1 = "exec_time" ]]
@@ -54,3 +54,5 @@ do
 done
 
 echo -e $footer >> graph.html
+
+make clean

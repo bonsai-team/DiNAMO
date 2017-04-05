@@ -1,6 +1,76 @@
-#include "hash.hpp"
+#if defined(__USE_STD_UNORDERED_MAP__)
+    /* Use Standard library */
+    #include <unordered_map>
+    using std::unordered_map;
+    #define __MAP__ unordered_map<string, int>
 
-sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &encounters, const string &filepath, unsigned int k) {
+#else
+    /* Use Sparse++ */
+    #include "../lib/sparsepp.h"
+    using spp::sparse_hash_map;
+    #define __MAP__ sparse_hash_map<string, int>
+
+#endif
+
+#include <iostream>
+using std::endl;
+using std::cerr;
+using std::cout;
+
+#include <fstream>
+using std::ifstream;
+
+#include <string>
+using std::string;
+
+#include <vector>
+using std::vector;
+
+#include <deque>
+using std::deque;
+
+#include <cstdlib>
+using std::atoi;
+
+#include "optionsParser.hpp"
+
+int main(int argc, char **argv) {
+
+    InputParser input(argc, argv);
+
+    /* Parsing filename */
+
+    const string &filepath = input.getCmdOption("-f");
+    if (filepath.empty()){
+        cerr << "You did not input the file name, try adding \"-f path/to/your/file\" to the end of your command line" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    /* Parsing kmere's size */
+
+    const string &kmString = input.getCmdOption("-k");
+    if (kmString.empty()){
+        cerr << "Please specify a k-mer size putting \"-k size\" to the end of your command line" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int signedK;
+    try {
+      signedK = stoi(kmString);
+    } catch (std::invalid_argument& e) {
+        cerr << "The k-mer size you entered (" << kmString << ") could not be converted to an int." << endl;
+        exit(EXIT_FAILURE);
+    } catch (std::out_of_range& e) {
+        cerr << "The k-mer size you entered (" << kmString << ") is too big !" << endl;
+        cerr << "Note that most of the k-mer will be unique when the size is >= 15" << endl;
+        exit(EXIT_FAILURE);
+    }
+    if (signedK < 0) {
+        cerr << "K-mer size must be greater than or equal to 2 !" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    unsigned int k = signedK;
 
     ifstream infile;
     infile.open(filepath);
@@ -12,6 +82,7 @@ sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &encoun
     }
 
     string data;
+    __MAP__ encounters;  //__MAP__ is defined at compilation time, check Makefile
     deque<char> deque(k);
     bool dequeReady = false;
 
@@ -63,5 +134,5 @@ sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &encoun
     }
 
     infile.close();
-    return encounters;
+    return 0;
 }
