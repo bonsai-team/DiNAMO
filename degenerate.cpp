@@ -73,7 +73,6 @@ void degenerate(sparse_hash_map<string, pair<int, int>> &motifs, sparse_hash_map
                 continue;
             }
             //this is where things can explode if the string is not sorted alphabetically
-            //std::cout << pos << "\t" << motif_it.first << "\t" << neighbors_nuc << std::endl;
             auto iupacs = nucs_to_iupacs.find(neighbors_nuc);
             assert(iupacs != nucs_to_iupacs.end());
 
