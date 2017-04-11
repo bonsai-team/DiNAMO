@@ -10,10 +10,13 @@
     //========================
 
     #include <vector>
-    #include <string>
-
-    using std::string;
     using std::vector;
+
+    #include <string>
+    using std::string;
+
+    #include <algorithm>
+    using std::find;
 
     //========================
 

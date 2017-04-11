@@ -29,6 +29,10 @@
     #include <cstdlib>
     using std::atoi;
 
+    #include <utility>
+    using std::pair;
+    using std::make_pair;
+
     //=====================
     //  Included libs
     //=====================
@@ -38,6 +42,6 @@
 
     //=====================
 
-    sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &, const string &, unsigned int);
+    void fill_hash_map(sparse_hash_map<string, pair<int, int>> &, const string &, unsigned int);
 
 #endif

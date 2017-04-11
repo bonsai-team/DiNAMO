@@ -1,6 +1,6 @@
 #include "hash.hpp"
 
-sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &encounters, const string &filepath, unsigned int k) {
+void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const string &filepath, unsigned int k) {
 
     ifstream infile;
     infile.open(filepath);
@@ -51,8 +51,12 @@ sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &encoun
                         break;
                 }
                 if (dequeReady) {
-                    string kmer(deque.begin(), deque.end());
-                    ++encounters[kmer];
+                    string motif(deque.begin(), deque.end());
+                    auto motif_it = encounters.find(motif);
+                    if (motif_it != encounters.end())
+                        ++((motif_it->second).first);
+                    else
+                        encounters.emplace(make_pair(motif, make_pair(1, -1)));
                     deque.pop_front();
                 }
                 else
@@ -63,5 +67,5 @@ sparse_hash_map<string, int> &fill_hash_map(sparse_hash_map<string, int> &encoun
     }
 
     infile.close();
-    return encounters;
+    return;
 }

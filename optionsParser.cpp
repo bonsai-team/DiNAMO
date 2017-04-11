@@ -1,4 +1,3 @@
-#include <algorithm>
 #include "optionsParser.hpp"
 
 
@@ -7,9 +6,9 @@ InputParser::InputParser(int &argc, char **argv){
         this->tokens.emplace_back(string(argv[i]));
 }
 
-const string& InputParser::getCmdOption(const string &option) const{
+const string &InputParser::getCmdOption(const string &option) const{
     vector<string>::const_iterator itr;
-    itr =  std::find(this->tokens.begin(), this->tokens.end(), option);
+    itr = find(this->tokens.begin(), this->tokens.end(), option);
     if (itr != this->tokens.end() && ++itr != this->tokens.end()){
         return *itr;
     }
@@ -17,6 +16,6 @@ const string& InputParser::getCmdOption(const string &option) const{
 }
 
 bool InputParser::cmdOptionExists(const string &option) const{
-    return std::find(this->tokens.begin(), this->tokens.end(), option)
+    return find(this->tokens.begin(), this->tokens.end(), option)
            != this->tokens.end();
 }
