@@ -28,21 +28,21 @@ void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const st
             basically asking the count of A, T, C, G. It is not what the program is meant for.
             */
 
-            for (unsigned int i = 0; i < data.size(); i++) {
+            for (char nuc : data) {
                 //filtering accepted characters in fasta file
-                switch(data[i]) {
+                switch(nuc) {
                     case 'A':
                     case 'C':
                     case 'G':
                     case 'T':
-                        deque.emplace_back(data[i]);
+                        deque.emplace_back(nuc);
                         break;
                     //lowercases to be added as uppercases
                     case 'a':
                     case 't':
                     case 'g':
                     case 'c':
-                        deque.emplace_back(toupper(data[i]));
+                        deque.emplace_back(toupper(nuc));
                         break;
                     //if character is invalid, emptying deque and refilling it
                     default:
