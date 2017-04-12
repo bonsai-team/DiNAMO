@@ -112,7 +112,7 @@ void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters,
 }
 
 void on_sequence_end(deque<char> &deque, sparse_hash_map<string, pair<int, int>> &encounters, unsigned int k) {
-    if(deque.size() >= k) {
+    if(deque.size() == k + p) {
         string motif(deque.begin(), next(deque.begin(), k));
         if(motif.find_first_not_of("ACGT") != string::npos)
             return;

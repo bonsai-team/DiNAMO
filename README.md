@@ -2,21 +2,40 @@
 
 C++ implementation of Chadi Saad's algorithm
 
+## Compilation
+
 Pour compiler :
 
-    make std
+    make
 
-pour utiliser la librairie standard
+Pour exécuter le programme vous devez fournir les options suivantes :
 
-    make sparse
+    -f chemin/vers/votre/fichier
+    -k taille_de_motif_désirée
 
-pour utiliser sparsepp
+Les options suivantes sont aussi disponibles :
+    _ limiter le nombre de positions qui pourront être dégénérées
 
-Pour lancer un test de rapidité sur la librairie standard et sparsepp (résultat produit dans graph.html) :
+        -d limite
+
+    _ ne compter que les motifs qui sont à une certaine position dans la séquence
+      (Veuillez noter que le comptage se fait depuis la fin de la séquence, ainsi la position 0 correspond au dernier motif)
+
+        -p position_du_motif
+
+
+# Tests
+
+Rendez-vous dans le répertoire test
+
+## Test de rapidité d'éxecution
+
+Pour lancer un test de rapidité entre la librairie standard et sparse++ (résultat produit dans graph.html) :
 
     make exectime
 
-Pour lancer un test de mémoire sur la librairie standard et sparsepp (résultat produit dans graph.html) :
+## Test d'empreinte mémoire
+
+Pour lancer un test de mémoire entre librairie standard et sparse++ (résultat produit dans graph.html) :
 
     make maxmemory
-
