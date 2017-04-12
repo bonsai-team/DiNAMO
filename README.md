@@ -20,6 +20,8 @@ Pour exécuter le programme vous devez fournir les options suivantes :
 
         ./artifact -f sequences/chr22.fa -k 6
 
+### Options
+
 Les options suivantes sont aussi disponibles :
 
   * limiter le nombre de positions qui pourront être dégénérées
@@ -28,9 +30,9 @@ Les options suivantes sont aussi disponibles :
 
   * ne compter que les motifs qui sont à une certaine position dans la séquence
 
-  (Veuillez noter que le comptage se fait depuis la fin de la séquence, ainsi la position 0 correspond au dernier motif)
-
         -p position_du_motif
+
+  (Veuillez noter que le comptage se fait depuis la fin de la séquence, ainsi la position 0 correspond au dernier motif de chaque séquence)
 
 
 # Tests
