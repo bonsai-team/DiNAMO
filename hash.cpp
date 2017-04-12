@@ -1,5 +1,6 @@
 #include "hash.hpp"
 
+
 void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const string &filepath, unsigned int k) {
 
     ifstream infile;
@@ -67,5 +68,59 @@ void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const st
     }
 
     infile.close();
+    return;
+}
+
+void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters, const string &filepath, unsigned int k, unsigned int p) {
+    ifstream infile;
+    infile.open(filepath);
+
+    // checking if the file could be opened
+    if (!infile.is_open()) {
+        cerr << "Error the file could not be opened, make sure that \"" << filepath << "\" exists and isn't a directory" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    string data;
+    deque<char> deque(k + p);
+
+    while(getline(infile, data)) {
+        if(data.begin() == data.end() || *data.begin() == '>') {
+            on_sequence_end(deque, encounters, k);
+            deque.clear();
+        }
+        else {
+            for (char nuc : data) {
+                if(deque.size() == k + p)
+                    deque.pop_front();
+                switch(nuc) {
+                    case 'a':
+                    case 'c':
+                    case 'g':
+                    case 't':
+                        deque.emplace_back(toupper(nuc));
+                        break;
+                    default :
+                        deque.emplace_back(nuc);
+                        break;
+                }
+            }
+        }
+    }
+    on_sequence_end(deque, encounters, k);
+    return;
+}
+
+void on_sequence_end(deque<char> &deque, sparse_hash_map<string, pair<int, int>> &encounters, unsigned int k) {
+    if(deque.size() >= k) {
+        string motif(deque.begin(), next(deque.begin(), k));
+        if(motif.find_first_not_of("ACGT") != string::npos)
+            return;
+        auto motif_it = encounters.find(motif);
+        if (motif_it != encounters.end())
+            ++((motif_it->second).first);
+        else
+            encounters.emplace(make_pair(motif, make_pair(1, -1)));
+    }
     return;
 }

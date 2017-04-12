@@ -41,7 +41,7 @@ int main (int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
     if (signed_k < 2) {
-        cerr << "The motif size must be greater than or equal to 2 !" << endl;
+        cerr << "The motif size must be greater than 1 !" << endl;
         exit(EXIT_FAILURE);
     }
 
@@ -77,6 +77,38 @@ int main (int argc, char **argv) {
         }
     }
 
+    unsigned int p = 0;
+
+    if(input.cmdOptionExists("-p")) {
+
+        const string &position = input.getCmdOption("-p");
+        int signed_p;
+        if (position.empty()) {
+            cerr << "You specified the option -p (count only motif that end at a certain pos) but did not input a value." << endl;
+            cerr << "Option usage : append \"-p X\" to the end of your command line." << endl;
+            cerr << "Description : count only motif that end at pos X in the sequence." << endl;
+            cerr << "Please note that the counting is made from the end (ie. -p 0 will only count the last motif of each sequence)." << endl;
+            exit(EXIT_FAILURE);
+        }
+        else {
+            try {
+                signed_p = stoi(position);
+            } catch (std::invalid_argument &e) {
+                cerr << "The position you entered (" << position << ") could not be converted to an int." << endl;
+                exit(EXIT_FAILURE);
+            } catch (std::out_of_range &e) {
+                cerr << "The position you entered (" << position << ") is too big !" << endl;
+                cerr << "If you believe you should be able to count a motif this far please consider opening a ticket." << endl;
+                exit(EXIT_FAILURE);
+            }
+            if (signed_p < 0) {
+                cerr << "The degeneration limit must be positive !" << endl;
+                exit(EXIT_FAILURE);
+            }
+            p = signed_p;
+        }
+    }
+
     //vector of pointers to hash_map
     vector<sparse_hash_map<string, pair<int, int>> *> hash_map_holder(d+1);
 
@@ -84,7 +116,13 @@ int main (int argc, char **argv) {
     hash_map_holder[0] = new sparse_hash_map<string, pair<int, int>>();
 
     //counting k-mers
-    fill_hash_map(*hash_map_holder[0], filename, k);
+    if(input.cmdOptionExists("-p")) {
+        fill_hash_map_from_pos(*hash_map_holder[0], filename, k, p);
+    }
+    else {
+        fill_hash_map(*hash_map_holder[0], filename, k);
+    }
+
 
     // for(auto const &it : *hash_map_holder[0]) {
     //     std::cout << it.first << "\t" << it.second.first << endl;

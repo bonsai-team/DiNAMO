@@ -33,6 +33,9 @@
     using std::pair;
     using std::make_pair;
 
+    #include <iterator>
+    using std::next;
+
     //=====================
     //  Included libs
     //=====================
@@ -43,5 +46,9 @@
     //=====================
 
     void fill_hash_map(sparse_hash_map<string, pair<int, int>> &, const string &, unsigned int);
+
+    void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &, const string &, unsigned int, unsigned int);
+
+    void on_sequence_end(deque<char> &, sparse_hash_map<string, pair<int, int>> &, unsigned int);
 
 #endif
