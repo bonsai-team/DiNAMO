@@ -1,0 +1,14 @@
+#Object files
+*.o
+
+#Dependency files
+*.d
+
+#Generated files
+artifact
+test/graph.html
+test/std
+test/sparse
+
+#Sequences
+sequences/*
