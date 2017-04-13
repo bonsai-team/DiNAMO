@@ -66,7 +66,6 @@ void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const st
             }
         }
     }
-
     infile.close();
     return;
 }
@@ -86,7 +85,7 @@ void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters,
 
     while(getline(infile, data)) {
         if(data.begin() == data.end() || *data.begin() == '>') {
-            on_sequence_end(deque, encounters, k);
+            on_sequence_end(deque, encounters, k, p);
             deque.clear();
         }
         else {
@@ -107,11 +106,11 @@ void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters,
             }
         }
     }
-    on_sequence_end(deque, encounters, k);
+    on_sequence_end(deque, encounters, k, p);
     return;
 }
 
-void on_sequence_end(deque<char> &deque, sparse_hash_map<string, pair<int, int>> &encounters, unsigned int k) {
+void on_sequence_end(deque<char> &deque, sparse_hash_map<string, pair<int, int>> &encounters, unsigned int k, unsigned int p) {
     if(deque.size() == k + p) {
         string motif(deque.begin(), next(deque.begin(), k));
         if(motif.find_first_not_of("ACGT") != string::npos)
