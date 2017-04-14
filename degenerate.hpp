@@ -25,13 +25,15 @@
     //     Libs needed
     //=====================
 
+    #include "node.hpp"
+
     #include "lib/sparsepp.h"
     using spp::sparse_hash_map;
 
     //=====================
 
-    string find_neighbor_motifs(sparse_hash_map<char, pair<string, int>> &, sparse_hash_map<char, pair<string, int>> &, const string &, unsigned int);
+    const string find_neighbor_motifs(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<char, pair<string, Node *>> &, const string &, unsigned int);
 
-    void degenerate(sparse_hash_map<string, pair<int, int>> &, sparse_hash_map<string, pair<int, int>> &, unsigned int);
+    void degenerate(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, unsigned int);
 
 #endif

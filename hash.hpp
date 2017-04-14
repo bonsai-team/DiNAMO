@@ -40,15 +40,17 @@
     //  Included libs
     //=====================
 
+    #include "node.hpp"
+
     #include "lib/sparsepp.h"
     using spp::sparse_hash_map;
 
     //=====================
 
-    void fill_hash_map(sparse_hash_map<string, pair<int, int>> &, const string &, unsigned int);
+    void fill_hash_map(sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, const string &, unsigned int);
 
-    void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &, const string &, unsigned int, unsigned int);
+    void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, const string &, unsigned int, unsigned int);
 
-    void on_sequence_end(deque<char> &, sparse_hash_map<string, pair<int, int>> &, unsigned int, unsigned int);
+    void on_sequence_end(deque<char> &, sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, unsigned int, unsigned int);
 
 #endif

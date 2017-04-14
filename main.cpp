@@ -7,6 +7,7 @@ using std::pair;
 #include "optionsParser.hpp"
 #include "hash.hpp"
 #include "degenerate.hpp"
+#include "node.hpp"
 
 
 int main (int argc, char **argv) {
@@ -110,19 +111,20 @@ int main (int argc, char **argv) {
     }
 
     //vector of pointers to hash_map
-    vector<sparse_hash_map<string, pair<int, int>> *> hash_map_holder(d+1);
+    vector<sparse_hash_map<string, pair<int, Node *>> *> hash_map_holder(d+1);
 
     //0_degree_motifs_hash_map
-    hash_map_holder[0] = new sparse_hash_map<string, pair<int, int>>();
+    hash_map_holder[0] = new sparse_hash_map<string, pair<int, Node *>>();
+
+    vector<Node *> node_holder(1);
 
     //counting k-mers
     if(input.cmdOptionExists("-p")) {
-        fill_hash_map_from_pos(*hash_map_holder[0], filename, k, p);
+        fill_hash_map_from_pos(*hash_map_holder[0], node_holder, filename, k, p);
     }
     else {
-        fill_hash_map(*hash_map_holder[0], filename, k);
+        fill_hash_map(*hash_map_holder[0], node_holder, filename, k);
     }
-
 
     // for(auto const &it : *hash_map_holder[0]) {
     //     std::cout << it.first << "\t" << it.second.first << endl;
@@ -130,17 +132,21 @@ int main (int argc, char **argv) {
     // delete(hash_map_holder[0]);
 
     for (unsigned int i=0; i < d; i++) {
-        hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, int>>();
-        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), k);
+        hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
+        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), node_holder, k);
     }
 
     for (unsigned int i=0; i <= d; i++) {
         for (auto const &it : *hash_map_holder[i]) {
-            std::cout << it.first << "\t" << it.second.first << endl;
+            std::cout << it.first << "\t" << it.second.second->get_count() << endl;
         }
     }
 
     for (auto const pointer : hash_map_holder) {
+        delete(pointer);
+    }
+
+    for (auto const pointer : node_holder) {
         delete(pointer);
     }
 }

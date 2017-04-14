@@ -1,7 +1,10 @@
 #include "hash.hpp"
 
 
-void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const string &filepath, unsigned int k) {
+void fill_hash_map( sparse_hash_map<string,
+                    pair<int, Node *>> &encounters,
+                    vector<Node *> &node_holder,
+                    const string &filepath, unsigned int k) {
 
     ifstream infile;
     infile.open(filepath);
@@ -55,9 +58,12 @@ void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const st
                     string motif(deque.begin(), deque.end());
                     auto motif_it = encounters.find(motif);
                     if (motif_it != encounters.end())
-                        ++((motif_it->second).first);
-                    else
-                        encounters.emplace(make_pair(motif, make_pair(1, -1)));
+                        (motif_it->second).second->increment_count();
+                    else {
+                        Node *new_node_ptr = new Node(motif);
+                        node_holder.push_back(new_node_ptr);
+                        encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
+                    }
                     deque.pop_front();
                 }
                 else
@@ -70,7 +76,11 @@ void fill_hash_map(sparse_hash_map<string, pair<int, int>> &encounters, const st
     return;
 }
 
-void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters, const string &filepath, unsigned int k, unsigned int p) {
+void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, Node *>> &encounters,
+                            vector<Node *> &node_holder,
+                            const string &filepath,
+                            unsigned int k,
+                            unsigned int p) {
     ifstream infile;
     infile.open(filepath);
 
@@ -85,7 +95,7 @@ void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters,
 
     while(getline(infile, data)) {
         if(data.begin() == data.end() || *data.begin() == '>') {
-            on_sequence_end(deque, encounters, k, p);
+            on_sequence_end(deque, encounters, node_holder, k, p);
             deque.clear();
         }
         else {
@@ -106,20 +116,28 @@ void fill_hash_map_from_pos(sparse_hash_map<string, pair<int, int>> &encounters,
             }
         }
     }
-    on_sequence_end(deque, encounters, k, p);
+    on_sequence_end(deque, encounters, node_holder, k, p);
     return;
 }
 
-void on_sequence_end(deque<char> &deque, sparse_hash_map<string, pair<int, int>> &encounters, unsigned int k, unsigned int p) {
+void on_sequence_end(   deque<char> &deque,
+                        sparse_hash_map<string, pair<int, Node *>> &encounters,
+                        vector<Node *> &node_holder,
+                        unsigned int k,
+                        unsigned int p) {
+
     if(deque.size() == k + p) {
         string motif(deque.begin(), next(deque.begin(), k));
         if(motif.find_first_not_of("ACGT") != string::npos)
             return;
         auto motif_it = encounters.find(motif);
         if (motif_it != encounters.end())
-            ++((motif_it->second).first);
-        else
-            encounters.emplace(make_pair(motif, make_pair(1, -1)));
+            (motif_it->second).second->increment_count();
+        else {
+            Node *new_node_ptr = new Node(motif);
+            node_holder.push_back(new_node_ptr);
+            encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
+        }
     }
     return;
 }

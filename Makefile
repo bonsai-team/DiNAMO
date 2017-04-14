@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -Ofast -std=c++14 -Wall
 CXXADDFLAGS = -MP -MD
 
-SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp
+SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp node.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 DEPS=$(subst .cpp,.d,$(SRCS))
 
