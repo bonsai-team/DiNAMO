@@ -23,17 +23,21 @@
 
     private:
         string motif;
-        int count;
-        vector<Node *> in;
-        vector<Node *> out;
+        unsigned int positive_count;
+        unsigned int negative_count;
+        vector<Node *> successors;
+        vector<Node *> predecessors;
 
     public:
-        Node(string &);
-        void add_in_connection(Node *);
-        void add_out_connection(Node *);
-        unsigned int get_count();
-        void increment_count();
-        void set_count(unsigned int);
+        Node(string &, unsigned int, unsigned int);
+        void add_predecessor(Node *);
+        void add_successor(Node *);
+        unsigned int get_positive_count();
+        unsigned int get_negative_count();
+        void increment_positive_count();
+        void increment_negative_count();
+        void set_positive_count(unsigned int);
+        void set_negative_count(unsigned int);
     };
 
 #endif

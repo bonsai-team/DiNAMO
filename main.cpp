@@ -16,9 +16,15 @@ int main (int argc, char **argv) {
 
     /* Parsing filename */
 
-    const string &filename = input.getCmdOption("-f");
-    if (filename.empty()){
-        cerr << "You did not input the file name, try adding \"-f path/to/your/file\" to the end of your command line" << endl;
+    const string &positive_filename = input.getCmdOption("-pf");
+    if (positive_filename.empty()){
+        cerr << "You did not input the positive sequence file, try adding \"-pf path/to/positive\" to the end of your command line" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    const string &negative_filename = input.getCmdOption("-nf");
+    if (negative_filename.empty()){
+        cerr << "You did not input the negative sequence file, try adding \"-nf path/to/negative\" to the end of your command line" << endl;
         exit(EXIT_FAILURE);
     }
 
@@ -120,10 +126,12 @@ int main (int argc, char **argv) {
 
     //counting k-mers
     if(input.cmdOptionExists("-p")) {
-        fill_hash_map_from_pos(*hash_map_holder[0], node_holder, filename, k, p);
+        fill_hash_map_from_pos_positive(*hash_map_holder[0], node_holder, positive_filename, k, p);
+        fill_hash_map_from_pos_negative(*hash_map_holder[0], node_holder, negative_filename, k, p);
     }
     else {
-        fill_hash_map(*hash_map_holder[0], node_holder, filename, k);
+        fill_hash_map_positive(*hash_map_holder[0], node_holder, positive_filename, k);
+        fill_hash_map_negative(*hash_map_holder[0], node_holder, negative_filename, k);
     }
 
     // for(auto const &it : *hash_map_holder[0]) {
@@ -138,7 +146,7 @@ int main (int argc, char **argv) {
 
     for (unsigned int i=0; i <= d; i++) {
         for (auto const &it : *hash_map_holder[i]) {
-            std::cout << it.first << "\t" << it.second.second->get_count() << endl;
+            std::cout << it.first << "\t" << it.second.second->get_negative_count() << "\t" << it.second.second->get_positive_count() << endl;
         }
     }
 
