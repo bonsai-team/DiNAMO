@@ -7,13 +7,6 @@ Node::Node(string &motif) {
     this->out = vector<Node *>();
 }
 
-Node::Node(string &motif, unsigned int count) {
-    this->motif = string(motif);
-    this->count = count;
-    this->in  = vector<Node *>();
-    this->out = vector<Node *>();
-}
-
 void Node::add_in_connection(Node *child) {
     this->in.push_back(child);
 }
@@ -28,4 +21,8 @@ unsigned int Node::get_count() {
 
 void Node::increment_count() {
     ++(this->count);
+}
+
+void Node::set_count(unsigned int count) {
+    this->count = count;
 }

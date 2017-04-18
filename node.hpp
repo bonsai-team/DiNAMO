@@ -29,11 +29,11 @@
 
     public:
         Node(string &);
-        Node(string &, unsigned int count);
         void add_in_connection(Node *);
         void add_out_connection(Node *);
         unsigned int get_count();
         void increment_count();
+        void set_count(unsigned int);
     };
 
 #endif
