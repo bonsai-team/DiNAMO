@@ -90,7 +90,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                 unsigned int degenerated_motif_positive_count = 0;
                 unsigned int degenerated_motif_negative_count = 0;
                 //node creation
-                Node *new_node_ptr = new Node(degenerated_motif, 0, 0);
+                Node *new_node_ptr = new Node(0, 0);
                 node_holder.push_back(new_node_ptr);
                 for (auto const &nuc : iupac_to_nucs[iupac]) {
                     //add links between nodes

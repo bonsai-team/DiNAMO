@@ -1,7 +1,6 @@
 #include "node.hpp"
 
-Node::Node(string &motif, unsigned int positive_count, unsigned int negative_count) {
-    this->motif = string(motif);
+Node::Node(unsigned int positive_count, unsigned int negative_count) {
     this->positive_count = positive_count;
     this->negative_count = negative_count;
     this->successors  = vector<Node *>();

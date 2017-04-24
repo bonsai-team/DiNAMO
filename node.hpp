@@ -22,14 +22,13 @@
     class Node {
 
     private:
-        string motif;
         unsigned int positive_count;
         unsigned int negative_count;
         vector<Node *> successors;
         vector<Node *> predecessors;
 
     public:
-        Node(string &, unsigned int, unsigned int);
+        Node(unsigned int, unsigned int);
         void add_predecessor(Node *);
         void add_successor(Node *);
         unsigned int get_positive_count();
