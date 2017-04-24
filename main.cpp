@@ -9,6 +9,7 @@ using std::pair;
 #include "degenerate.hpp"
 #include "node.hpp"
 #include "mutual_information.hpp"
+#include "fisher_test.hpp"
 
 
 int main (int argc, char **argv) {
@@ -167,7 +168,12 @@ int main (int argc, char **argv) {
             std::cout << it.first << "\t" << mutual_information(it.second.second->get_positive_count(),
                                                                 it.second.second->get_negative_count(),
                                                                 global_motif_count_positive,
-                                                                global_motif_count_negative)  << endl;
+                                                                global_motif_count_negative) << "\t" <<
+                                            fisher_test_p_value(it.second.second->get_positive_count(),
+                                                                it.second.second->get_negative_count(),
+                                                                global_motif_count_positive,
+                                                                global_motif_count_negative,
+                                                                one_tailed) << endl;
         }
     }
 
