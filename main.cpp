@@ -124,8 +124,6 @@ int main (int argc, char **argv) {
     //0_degree_motifs_hash_map
     hash_map_holder[0] = new sparse_hash_map<string, pair<int, Node *>>();
 
-    vector<Node *> node_holder(1);
-
     unsigned long long int global_motif_count_positive;
     unsigned long long int global_motif_count_negative;
 
@@ -135,18 +133,18 @@ int main (int argc, char **argv) {
     if(input.cmdOptionExists("-p")) {
 
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_from_pos_positive(*hash_map_holder[0], node_holder, positive_filename, k, p);
+        global_motif_count_positive = fill_hash_map_from_pos_positive(*hash_map_holder[0], positive_filename, k, p);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_from_pos_negative(*hash_map_holder[0], node_holder, negative_filename, k, p);
+        global_motif_count_negative = fill_hash_map_from_pos_negative(*hash_map_holder[0], negative_filename, k, p);
         std::clog << "\tNegative file read." << endl;
     }
     else {
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_positive(*hash_map_holder[0], node_holder, positive_filename, k);
+        global_motif_count_positive = fill_hash_map_positive(*hash_map_holder[0], positive_filename, k);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_negative(*hash_map_holder[0], node_holder, negative_filename, k);
+        global_motif_count_negative = fill_hash_map_negative(*hash_map_holder[0], negative_filename, k);
         std::clog << "\tNegative file read." << endl;
     }
 
@@ -158,13 +156,12 @@ int main (int argc, char **argv) {
         std::clog << "\tLevel " << i << " : degeneration ongoing" << endl;
 
         hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
-        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), node_holder, k);
+        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), k);
     }
 
     //affichage des résultats
     for (unsigned int i=0; i <= d; i++) {
         for (auto const &it : *hash_map_holder[i]) {
-            // std::cout << it.first << "\t" << it.second.second->get_negative_count() << "\t" << it.second.second->get_positive_count() << endl;
             std::cout << it.first << "\t" << mutual_information(it.second.second->get_positive_count(),
                                                                 it.second.second->get_negative_count(),
                                                                 global_motif_count_positive,
@@ -177,17 +174,21 @@ int main (int argc, char **argv) {
         }
     }
 
-    std::cout << "\t" << global_motif_count_negative << "\t" << global_motif_count_positive << endl;
-
     std::clog << endl << "======== Cleaning ========" << endl << endl;
+
+
+
+    std::clog << "\tNodes..." << endl;
+    int node_count = 0;
+    for (auto const &hash_map_reference : hash_map_holder) {
+        for (auto const &hash_map_value : *hash_map_reference ) {
+            delete(hash_map_value.second.second);
+            ++node_count;
+        }
+    }
 
     std::clog << "\tHashmaps..." << endl;
     for (auto const pointer : hash_map_holder) {
-        delete(pointer);
-    }
-
-    std::clog << "\tNodes..." << endl;
-    for (auto const pointer : node_holder) {
         delete(pointer);
     }
 }

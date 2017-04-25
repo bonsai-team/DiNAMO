@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -Ofast -std=c++14 -Wall
+CXXFLAGS = -std=c++14 -Wall -Ofast
 CXXADDFLAGS = -MP -MD
 
 SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp node.cpp mutual_information.cpp fisher_test.cpp

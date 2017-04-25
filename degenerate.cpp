@@ -58,7 +58,6 @@ const string find_neighbor_motifs(  sparse_hash_map<string, pair<int, Node *>> &
 
 void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                 sparse_hash_map<string, pair<int, Node *>> &degenerated_motifs,
-                vector<Node *> &node_holder,
                 const unsigned int kmer_size) {
 
     //pour chaque position
@@ -87,19 +86,31 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
             string degenerated_motif(motif_it.first);
             for (auto const &iupac : iupacs->second) {
                 degenerated_motif.replace(pos, 1, 1, iupac);
+                Node *new_node_ptr;
+                bool node_already_created = false;
                 unsigned int degenerated_motif_positive_count = 0;
                 unsigned int degenerated_motif_negative_count = 0;
-                //node creation
-                Node *new_node_ptr = new Node(0, 0);
-                node_holder.push_back(new_node_ptr);
+                auto entry_ptr = degenerated_motifs.find(degenerated_motif);
+                if(entry_ptr != degenerated_motifs.end()) {
+                    new_node_ptr = entry_ptr->second.second;
+                    node_already_created = true;
+                }
+                else {
+                    //node creation
+                    new_node_ptr = new Node(0, 0);
+                }
                 for (auto const &nuc : iupac_to_nucs[iupac]) {
                     //add links between nodes
                     new_node_ptr->add_successor(neighbor_motifs[nuc].second);
                     neighbor_motifs[nuc].second->add_predecessor(new_node_ptr);
+                    if(node_already_created)
+                        continue;
                     //add child count
                     degenerated_motif_positive_count += neighbor_motifs[nuc].second->get_positive_count();
                     degenerated_motif_negative_count += neighbor_motifs[nuc].second->get_negative_count();
                 }
+                if(node_already_created)
+                    continue;
                 new_node_ptr->set_positive_count(degenerated_motif_positive_count);
                 new_node_ptr->set_negative_count(degenerated_motif_negative_count);
                 degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, new_node_ptr)));

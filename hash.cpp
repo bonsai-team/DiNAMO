@@ -3,7 +3,6 @@
 
 unsigned long long fill_hash_map_positive( sparse_hash_map<string,
                     pair<int, Node *>> &encounters,
-                    vector<Node *> &node_holder,
                     const string &filepath, unsigned int k) {
 
     ifstream infile;
@@ -63,7 +62,6 @@ unsigned long long fill_hash_map_positive( sparse_hash_map<string,
                         (motif_it->second).second->increment_positive_count();
                     else {
                         Node *new_node_ptr = new Node(1, 0);
-                        node_holder.push_back(new_node_ptr);
                         encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
                     }
                     deque.pop_front();
@@ -80,7 +78,6 @@ unsigned long long fill_hash_map_positive( sparse_hash_map<string,
 
 unsigned long long fill_hash_map_negative(sparse_hash_map<string,
                             pair<int, Node *>> &encounters,
-                            vector<Node *> &node_holder,
                             const string &filepath, unsigned int k) {
 
     ifstream infile;
@@ -140,7 +137,6 @@ unsigned long long fill_hash_map_negative(sparse_hash_map<string,
                         (motif_it->second).second->increment_negative_count();
                     else {
                         Node *new_node_ptr = new Node(0, 1);
-                        node_holder.push_back(new_node_ptr);
                         encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
                     }
                     deque.pop_front();
@@ -156,7 +152,6 @@ unsigned long long fill_hash_map_negative(sparse_hash_map<string,
 }
 
 unsigned long long fill_hash_map_from_pos_positive(sparse_hash_map<string, pair<int, Node *>> &encounters,
-                                     vector<Node *> &node_holder,
                                      const string &filepath,
                                      unsigned int k,
                                      unsigned int p) {
@@ -175,7 +170,7 @@ unsigned long long fill_hash_map_from_pos_positive(sparse_hash_map<string, pair<
 
     while(getline(infile, data)) {
         if(data.begin() == data.end() || *data.begin() == '>') {
-            if(on_sequence_end_positive(deque, encounters, node_holder, k, p)) {
+            if(on_sequence_end_positive(deque, encounters, k, p)) {
                 ++global_motif_count_positive;
             }
             deque.clear();
@@ -198,14 +193,13 @@ unsigned long long fill_hash_map_from_pos_positive(sparse_hash_map<string, pair<
             }
         }
     }
-    if (on_sequence_end_positive(deque, encounters, node_holder, k, p)) {
+    if (on_sequence_end_positive(deque, encounters, k, p)) {
         ++global_motif_count_positive;
     }
     return global_motif_count_positive;
 }
 
 unsigned long long fill_hash_map_from_pos_negative(sparse_hash_map<string, pair<int, Node *>> &encounters,
-                                     vector<Node *> &node_holder,
                                      const string &filepath,
                                      unsigned int k,
                                      unsigned int p) {
@@ -224,7 +218,7 @@ unsigned long long fill_hash_map_from_pos_negative(sparse_hash_map<string, pair<
 
     while(getline(infile, data)) {
         if(data.begin() == data.end() || *data.begin() == '>') {
-            if(on_sequence_end_negative(deque, encounters, node_holder, k, p)) {
+            if(on_sequence_end_negative(deque, encounters, k, p)) {
                 ++global_motif_count_negative;
             }
             deque.clear();
@@ -247,7 +241,7 @@ unsigned long long fill_hash_map_from_pos_negative(sparse_hash_map<string, pair<
             }
         }
     }
-    if(on_sequence_end_negative(deque, encounters, node_holder, k, p)) {
+    if(on_sequence_end_negative(deque, encounters, k, p)) {
         ++global_motif_count_negative;
     }
     return global_motif_count_negative;
@@ -255,7 +249,6 @@ unsigned long long fill_hash_map_from_pos_negative(sparse_hash_map<string, pair<
 
 bool on_sequence_end_positive(deque<char> &deque,
                               sparse_hash_map<string, pair<int, Node *>> &encounters,
-                              vector<Node *> &node_holder,
                               unsigned int k,
                               unsigned int p) {
 
@@ -269,7 +262,6 @@ bool on_sequence_end_positive(deque<char> &deque,
             (motif_it->second).second->increment_positive_count();
         else {
             Node *new_node_ptr = new Node(1, 0);
-            node_holder.push_back(new_node_ptr);
             encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
         }
     }
@@ -278,7 +270,6 @@ bool on_sequence_end_positive(deque<char> &deque,
 
 bool on_sequence_end_negative(deque<char> &deque,
                               sparse_hash_map<string, pair<int, Node *>> &encounters,
-                              vector<Node *> &node_holder,
                               unsigned int k,
                               unsigned int p) {
 
@@ -291,7 +282,6 @@ bool on_sequence_end_negative(deque<char> &deque,
             (motif_it->second).second->increment_negative_count();
         else {
             Node *new_node_ptr = new Node(1, 0);
-            node_holder.push_back(new_node_ptr);
             encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
         }
     }

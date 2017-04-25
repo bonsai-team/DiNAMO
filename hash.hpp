@@ -47,13 +47,13 @@
 
     //=====================
 
-    unsigned long long int fill_hash_map_positive(sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, const string &, unsigned int);
-    unsigned long long int fill_hash_map_negative(sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, const string &, unsigned int);
+    unsigned long long int fill_hash_map_positive(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int);
+    unsigned long long int fill_hash_map_negative(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int);
 
-    unsigned long long int fill_hash_map_from_pos_positive(sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, const string &, unsigned int, unsigned int);
-    unsigned long long int fill_hash_map_from_pos_negative(sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, const string &, unsigned int, unsigned int);
+    unsigned long long int fill_hash_map_from_pos_positive(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, unsigned int);
+    unsigned long long int fill_hash_map_from_pos_negative(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, unsigned int);
 
-    bool on_sequence_end_positive(deque<char> &, sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, unsigned int, unsigned int);
-    bool on_sequence_end_negative(deque<char> &, sparse_hash_map<string, pair<int, Node *>> &, vector<Node *> &, unsigned int, unsigned int);
+    bool on_sequence_end_positive(deque<char> &, sparse_hash_map<string, pair<int, Node *>> &, unsigned int, unsigned int);
+    bool on_sequence_end_negative(deque<char> &, sparse_hash_map<string, pair<int, Node *>> &, unsigned int, unsigned int);
 
 #endif
