@@ -10,6 +10,7 @@ using std::pair;
 #include "node.hpp"
 #include "mutual_information.hpp"
 #include "fisher_test.hpp"
+#include "stat_container.hpp"
 
 
 int main (int argc, char **argv) {
@@ -159,36 +160,49 @@ int main (int argc, char **argv) {
         degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), k);
     }
 
-    //affichage des résultats
-    for (unsigned int i=0; i <= d; i++) {
-        for (auto const &it : *hash_map_holder[i]) {
-            std::cout << it.first << "\t" << mutual_information(it.second.second->get_positive_count(),
-                                                                it.second.second->get_negative_count(),
-                                                                global_motif_count_positive,
-                                                                global_motif_count_negative) << "\t" <<
-                                            fisher_test_p_value(it.second.second->get_positive_count(),
-                                                                it.second.second->get_negative_count(),
-                                                                global_motif_count_positive,
-                                                                global_motif_count_negative,
-                                                                one_tailed) << endl;
+    std::clog << endl << "======== Generating MI and p-value ========" << endl << endl;
+
+    //construction of a vector containing <motif, flag, MI, pvalue>
+    vector<StatContainer> stat_values;
+
+    int generated_containers = 0;
+    for (auto const &hash_map_reference : hash_map_holder) {
+        for (auto const &hash_map_entry_ref : *hash_map_reference ) {
+            // std::cout << hash_map_entry_ref.first << "\t" << hash_map_entry_ref.second.second->get_positive_count() << "\t" << hash_map_entry_ref.second.second->get_negative_count() << "\t" << global_motif_count_positive << "\t" << global_motif_count_negative << std::endl;
+            stat_values.emplace_back(StatContainer( hash_map_entry_ref.first,
+                                                    mutual_information (hash_map_entry_ref.second.second->get_positive_count(),
+                                                                        hash_map_entry_ref.second.second->get_negative_count(),
+                                                                        global_motif_count_positive,
+                                                                        global_motif_count_negative),
+                                                    fisher_test_p_value(hash_map_entry_ref.second.second->get_positive_count(),
+                                                                        hash_map_entry_ref.second.second->get_negative_count(),
+                                                                        global_motif_count_positive,
+                                                                        global_motif_count_negative,
+                                                                        one_tailed)
+                                                  )
+                                    );
+            generated_containers++;
         }
+    }
+
+    std::clog << "\tDone generating " << generated_containers << " containers and their content" << endl;
+    std::clog << "\tBytes allocated : " << generated_containers << " x " << sizeof(StatContainer) << endl;
+
+    std::clog << endl << "======== Simplification ========" << endl << endl;
+
+    std::clog << "\tSorting the containers by MI" << endl;
+    std::sort(stat_values.begin(), stat_values.end(), StatContainer::compare_by_mi);
+    for (auto &stat_container : stat_values)
+    {
+        std::cout << stat_container.get_motif() << "\t" << stat_container.get_mi() << std::endl;
     }
 
     std::clog << endl << "======== Cleaning ========" << endl << endl;
 
-
-
-    std::clog << "\tNodes..." << endl;
-    int node_count = 0;
-    for (auto const &hash_map_reference : hash_map_holder) {
-        for (auto const &hash_map_value : *hash_map_reference ) {
+    for (auto const &hash_map_ptr_reference : hash_map_holder) {
+        for (auto const &hash_map_value : *hash_map_ptr_reference ) {
             delete(hash_map_value.second.second);
-            ++node_count;
         }
-    }
-
-    std::clog << "\tHashmaps..." << endl;
-    for (auto const pointer : hash_map_holder) {
-        delete(pointer);
+        delete(hash_map_ptr_reference);
     }
 }

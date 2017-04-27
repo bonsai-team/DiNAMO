@@ -2,18 +2,32 @@
 
 const vector<char> nucleotides {'A','C','G','T'};
 
-sparse_hash_map<string, unordered_set<char>> nucs_to_iupacs {
-    {"ACGT", {'N','B','D','H','V','Y','S','K','R','W','M'}},
-    {"ACG" , {'M','R','S','V'}},
-    {"ACT" , {'M','W','Y','H'}},
-    {"AGT" , {'R','W','K','D'}},
-    {"CGT" , {'S','Y','K','B'}},
-    {"AC"  , {'M'}},
-    {"AG"  , {'R'}},
-    {"AT"  , {'W'}},
-    {"CG"  , {'S'}},
-    {"CT"  , {'Y'}},
-    {"GT"  , {'K'}}
+sparse_hash_map<string, vector<unordered_set<char>>> nucs_to_iupacs {
+    {"ACGT", {{'Y','S','K','R','W','M'}, {'B','D','H','V'}, {'N'}}},
+    {"ACG" , {{'M','R','S'}, {'V'}}},
+    {"ACT" , {{'M','W','Y'}, {'H'}}},
+    {"AGT" , {{'R','W','K'}, {'D'}}},
+    {"CGT" , {{'S','Y','K'}, {'B'}}},
+    {"AC"  , {{'M'}}},
+    {"AG"  , {{'R'}}},
+    {"AT"  , {{'W'}}},
+    {"CG"  , {{'S'}}},
+    {"CT"  , {{'Y'}}},
+    {"GT"  , {{'K'}}}
+};
+
+sparse_hash_map<char, unordered_set<char>> iupacs_dependencies {
+    {'N', {'B','D','H','V'}},
+    {'B', {'Y','S','K'}},
+    {'D', {'R','W','K'}},
+    {'H', {'Y','W','M'}},
+    {'V', {'R','S','M'}},
+    {'Y', {'C','T'}},
+    {'S', {'G','C'}},
+    {'K', {'G','T'}},
+    {'R', {'A','G'}},
+    {'W', {'A','T'}},
+    {'M', {'A','C'}}
 };
 
 sparse_hash_map<char, unordered_set<char>> iupac_to_nucs {
@@ -82,38 +96,58 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
             auto iupacs = nucs_to_iupacs.find(neighbors_nuc);
             assert(iupacs != nucs_to_iupacs.end());
 
-            // pour tous les iupacs dérivant des nucléotides
             string degenerated_motif(motif_it.first);
-            for (auto const &iupac : iupacs->second) {
-                degenerated_motif.replace(pos, 1, 1, iupac);
-                Node *new_node_ptr;
-                bool node_already_created = false;
-                unsigned int degenerated_motif_positive_count = 0;
-                unsigned int degenerated_motif_negative_count = 0;
-                auto entry_ptr = degenerated_motifs.find(degenerated_motif);
-                if(entry_ptr != degenerated_motifs.end()) {
-                    new_node_ptr = entry_ptr->second.second;
-                    node_already_created = true;
+
+            //TODO not required since lookup in a hashtable is O(1)
+            sparse_hash_map<char, Node *> iupac_to_node;
+            iupac_to_node.reserve(11);
+
+            // pour tous les iupacs dérivant des nucléotides
+            for (int degeneration_degree = 0; degeneration_degree < iupacs->second.size(); degeneration_degree++) {
+                for (auto const iupac : iupacs->second[degeneration_degree]) {
+
+                    degenerated_motif.replace(pos, 1, 1, iupac);
+                    Node *current_node_ptr;
+
+                    //checks if the node has already been created
+                    auto entry_ptr = degenerated_motifs.find(degenerated_motif);
+                    if(entry_ptr != degenerated_motifs.end()) {
+                        current_node_ptr = entry_ptr->second.second;
+                    }
+                    else {
+                        //node creation
+                        current_node_ptr = new Node(0, 0);
+                        unsigned int degenerated_motif_positive_count = 0;
+                        unsigned int degenerated_motif_negative_count = 0;
+                        for (auto const &nuc : iupac_to_nucs[iupac]) {
+                            //add child count
+                            degenerated_motif_positive_count += neighbor_motifs[nuc].second->get_positive_count();
+                            degenerated_motif_negative_count += neighbor_motifs[nuc].second->get_negative_count();
+                        }
+                        current_node_ptr->set_positive_count(degenerated_motif_positive_count);
+                        current_node_ptr->set_negative_count(degenerated_motif_negative_count);
+                        degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, current_node_ptr)));
+                    }
+                    //remembering the node that we created to be able to find them easily
+                    //TODO this is not required since lookup in a hash table is O(1)
+                    iupac_to_node[iupac] = current_node_ptr;
+
+                    //adding links between nodes
+
+                    //here we create the nodes that depends on the nucleotides first,
+                    //then we create the nodes that depends on the previous one, etc.
+                    if (degeneration_degree == 0) {
+                        for (char nuc : iupacs_dependencies[iupac]) {
+                            current_node_ptr->add_successor(neighbor_motifs[nuc].second);
+                            neighbor_motifs[nuc].second->add_predecessor(current_node_ptr);
+                        }
+                    } else {
+                        for (char iupac_dependency : iupacs_dependencies[iupac]) {
+                            current_node_ptr->add_successor(iupac_to_node[iupac_dependency]);
+                            iupac_to_node[iupac_dependency]->add_predecessor(current_node_ptr);
+                        }
+                    }
                 }
-                else {
-                    //node creation
-                    new_node_ptr = new Node(0, 0);
-                }
-                for (auto const &nuc : iupac_to_nucs[iupac]) {
-                    //add links between nodes
-                    new_node_ptr->add_successor(neighbor_motifs[nuc].second);
-                    neighbor_motifs[nuc].second->add_predecessor(new_node_ptr);
-                    if(node_already_created)
-                        continue;
-                    //add child count
-                    degenerated_motif_positive_count += neighbor_motifs[nuc].second->get_positive_count();
-                    degenerated_motif_negative_count += neighbor_motifs[nuc].second->get_negative_count();
-                }
-                if(node_already_created)
-                    continue;
-                new_node_ptr->set_positive_count(degenerated_motif_positive_count);
-                new_node_ptr->set_negative_count(degenerated_motif_negative_count);
-                degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, new_node_ptr)));
             }
         }
     }
