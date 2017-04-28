@@ -10,7 +10,7 @@ using std::pair;
 #include "node.hpp"
 #include "mutual_information.hpp"
 #include "fisher_test.hpp"
-#include "stat_container.hpp"
+#include "graph_simplification.hpp"
 
 
 int main (int argc, char **argv) {
@@ -33,30 +33,30 @@ int main (int argc, char **argv) {
 
     /* Parsing kmere's size */
 
-    const string &km_string = input.getCmdOption("-k");
-    if (km_string.empty()){
-        cerr << "Please specify a k-mer size putting \"-k size\" to the end of your command line" << endl;
+    const string &length_string = input.getCmdOption("-l");
+    if (length_string.empty()){
+        cerr << "Please input a motif length putting \"-l length\" to the end of your command line" << endl;
         exit(EXIT_FAILURE);
     }
 
-    int signed_k;
+    int signed_l;
     try {
-      signed_k = stoi(km_string);
+      signed_l = stoi(length_string);
     } catch (std::invalid_argument& e) {
-        cerr << "The k-mer size you input (" << km_string << ") could not be converted to an int." << endl;
+        cerr << "The motif length you input (" << length_string << ") could not be converted to an int." << endl;
         exit(EXIT_FAILURE);
     } catch (std::out_of_range& e) {
-        cerr << "The k-mer size you input (" << km_string << ") is too big !" << endl;
+        cerr << "The motif length you input (" << length_string << ") is too big !" << endl;
         cerr << "Note that most of the k-mer will be unique when the size is >= 15" << endl;
         exit(EXIT_FAILURE);
     }
-    if (signed_k < 2) {
-        cerr << "The motif size must be greater than 1 !" << endl;
+    if (signed_l < 2) {
+        cerr << "The motif length must be greater than 1 !" << endl;
         exit(EXIT_FAILURE);
     }
 
-    unsigned int k = signed_k;
-    unsigned int d = k;
+    unsigned int l = signed_l;
+    unsigned int d = l;
 
     if(input.cmdOptionExists("-d")) {
 
@@ -79,7 +79,7 @@ int main (int argc, char **argv) {
                 cerr << "Please note that at most k positions can be degenerated (k being the motif size you chose)." << endl;
                 exit(EXIT_FAILURE);
             }
-            if (signed_d < 0 || signed_d > signed_k) {
+            if (signed_d < 0 || signed_d > signed_l) {
                 cerr << "The degeneration limit must be positive, and <= k ! (k being the motif size you chose)" << endl;
                 exit(EXIT_FAILURE);
             }
@@ -134,18 +134,18 @@ int main (int argc, char **argv) {
     if(input.cmdOptionExists("-p")) {
 
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_from_pos_positive(*hash_map_holder[0], positive_filename, k, p);
+        global_motif_count_positive = fill_hash_map_from_pos_positive(*hash_map_holder[0], positive_filename, l, p);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_from_pos_negative(*hash_map_holder[0], negative_filename, k, p);
+        global_motif_count_negative = fill_hash_map_from_pos_negative(*hash_map_holder[0], negative_filename, l, p);
         std::clog << "\tNegative file read." << endl;
     }
     else {
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_positive(*hash_map_holder[0], positive_filename, k);
+        global_motif_count_positive = fill_hash_map_positive(*hash_map_holder[0], positive_filename, l);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_negative(*hash_map_holder[0], negative_filename, k);
+        global_motif_count_negative = fill_hash_map_negative(*hash_map_holder[0], negative_filename, l);
         std::clog << "\tNegative file read." << endl;
     }
 
@@ -157,44 +157,70 @@ int main (int argc, char **argv) {
         std::clog << "\tLevel " << i << " : degeneration ongoing" << endl;
 
         hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
-        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), k);
+        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l);
     }
-
-    std::clog << endl << "======== Generating MI and p-value ========" << endl << endl;
-
-    //construction of a vector containing <motif, flag, MI, pvalue>
-    vector<StatContainer> stat_values;
-
-    int generated_containers = 0;
-    for (auto const &hash_map_reference : hash_map_holder) {
-        for (auto const &hash_map_entry_ref : *hash_map_reference ) {
-            // std::cout << hash_map_entry_ref.first << "\t" << hash_map_entry_ref.second.second->get_positive_count() << "\t" << hash_map_entry_ref.second.second->get_negative_count() << "\t" << global_motif_count_positive << "\t" << global_motif_count_negative << std::endl;
-            stat_values.emplace_back(StatContainer( hash_map_entry_ref.first,
-                                                    mutual_information (hash_map_entry_ref.second.second->get_positive_count(),
-                                                                        hash_map_entry_ref.second.second->get_negative_count(),
-                                                                        global_motif_count_positive,
-                                                                        global_motif_count_negative),
-                                                    fisher_test_p_value(hash_map_entry_ref.second.second->get_positive_count(),
-                                                                        hash_map_entry_ref.second.second->get_negative_count(),
-                                                                        global_motif_count_positive,
-                                                                        global_motif_count_negative,
-                                                                        one_tailed)
-                                                  )
-                                    );
-            generated_containers++;
-        }
-    }
-
-    std::clog << "\tDone generating " << generated_containers << " containers and their content" << endl;
-    std::clog << "\tBytes allocated : " << generated_containers << " x " << sizeof(StatContainer) << endl;
 
     std::clog << endl << "======== Simplification ========" << endl << endl;
 
-    std::clog << "\tSorting the containers by MI" << endl;
-    std::sort(stat_values.begin(), stat_values.end(), StatContainer::compare_by_mi);
-    for (auto &stat_container : stat_values)
-    {
-        std::cout << stat_container.get_motif() << "\t" << stat_container.get_mi() << std::endl;
+    std::clog << "\tGenerating MIs..." << endl;
+    //TODO get the number of nodes to define the vector as an array
+    std::vector<pair<const string, pair<int, Node *> > *> mi_sorted_hash_map_entries;
+    std::vector<pair<const string, pair<int, Node *> > *> pvalue_sorted_hash_map_entries;
+
+    for (auto const &hash_map_reference : hash_map_holder) {
+        for (auto &hash_map_entry_ref : *hash_map_reference ) {
+            mi_sorted_hash_map_entries.push_back(&hash_map_entry_ref);
+            hash_map_entry_ref.second.second->calculate_mi(global_motif_count_positive, global_motif_count_negative);
+        }
+    }
+
+    std::clog << "\tDone generating MIs." << endl << endl;
+
+    std::clog << "\tSorting the entries by MI..." << endl << endl;
+    std::sort(  mi_sorted_hash_map_entries.begin(),
+                mi_sorted_hash_map_entries.end(),
+                [] (const auto entry_one, const auto entry_two) {
+                    return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
+                }
+             );
+
+    std::clog << "\tSimplificating graph..." << endl;
+
+    graph_simplification(mi_sorted_hash_map_entries, input.cmdOptionExists("-p"));
+
+    std::clog << "\tSimplification done !" << endl << endl;
+
+    std::clog << "\tGenerating pvalue of the remaining entries..." << endl;
+    unsigned int m = 0;
+    for (auto &entry : mi_sorted_hash_map_entries) {
+        if (entry->second.second->get_state() == validated) {
+            //std::cout << entry->first << "\t" << entry->second.second->get_mi() << "\t" << entry->second.second->get_pvalue() << std::endl;
+            entry->second.second->calculate_pvalue(global_motif_count_positive, global_motif_count_negative);
+            pvalue_sorted_hash_map_entries.push_back(entry);
+            m++;
+        }
+    }
+    std::clog << "\tDone generating pvalues." << endl << endl;
+
+    std::clog << "\tSorting the remaining entries by pvalue..." << endl;
+    std::sort(  pvalue_sorted_hash_map_entries.begin(),
+                pvalue_sorted_hash_map_entries.end(),
+                [] (const auto entry_one, const auto entry_two) {
+                    return entry_one->second.second->get_pvalue() < entry_two->second.second->get_pvalue();
+                }
+             );
+
+    std::clog << endl << "======== Results ========" << endl << endl;
+
+    std::clog << "\tApplying Holm-Bonferroni method to determine independance of observed values in both files" << endl;
+    std::clog << endl << "The appearance of the following values were found to depend on the file you look in" << endl;
+    unsigned int k = 0;
+    double alpha = 0.05;
+    while (pvalue_sorted_hash_map_entries[k]->second.second->get_pvalue()
+           <= (alpha / ((double)(m + 1 - k)))
+          ) {
+        std::cout << pvalue_sorted_hash_map_entries[k]->first << endl;
+        k++;
     }
 
     std::clog << endl << "======== Cleaning ========" << endl << endl;

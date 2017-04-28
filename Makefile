@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++14 -Wall -Ofast
 CXXADDFLAGS = -MP -MD
 
-SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp node.cpp mutual_information.cpp fisher_test.cpp stat_container.cpp
+SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp node.cpp mutual_information.cpp fisher_test.cpp graph_simplification.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 DEPS=$(subst .cpp,.d,$(SRCS))
 
