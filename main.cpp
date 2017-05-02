@@ -1,9 +1,6 @@
 #include "lib/sparsepp.h"
 using spp::sparse_hash_map;
 
-#include <utility>
-using std::pair;
-
 #include "optionsParser.hpp"
 #include "hash.hpp"
 #include "degenerate.hpp"
@@ -12,8 +9,15 @@ using std::pair;
 #include "fisher_test.hpp"
 #include "graph_simplification.hpp"
 
+#include <utility>
+using std::pair;
+
+#include <chrono>
+
 
 int main (int argc, char **argv) {
+
+    auto start_chrono_parsing_options = std::chrono::high_resolution_clock::now();
 
     InputParser input(argc, argv);
 
@@ -119,35 +123,48 @@ int main (int argc, char **argv) {
         }
     }
 
+    auto end_chrono_parsing_options = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> parsing_options_time = end_chrono_parsing_options - start_chrono_parsing_options;
+    std::clog << "Parsed options in : " << parsing_options_time.count() << " seconds\n";
+
     //vector of pointers to hash_map
     vector<sparse_hash_map<string, pair<int, Node *>> *> hash_map_holder(d+1);
 
     //0_degree_motifs_hash_map
     hash_map_holder[0] = new sparse_hash_map<string, pair<int, Node *>>();
 
-    unsigned long long int global_motif_count_positive;
-    unsigned long long int global_motif_count_negative;
+    unsigned int global_motif_count_positive;
+    unsigned int global_motif_count_negative;
 
     //counting k-mers
+
+    auto start_chrono_counting = std::chrono::high_resolution_clock::now();
     std::clog << "======== Counting ========" << endl << endl;
 
     if(input.cmdOptionExists("-p")) {
 
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_from_pos_positive(*hash_map_holder[0], positive_filename, l, p);
+        global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_from_pos_negative(*hash_map_holder[0], negative_filename, l, p);
+        global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false);
         std::clog << "\tNegative file read." << endl;
     }
     else {
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_positive(*hash_map_holder[0], positive_filename, l);
+        global_motif_count_positive = fill_hash_map(*hash_map_holder[0], positive_filename, l, true);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_negative(*hash_map_holder[0], negative_filename, l);
+        global_motif_count_negative = fill_hash_map(*hash_map_holder[0], negative_filename, l, false);
         std::clog << "\tNegative file read." << endl;
     }
+
+    auto end_chrono_counting = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> counting_time = end_chrono_counting - start_chrono_counting;
+    std::clog << "Counting done in : " << counting_time.count() << " seconds" << endl;
+
+
+    auto start_chrono_degeneration = std::chrono::high_resolution_clock::now();
 
     //degeneration
     std::clog << endl << "======== Degeneration ========" << endl << endl;
@@ -160,6 +177,12 @@ int main (int argc, char **argv) {
         degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l);
     }
 
+    auto end_chrono_degeneration = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> degeneration_time = end_chrono_degeneration - start_chrono_degeneration;
+    std::clog << "Degeneration done in : " << degeneration_time.count() << " seconds\n";
+
+
+    auto start_chrono_simplification = std::chrono::high_resolution_clock::now();
     std::clog << endl << "======== Simplification ========" << endl << endl;
 
     std::clog << "\tGenerating MIs..." << endl;
@@ -176,13 +199,14 @@ int main (int argc, char **argv) {
 
     std::clog << "\tDone generating MIs." << endl << endl;
 
-    std::clog << "\tSorting the entries by MI..." << endl << endl;
+    std::clog << "\tSorting entries by MI..." << endl << endl;
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
                     return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
                 }
              );
+
 
     std::clog << "\tSimplificating graph..." << endl;
 
@@ -194,7 +218,6 @@ int main (int argc, char **argv) {
     unsigned int m = 0;
     for (auto &entry : mi_sorted_hash_map_entries) {
         if (entry->second.second->get_state() == validated) {
-            //std::cout << entry->first << "\t" << entry->second.second->get_mi() << "\t" << entry->second.second->get_pvalue() << std::endl;
             entry->second.second->calculate_pvalue(global_motif_count_positive, global_motif_count_negative);
             pvalue_sorted_hash_map_entries.push_back(entry);
             m++;
@@ -210,6 +233,13 @@ int main (int argc, char **argv) {
                 }
              );
 
+    auto end_chrono_simplification = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> simplification_time = end_chrono_simplification - start_chrono_simplification;
+    std::clog << "Simplification made in : " << simplification_time.count() << " seconds\n";
+
+
+    auto start_chrono_holm_test = std::chrono::high_resolution_clock::now();
+
     std::clog << endl << "======== Results ========" << endl << endl;
 
     std::clog << "\tApplying Holm-Bonferroni method to determine independance of observed values in both files" << endl;
@@ -222,6 +252,10 @@ int main (int argc, char **argv) {
         std::cout << pvalue_sorted_hash_map_entries[k]->first << endl;
         k++;
     }
+
+    auto end_chrono_holm_test = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> holm_test_time = end_chrono_holm_test - start_chrono_holm_test;
+    std::clog << "Holm method performed in : " << holm_test_time.count() << " seconds\n";
 
     std::clog << endl << "======== Cleaning ========" << endl << endl;
 

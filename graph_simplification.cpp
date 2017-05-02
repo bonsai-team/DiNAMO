@@ -5,6 +5,7 @@ void graph_simplification(vector<pair<const string, pair<int, Node *> > *> mi_so
         Node *node_ptr = entry_ptr->second.second;
         switch (node_ptr->get_state()) {
         case candidate:
+            // std::cout << node_ptr->get_motif() << " validated" << std::endl;
             node_ptr->validate();
             for (Node *predecessor_ptr: node_ptr->get_predecessors()) {
                 suppress_predecessors(predecessor_ptr);
@@ -31,6 +32,7 @@ void suppress_predecessors(Node *node_ptr) {
     switch (node_ptr->get_state()) {
     case candidate:
     case better_predecessor:
+        // std::cout << "\tSuppressed " << node_ptr->get_motif() << std::endl;
         node_ptr->suppress();
         for (Node *predecessor_ptr: node_ptr->get_predecessors()) {
             suppress_predecessors(predecessor_ptr);
@@ -44,6 +46,7 @@ void suppress_predecessors(Node *node_ptr) {
 void tag_successors(Node *node_ptr) {
     switch (node_ptr->get_state()) {
     case candidate:
+        // std::cout << "\tTagged " << node_ptr->get_motif() << std::endl;
         node_ptr->flag();
         for (Node *successor_ptr: node_ptr->get_successors()) {
             tag_successors(successor_ptr);
@@ -58,6 +61,7 @@ void suppress_successors(Node *node_ptr) {
     switch (node_ptr->get_state()) {
     case candidate:
         node_ptr->suppress();
+        // std::cout << "\tSuppressed " << node_ptr->get_motif() << std::endl;
         for (Node *successor_ptr: node_ptr->get_successors()) {
             suppress_successors(successor_ptr);
         }

@@ -86,3 +86,11 @@ void Node::flag() {
 State Node::get_state() {
     return this->state;
 }
+
+void Node::set_motif(string motif) {
+    this->motif = motif;
+}
+
+string &Node::get_motif() {
+    return this->motif;
+}

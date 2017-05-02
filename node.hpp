@@ -21,11 +21,12 @@
 
     //===========================
 
-    enum State {validated, candidate, better_predecessor, deleted};
+    enum State {validated = 0, candidate = 1, better_predecessor = 2, deleted = 3};
 
     class Node {
 
     private:
+        // string motif;
         unsigned int positive_count;
         unsigned int negative_count;
         double mi;
@@ -58,6 +59,8 @@
         void suppress();
         void flag();
         State get_state();
+        // void set_motif(string motif);
+        // string &get_motif();
     };
 
 #endif

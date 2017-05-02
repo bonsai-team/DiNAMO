@@ -22,11 +22,11 @@ sparse_hash_map<char, unordered_set<char>> iupacs_dependencies {
     {'D', {'R','W','K'}},
     {'H', {'Y','W','M'}},
     {'V', {'R','S','M'}},
+    {'R', {'A','G'}},
     {'Y', {'C','T'}},
     {'S', {'G','C'}},
-    {'K', {'G','T'}},
-    {'R', {'A','G'}},
     {'W', {'A','T'}},
+    {'K', {'G','T'}},
     {'M', {'A','C'}}
 };
 
@@ -126,6 +126,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                         }
                         current_node_ptr->set_positive_count(degenerated_motif_positive_count);
                         current_node_ptr->set_negative_count(degenerated_motif_negative_count);
+                        // current_node_ptr->set_motif(degenerated_motif);
                         degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, current_node_ptr)));
                     }
                     //remembering the node that we created to be able to find them easily
@@ -138,11 +139,13 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                     //then we create the nodes that depends on the previous one, etc.
                     if (degeneration_degree == 0) {
                         for (char nuc : iupacs_dependencies[iupac]) {
+                            // std::cout << degenerated_motif  << "<->" << neighbor_motifs[nuc].second->get_motif() << "\t Position " << pos << endl;
                             current_node_ptr->add_successor(neighbor_motifs[nuc].second);
                             neighbor_motifs[nuc].second->add_predecessor(current_node_ptr);
                         }
                     } else {
                         for (char iupac_dependency : iupacs_dependencies[iupac]) {
+                            // std::cout << degenerated_motif  << "<->" << iupac_to_node[iupac_dependency]->get_motif() << "\t Position " << pos << endl;
                             current_node_ptr->add_successor(iupac_to_node[iupac_dependency]);
                             iupac_to_node[iupac_dependency]->add_predecessor(current_node_ptr);
                         }
