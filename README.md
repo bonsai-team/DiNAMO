@@ -14,11 +14,11 @@ Pour exécuter le programme vous devez fournir les options suivantes :
 
   * -nf *chemin/vers/votre/fichier/negatif*
   * -pf *chemin/vers/votre/fichier/positif*
-  * -k  *taille\_de\_motif\_désirée*
+  * -l  *taille\_de\_motif\_désirée*
 
   Une ligne de commande typique pourrait être :
 
-        ./artifact -nf sequences/controle.fa -pf sequences/signal.fa -k 6
+        ./artifact -nf sequences/controle.fa -pf sequences/signal.fa -l 6
 
 ### Options
 
