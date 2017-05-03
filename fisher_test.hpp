@@ -8,7 +8,7 @@
 
     #include <iostream>
     using std::cerr;
-    using std::endl; 
+    using std::endl;
 
     //=====================
     //  Lib dependencies
@@ -23,7 +23,7 @@
 
     //====================
 
-    enum Methods {one_tailed, odds_ratio, two_tailed};
+    enum Methods {one_sided_less, one_sided_greater, two_tailed};
 
     double fisher_test_p_value(unsigned int, unsigned int, unsigned int, unsigned int, Methods);
 

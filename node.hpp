@@ -6,8 +6,8 @@
     //      Dependencies
     //===========================
 
-    #include <string>
-    using std::string;
+    // #include <string>
+    // using std::string;
 
     #include <vector>
     using std::vector;
@@ -21,7 +21,7 @@
 
     //===========================
 
-    enum State {validated = 0, candidate = 1, better_predecessor = 2, deleted = 3};
+    enum State {validated = 0, unvisited = 1, tagged = 2, deleted = 3};
 
     class Node {
 
@@ -57,7 +57,7 @@
 
         void validate();
         void suppress();
-        void flag();
+        void tag();
         State get_state();
         // void set_motif(string motif);
         // string &get_motif();

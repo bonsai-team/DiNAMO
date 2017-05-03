@@ -12,6 +12,9 @@
     #include <utility>
     using std::pair;
 
+    #include <string>
+    using std::string;
+
     //=====================
     //  Lib dependencies
     //=====================
@@ -26,6 +29,8 @@
 
     void tag_successors(Node *);
 
-    void suppress_successors(Node *);
+    void tag_predecessors(Node *);
+
+    void suppress_successors_and_tag_predecessors(Node *);
 
 #endif

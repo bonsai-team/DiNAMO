@@ -240,22 +240,36 @@ int main (int argc, char **argv) {
 
     auto start_chrono_holm_test = std::chrono::high_resolution_clock::now();
 
-    std::clog << endl << "======== Results ========" << endl << endl;
+    std::clog << endl << "======== Holm-Bonferroni ========" << endl << endl;
 
     std::clog << "\tApplying Holm-Bonferroni method to determine independance of observed values in both files" << endl;
-    std::clog << endl << "The appearance of the following values were found to depend on the file you look in" << endl;
+
+    mi_sorted_hash_map_entries.clear();
+
     unsigned int k = 0;
     double alpha = 0.05;
     while (pvalue_sorted_hash_map_entries[k]->second.second->get_pvalue()
            <= (alpha / ((double)(m + 1 - k)))
           ) {
-        std::cout << pvalue_sorted_hash_map_entries[k]->first << endl;
+        mi_sorted_hash_map_entries.push_back(pvalue_sorted_hash_map_entries[k]);
         k++;
     }
+
+    std::sort(  mi_sorted_hash_map_entries.begin(),
+                mi_sorted_hash_map_entries.end(),
+                [] (const auto entry_one, const auto entry_two) {
+                    return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
+                }
+             );
 
     auto end_chrono_holm_test = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> holm_test_time = end_chrono_holm_test - start_chrono_holm_test;
     std::clog << "Holm method performed in : " << holm_test_time.count() << " seconds\n";
+
+    std::clog << endl << "======== Results ========" << endl << endl;
+    for (auto &entry : mi_sorted_hash_map_entries) {
+        std::cout << entry->first << "\t" << entry->second.second->get_mi() << endl;
+    }
 
     std::clog << endl << "======== Cleaning ========" << endl << endl;
 

@@ -5,7 +5,7 @@ Node::Node(unsigned int positive_count, unsigned int negative_count) {
     this->negative_count = negative_count;
     this->successors  = vector<Node *>();
     this->predecessors = vector<Node *>();
-    this->state = candidate;
+    this->state = unvisited;
 }
 
 void Node::add_predecessor(Node *child) {
@@ -60,7 +60,7 @@ void Node::calculate_pvalue(unsigned int global_motif_count_positive, unsigned i
                                        this->get_negative_count(),
                                        global_motif_count_positive,
                                        global_motif_count_negative,
-                                       one_tailed);
+                                       one_sided_greater);
 }
 
 double Node::get_mi() {
@@ -79,18 +79,18 @@ void Node::suppress() {
     this->state = deleted;
 }
 
-void Node::flag() {
-    this->state = better_predecessor;
+void Node::tag() {
+    this->state = tagged;
 }
 
 State Node::get_state() {
     return this->state;
 }
 
-void Node::set_motif(string motif) {
-    this->motif = motif;
-}
-
-string &Node::get_motif() {
-    return this->motif;
-}
+// void Node::set_motif(string motif) {
+//     this->motif = motif;
+// }
+//
+// string &Node::get_motif() {
+//     return this->motif;
+// }
