@@ -25,3 +25,6 @@ before_script:
   - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
   - g++ -v
   - export CXX=/usr/bin/g++-6
+
+notifications:
+    email: false
