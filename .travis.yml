@@ -41,6 +41,7 @@ script:
 
 after_success:
   - git fetch
-  - git checkout master
-  - git merge unstable
-  - git push origin master
+  - git branch -a
+  # - git checkout master
+  # - git merge unstable
+  # - git push origin master
