@@ -1,5 +1,7 @@
 # DiNAMO
 
+[![Build Status](https://travis-ci.org/bonsai-team/DiNAMO.svg?branch=master)](https://travis-ci.org/bonsai-team/DiNAMO)
+
 C++ implementation of Chadi Saad's algorithm
 
 ## Compilation
