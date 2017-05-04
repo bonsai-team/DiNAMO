@@ -1,0 +1,12 @@
+language: cpp
+compiler:
+  - gcc
+
+script: make #-j4 && make test -j4
+
+# need to install the Boost libraries to the sandbox
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install libboost-math-dev
