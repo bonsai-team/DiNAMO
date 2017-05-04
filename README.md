@@ -20,7 +20,7 @@ Pour exécuter le programme vous devez fournir les options suivantes :
 
   Une ligne de commande typique pourrait être :
 
-        ./artifact -nf sequences/controle.fa -pf sequences/signal.fa -l 6
+        ./dinamo -nf sequences/controle.fa -pf sequences/signal.fa -l 6
 
 ### Options
 
