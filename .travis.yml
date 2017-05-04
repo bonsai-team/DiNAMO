@@ -20,6 +20,7 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
+    # needed for modern c+++
     - g++-6
     - libboost-math-dev
 
@@ -28,13 +29,6 @@ branches:
   - unstable
 
 ################################################
-
-# need to install the Math Boost libraries to the sandbox
-# before_install:
-#   - sudo apt-get update -qq
-#
-# install:
-#   - sudo apt-get install libboost-math-dev
 
 # making sure we use latest g++
 before_script:
