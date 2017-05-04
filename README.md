@@ -1,4 +1,4 @@
-# artifact
+# DiNAMO
 
 C++ implementation of Chadi Saad's algorithm
 
@@ -33,20 +33,3 @@ Les options suivantes sont aussi disponibles :
         -p position_du_motif
 
   (Veuillez noter que le comptage se fait depuis la fin de la séquence, ainsi la position 0 correspond au dernier motif de chaque séquence)
-
-
-# Tests
-
-Rendez-vous dans le répertoire test
-
-## Test de rapidité d'éxecution
-
-Pour lancer un test de rapidité entre la librairie standard et sparse++ (résultat produit dans graph.html) :
-
-    make exectime
-
-## Test d'empreinte mémoire
-
-Pour lancer un test de mémoire entre librairie standard et sparse++ (résultat produit dans graph.html) :
-
-    make maxmemory
