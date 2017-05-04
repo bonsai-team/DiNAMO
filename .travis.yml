@@ -1,6 +1,16 @@
+dist: trusty
+sudo: require
+
 language: cpp
 compiler:
   - gcc
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
 
 script: make #-j4 && make test -j4
 
@@ -10,3 +20,8 @@ before_install:
 
 install:
   - sudo apt-get install libboost-math-dev
+
+before_script:
+  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  - g++ -v
+  - export CXX=/usr/bin/g++-6
