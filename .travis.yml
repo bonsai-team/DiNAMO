@@ -45,5 +45,5 @@ script:
   - make #-j4 && make test -j4
 
 after_success:
-  - "chmod a+x auto_merger.sh"
-  - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO auto_merger.sh"
+  - "chmod a+x ./travis_auto_merger.sh"
+  - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO travis_auto_merger.sh"
