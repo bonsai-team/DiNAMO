@@ -41,7 +41,7 @@ script: true
 
 after_success:
   - git fetch --all
-  - git checkout unstable
+  - git checkout master
   - git branch -a
   # - git checkout master
   # - git merge unstable
