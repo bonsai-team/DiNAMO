@@ -3,6 +3,10 @@ notifications:
 
 ###############################################
 
+secure: "cMkn0Em26i4QGIiJQ4FrvBaRqTe1mqeYAqCawpsjXQg8T3V8O7oDW67ZEq08A8GZlZ8IVUYpXOsOIkKcizWlVwwwIEH0GTxLXVAC3zYOMmVEts+ui58PQnwcZl3goGZ5oQDMFCaGKc84WsQ5qBVrK4OEEVcsw5kwNk3cmgc3nF/H1p7KgUL9sZtGoh6DwN4fLnJgwvYjsx1n/Unc7XuBy6Bb4sW09TOYyLUAlaTiuU3Eee3EZmKadYt1lDrv8d4GkEhBKeD1s9YTAPrC+f2t5PforO9BIVNibgk3PUcKnVyy6h8n2qWh4qHYT9KyFmqCCN2DuoWSXYj0igVxv8AM15Y89rIdJSqzw087PlK4QAI9j54EQCb8VK4p3Jvt1we0S+xxqzkxBOKgxdJx4LMuQz1dYlPoIVfoTHR5fWtgV/XLxXqa5rXOH7Lf9RFdGVI9jpa6nqVEXNAWLvR+b9ywPq59r1glgBXVnJSSMTvwXyfplP+Y+6AEok3vIQywou8bJ1uXzVy5epvNtolagbt74dM5MDcv+zga4/yLNpAZTuYB4u8qov+3ODWoRX+54X/LcheJw6Q+CsxAieJjnPCVDgK6itmzaHzj8wiBzaA01YbRzoLnumKJVzw5qm7MeJ4DWCQHmx+X2B2+rIt7OXlTyw+HexujV00M62FbZIEqV+I="
+
+###############################################
+
 dist: trusty
 sudo: require
 
@@ -40,9 +44,6 @@ script: true
   # - make #-j4 && make test -j4
 
 after_success:
-  - git fetch --all
-  - git checkout master
-  - git branch -a
-  # - git checkout master
-  # - git merge unstable
-  # - git push origin master
+  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
+  - "chmod a+x /tmp/travis-automerge"
+  - "BRANCHES_TO_MERGE_REGEX='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO /tmp/travis-automerge"
