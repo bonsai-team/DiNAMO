@@ -40,7 +40,7 @@ script: true
   # - make #-j4 && make test -j4
 
 after_success:
-  - git fetch
+  - git fetch --all
   - git checkout unstable
   - git branch -a
   # - git checkout master
