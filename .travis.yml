@@ -9,13 +9,13 @@ sudo: require
 language: cpp
 compiler:
   - gcc
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-6
+#
+# addons:
+#   apt:
+#     sources:
+#     - ubuntu-toolchain-r-test
+#     packages:
+#     - g++-6
 
 branches:
   only:
@@ -24,23 +24,24 @@ branches:
 ################################################
 
 # need to install the Math Boost libraries to the sandbox
-before_install:
-  - sudo apt-get update -qq
+before_install: true
+  # - sudo apt-get update -qq
 
-install:
-  - sudo apt-get install libboost-math-dev
+install: true
+  # - sudo apt-get install libboost-math-dev
 
 # making sure we use latest g++
-before_script:
-  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  - g++ -v
-  - export CXX=/usr/bin/g++-6
+before_script: true
+  # - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  # - g++ -v
+  # - export CXX=/usr/bin/g++-6
 
-script:
-  - make #-j4 && make test -j4
+script: true
+  # - make #-j4 && make test -j4
 
 after_success:
   - git fetch
+  - git checkout unstable
   - git branch -a
   # - git checkout master
   # - git merge unstable
