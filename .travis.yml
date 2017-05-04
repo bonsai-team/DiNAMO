@@ -14,13 +14,13 @@ sudo: require
 language: cpp
 compiler:
   - gcc
-#
-# addons:
-#   apt:
-#     sources:
-#     - ubuntu-toolchain-r-test
-#     packages:
-#     - g++-6
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-6
 
 branches:
   only:
@@ -29,22 +29,21 @@ branches:
 ################################################
 
 # need to install the Math Boost libraries to the sandbox
-before_install: true
-  # - sudo apt-get update -qq
+before_install:
+  - sudo apt-get update -qq
 
-install: true
-  # - sudo apt-get install libboost-math-dev
+install:
+  - sudo apt-get install libboost-math-dev
 
 # making sure we use latest g++
-before_script: true
-  # - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
-  # - g++ -v
-  # - export CXX=/usr/bin/g++-6
+before_script:
+  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  - g++ -v
+  - export CXX=/usr/bin/g++-6
 
-script: true
-  # - make #-j4 && make test -j4
+script:
+  - make #-j4 && make test -j4
 
 after_success:
-  - "curl -o /tmp/travis-automerge https://raw.githubusercontent.com/cdown/travis-automerge/master/travis-automerge"
-  - "chmod a+x /tmp/travis-automerge"
-  - "BRANCHES_TO_MERGE_REGEX='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO /tmp/travis-automerge"
+  - "chmod a+x auto_merger.sh"
+  - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO auto_merger.sh"
