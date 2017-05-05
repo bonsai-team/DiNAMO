@@ -6,7 +6,7 @@ SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp node.cpp mutual_informat
 OBJS=$(subst .cpp,.o,$(SRCS))
 DEPS=$(subst .cpp,.d,$(SRCS))
 
-all: artifact
+all: dinamo
 
 dinamo: $(OBJS)
 	$(CXX) $(CXXFLAGS) $(CXXADDFLAGS) -o $@ $(OBJS)

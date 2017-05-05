@@ -22,6 +22,7 @@ addons:
     packages:
     # needed for modern c+++
     - g++-6
+    # boost dependency (hypergeometric distribution needed to perform fisher exact test)
     - libboost-math-dev
 
 branches:

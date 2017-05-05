@@ -112,7 +112,7 @@ int main (int argc, char **argv) {
                 exit(EXIT_FAILURE);
             } catch (std::out_of_range &e) {
                 cerr << "The position you entered (" << position << ") is too big !" << endl;
-                cerr << "If you believe you should be able to count a motif this far please consider opening a ticket." << endl;
+                cerr << "If you believe you should be able to count a motif this far please consider creating an issue." << endl;
                 exit(EXIT_FAILURE);
             }
             if (signed_p < 0) {
@@ -121,6 +121,16 @@ int main (int argc, char **argv) {
             }
             p = signed_p;
         }
+    }
+
+    bool norc = false;
+
+    if(input.cmdOptionExists("-norc")) {
+        const string &norc_str = input.getCmdOption("-norc");
+        if (!norc_str.empty()) {
+            std::cerr << "warning : you provided an argument (" << norc_str << ") to the -norc option but this option doesn't require one." << endl;
+        }
+        norc = true;
     }
 
     auto end_chrono_parsing_options = std::chrono::high_resolution_clock::now();

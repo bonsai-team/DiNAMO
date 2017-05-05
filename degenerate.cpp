@@ -121,7 +121,16 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                         unsigned int degenerated_motif_negative_count = 0;
                         for (auto const &nuc : iupac_to_nucs[iupac]) {
                             //add child count
+                            if (degenerated_motif_positive_count > ~0 - neighbor_motifs[nuc].second->get_positive_count()) {
+                                std::cerr << "Error : an overflow occurred while setting the positive count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
+                                exit(EXIT_FAILURE);
+                            }
                             degenerated_motif_positive_count += neighbor_motifs[nuc].second->get_positive_count();
+
+                            if (degenerated_motif_negative_count > ~0 - neighbor_motifs[nuc].second->get_negative_count()) {
+                                std::cerr << "Error : an overflow occurred while setting the negative count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
+                                exit(EXIT_FAILURE);
+                            }
                             degenerated_motif_negative_count += neighbor_motifs[nuc].second->get_negative_count();
                         }
                         current_node_ptr->set_positive_count(degenerated_motif_positive_count);
