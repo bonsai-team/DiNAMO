@@ -5,7 +5,7 @@
 *.d
 
 #Generated files
-artifact
+dinamo
 test/graph.html
 test/std
 test/sparse

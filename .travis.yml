@@ -25,21 +25,18 @@ addons:
     # boost dependency (hypergeometric distribution needed to perform fisher exact test)
     - libboost-math-dev
 
-branches:
-  only:
-  - unstable
-
 ################################################
 
-# making sure we use latest g++
-before_script:
+unstable:
+  # making sure we use latest g++
+  before_script:
   - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
   - g++ -v
   - export CXX=/usr/bin/g++-6
 
-script:
+  script:
   - make #-j4 && make test -j4
 
-after_success:
+  after_success:
   - "chmod a+x ./travis_auto_merger.sh"
   - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO ./travis_auto_merger.sh"
