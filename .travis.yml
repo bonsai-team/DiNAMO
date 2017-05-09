@@ -25,10 +25,6 @@ addons:
     # boost dependency (hypergeometric distribution needed to perform fisher exact test)
     - libboost-math-dev
 
-branches:
-  only:
-  - unstable
-
 ################################################
 
 # making sure we use latest g++

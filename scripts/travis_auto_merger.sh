@@ -1,4 +1,5 @@
 #!/bin/bash -e
+if [ "$TRAVIS_BRANCH" = "unstable" ]; then
 
 : "${BRANCH_TO_MERGE?}" "${BRANCH_TO_MERGE_INTO?}"
 : "${GITHUB_SECRET_TOKEN?}" "${GITHUB_REPO?}"
@@ -33,3 +34,5 @@ push_uri="https://$GITHUB_SECRET_TOKEN@github.com/$GITHUB_REPO"
 git push "$push_uri" "$BRANCH_TO_MERGE_INTO" >/dev/null 2>&1
 git checkout -b "$TRAVIS_BRANCH"
 git push "$push_uri" "$TRAVIS_BRANCH" >/dev/null 2>&1
+
+fi
