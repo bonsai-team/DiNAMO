@@ -69,7 +69,7 @@ int main (int argc, char **argv) {
         if (degeneration_level.empty()) {
             cerr << "You specified the option -d (limit degeneration) but did not input a value." << endl;
             cerr << "Option usage : append \"-d X\" to the end of your command line." << endl;
-            cerr << "Description : Limits the degeneration to at most X positions per motif. Please note that X cannot be greater than k." << endl;
+            cerr << "Description : Limits the degeneration to at most X positions per motif. Please note that X cannot be greater than l." << endl;
             exit(EXIT_FAILURE);
         }
         else {
@@ -80,11 +80,11 @@ int main (int argc, char **argv) {
                 exit(EXIT_FAILURE);
             } catch (std::out_of_range &e) {
                 cerr << "The degeneration limit you entered (" << degeneration_level << ") is way too big !" << endl;
-                cerr << "Please note that at most k positions can be degenerated (k being the motif size you chose)." << endl;
+                cerr << "Please note that at most l positions can be degenerated (l being the motif size you chose)." << endl;
                 exit(EXIT_FAILURE);
             }
             if (signed_d < 0 || signed_d > signed_l) {
-                cerr << "The degeneration limit must be positive, and <= k ! (k being the motif size you chose)" << endl;
+                cerr << "The degeneration limit must be positive, and <= l ! (l being the motif size you chose)" << endl;
                 exit(EXIT_FAILURE);
             }
             d = signed_d;
@@ -123,14 +123,14 @@ int main (int argc, char **argv) {
         }
     }
 
-    bool norc = false;
+    bool rc = !input.cmdOptionExists("-p");
 
     if(input.cmdOptionExists("-norc")) {
         const string &norc_str = input.getCmdOption("-norc");
         if (!norc_str.empty()) {
             std::cerr << "warning : you provided an argument (" << norc_str << ") to the -norc option but this option doesn't require one." << endl;
         }
-        norc = true;
+        rc = false;
     }
 
     auto end_chrono_parsing_options = std::chrono::high_resolution_clock::now();
@@ -154,18 +154,18 @@ int main (int argc, char **argv) {
     if(input.cmdOptionExists("-p")) {
 
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true);
+        global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true, rc);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false);
+        global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false, rc);
         std::clog << "\tNegative file read." << endl;
     }
     else {
         std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map(*hash_map_holder[0], positive_filename, l, true);
+        global_motif_count_positive = fill_hash_map(*hash_map_holder[0], positive_filename, l, true, rc);
         std::clog << "\tPositive file read." << endl;
         std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map(*hash_map_holder[0], negative_filename, l, false);
+        global_motif_count_negative = fill_hash_map(*hash_map_holder[0], negative_filename, l, false, rc);
         std::clog << "\tNegative file read." << endl;
     }
 
@@ -186,6 +186,16 @@ int main (int argc, char **argv) {
         hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
         degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l);
     }
+    //
+    // for (auto &hash_map_ref : hash_map_holder) {
+    //     for (auto &it : *hash_map_ref) {
+    //         std::cout << it.first << "\t" << it.second.second->get_positive_count() << "\t" << it.second.second->get_negative_count() << endl;
+    //     }
+    // }
+    //
+    // std::cout << global_motif_count_positive << "\t" << global_motif_count_negative << endl;
+    //
+    // exit(EXIT_SUCCESS);
 
     auto end_chrono_degeneration = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> degeneration_time = end_chrono_degeneration - start_chrono_degeneration;
@@ -216,7 +226,6 @@ int main (int argc, char **argv) {
                     return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
                 }
              );
-
 
     std::clog << "\tSimplificating graph..." << endl;
 
@@ -281,12 +290,12 @@ int main (int argc, char **argv) {
         std::cout << entry->first << "\t" << entry->second.second->get_mi() << endl;
     }
 
-    std::clog << endl << "======== Cleaning ========" << endl << endl;
-
-    for (auto const &hash_map_ptr_reference : hash_map_holder) {
-        for (auto const &hash_map_value : *hash_map_ptr_reference ) {
-            delete(hash_map_value.second.second);
-        }
-        delete(hash_map_ptr_reference);
-    }
+    // std::clog << endl << "======== Cleaning ========" << endl << endl;
+    //
+    // for (auto const &hash_map_ptr_reference : hash_map_holder) {
+    //     for (auto const &hash_map_value : *hash_map_ptr_reference ) {
+    //         delete(hash_map_value.second.second);
+    //     }
+    //     delete(hash_map_ptr_reference);
+    // }
 }

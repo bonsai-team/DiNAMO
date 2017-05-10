@@ -36,6 +36,10 @@
     #include <iterator>
     using std::next;
 
+    #include <algorithm>
+    using std::transform;
+    using std::reverse;
+
     //=====================
     //  Included libs
     //=====================
@@ -47,10 +51,8 @@
 
     //=====================
 
-    unsigned int fill_hash_map(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, bool);
+    unsigned int fill_hash_map(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, bool, bool);
 
-    unsigned int fill_hash_map_from_pos(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, unsigned int, bool);
-
-    bool on_sequence_end(deque<char> &, sparse_hash_map<string, pair<int, Node *>> &, unsigned int, unsigned int, bool);
+    unsigned int fill_hash_map_from_pos(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, unsigned int, bool, bool);
 
 #endif
