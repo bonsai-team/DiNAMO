@@ -49,6 +49,8 @@
     #include "lib/sparsepp.h"
     using spp::sparse_hash_map;
 
+    #include "reverse_complement.hpp"
+
     //=====================
 
     unsigned int fill_hash_map(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, bool, bool);

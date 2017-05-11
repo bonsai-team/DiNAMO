@@ -30,10 +30,12 @@
     #include "lib/sparsepp.h"
     using spp::sparse_hash_map;
 
+    #include "reverse_complement.hpp"
+
     //=====================
 
     const string find_neighbor_motifs(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<char, pair<string, Node *>> &, const string &, unsigned int);
 
-    void degenerate(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<string, pair<int, Node *>> &, unsigned int);
+    void degenerate(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<string, pair<int, Node *>> &, unsigned int, bool);
 
 #endif

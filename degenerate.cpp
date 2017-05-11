@@ -72,7 +72,8 @@ const string find_neighbor_motifs(  sparse_hash_map<string, pair<int, Node *>> &
 
 void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                 sparse_hash_map<string, pair<int, Node *>> &degenerated_motifs,
-                const unsigned int kmer_size) {
+                const unsigned int kmer_size,
+                bool rc) {
 
     //pour chaque position
     for (unsigned int pos = 0; pos < kmer_size; pos++) {
@@ -80,7 +81,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
         //pour chaque motif dans la table
         for (auto const &motif_it : motifs) {
             //s'il n'a pas été marqué pour cette position ou si la position a déjà été dégénérée
-            if(motif_it.second.first == pos || !string("ACGT").find(motif_it.first[pos])) {
+            if(motif_it.second.first == pos || motif_it.second.first == kmer_size || !string("ACGT").find(motif_it.first[pos])) {
                 continue;
             }
 
@@ -96,6 +97,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
             auto iupacs = nucs_to_iupacs.find(neighbors_nuc);
             assert(iupacs != nucs_to_iupacs.end());
 
+            //string that will be transformed into the degenerated motif later
             string degenerated_motif(motif_it.first);
 
             //TODO not required since lookup in a hashtable is O(1)
@@ -137,6 +139,9 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                         current_node_ptr->set_negative_count(degenerated_motif_negative_count);
                         // current_node_ptr->set_motif(degenerated_motif);
                         degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, current_node_ptr)));
+                        if (rc) {
+                            degenerated_motifs.emplace(make_pair(reverse_complement(degenerated_motif), make_pair(kmer_size, current_node_ptr)));
+                        }
                     }
                     //remembering the node that we created to be able to find them easily
                     //TODO this is not required since lookup in a hash table is O(1)

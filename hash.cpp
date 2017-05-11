@@ -1,21 +1,5 @@
 #include "hash.hpp"
 
-sparse_hash_map<char, char> nuc_to_complement {
-    {'A','T'},
-    {'C','G'},
-    {'G','C'},
-    {'T','A'}
-};
-
-string reverse_complement(string &motif) {
-    string rv(motif);
-    transform(rv.begin(), rv.end(), rv.begin(),
-    [](char nuc) {return nuc_to_complement[nuc]; });
-    reverse(rv.begin(), rv.end());
-    // std::cout << motif << "\t" << rv << std::endl;
-    return rv;
-}
-
 void open_file(ifstream &infile, const string &filepath) {
     infile.open(filepath);
 
@@ -38,6 +22,7 @@ void inc_global_count(unsigned &global_motif_count, bool rc) {
 
 void on_valid_motif(string &motif,
                     sparse_hash_map<string, pair<int, Node *>> &encounters,
+                    unsigned int l,
                     bool is_positive_file,
                     bool rc
                    ) {
@@ -64,7 +49,7 @@ void on_valid_motif(string &motif,
         if (rc) {
             string rv_cmp(reverse_complement(motif));
             if (rv_cmp != motif)
-                encounters.emplace(make_pair(rv_cmp, make_pair(-1, new_node_ptr)));
+                encounters.emplace(make_pair(rv_cmp, make_pair(l, new_node_ptr)));
             else if (is_positive_file)
                 new_node_ptr->increment_positive_count();
             else new_node_ptr->increment_negative_count();
@@ -118,7 +103,7 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
                 if (dequeReady) {
                     inc_global_count(global_motif_count, rc);
                     string motif(deque.begin(), deque.end());
-                    on_valid_motif(motif, encounters, is_positive_file, rc);
+                    on_valid_motif(motif, encounters, l, is_positive_file, rc);
                     deque.pop_front();
                 }
                 else
@@ -144,7 +129,7 @@ bool on_sequence_end(deque<char> &deque,
         if(motif.find_first_not_of("ACGT") != string::npos)
             return false;
 
-        on_valid_motif(motif, encounters, is_positive_file, rc);
+        on_valid_motif(motif, encounters, l, is_positive_file, rc);
     }
     return true;
 }

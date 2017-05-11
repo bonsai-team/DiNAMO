@@ -59,8 +59,6 @@
         void suppress();
         void tag();
         State get_state();
-        // void set_motif(string motif);
-        // string &get_motif();
     };
 
 #endif

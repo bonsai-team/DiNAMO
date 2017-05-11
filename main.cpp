@@ -175,8 +175,6 @@ int main (int argc, char **argv) {
 
 
     auto start_chrono_degeneration = std::chrono::high_resolution_clock::now();
-
-    //degeneration
     std::clog << endl << "======== Degeneration ========" << endl << endl;
 
     for (unsigned int i=0; i < d; i++) {
@@ -184,18 +182,8 @@ int main (int argc, char **argv) {
         std::clog << "\tLevel " << i << " : degeneration ongoing" << endl;
 
         hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
-        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l);
+        degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l, rc);
     }
-    //
-    // for (auto &hash_map_ref : hash_map_holder) {
-    //     for (auto &it : *hash_map_ref) {
-    //         std::cout << it.first << "\t" << it.second.second->get_positive_count() << "\t" << it.second.second->get_negative_count() << endl;
-    //     }
-    // }
-    //
-    // std::cout << global_motif_count_positive << "\t" << global_motif_count_negative << endl;
-    //
-    // exit(EXIT_SUCCESS);
 
     auto end_chrono_degeneration = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> degeneration_time = end_chrono_degeneration - start_chrono_degeneration;
@@ -226,6 +214,7 @@ int main (int argc, char **argv) {
                     return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
                 }
              );
+
 
     std::clog << "\tSimplificating graph..." << endl;
 
