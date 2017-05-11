@@ -15,9 +15,9 @@ bool is_new_sequence(string &data) {
 }
 
 void inc_global_count(unsigned &global_motif_count, bool rc) {
-    if (rc)
+    if (rc) {
         global_motif_count += 2;
-    else global_motif_count++;
+    } else ++global_motif_count;
 }
 
 void on_valid_motif(string &motif,
@@ -126,12 +126,12 @@ bool on_sequence_end(deque<char> &deque,
 
     if(deque.size() == l + p) {
         string motif(deque.begin(), next(deque.begin(), l));
-        if(motif.find_first_not_of("ACGT") != string::npos)
-            return false;
-
-        on_valid_motif(motif, encounters, l, is_positive_file, rc);
+        if(motif.find_first_not_of("ACGT") == string::npos) {
+            on_valid_motif(motif, encounters, l, is_positive_file, rc);
+            return true;
+        }
     }
-    return true;
+    return false;
 }
 
 

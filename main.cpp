@@ -125,7 +125,7 @@ int main (int argc, char **argv) {
 
     bool rc = !input.cmdOptionExists("-p");
 
-    if(input.cmdOptionExists("-norc")) {
+    if(input.cmdOptionExists("-p") && input.cmdOptionExists("-norc")) {
         const string &norc_str = input.getCmdOption("-norc");
         if (!norc_str.empty()) {
             std::cerr << "warning : you provided an argument (" << norc_str << ") to the -norc option but this option doesn't require one." << endl;
@@ -151,23 +151,17 @@ int main (int argc, char **argv) {
     auto start_chrono_counting = std::chrono::high_resolution_clock::now();
     std::clog << "======== Counting ========" << endl << endl;
 
-    if(input.cmdOptionExists("-p")) {
+    std::clog << "\tBeginning to read positive file..." << endl;
+    if(input.cmdOptionExists("-p"))
+         global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true, rc);
+    else global_motif_count_positive = fill_hash_map         (*hash_map_holder[0], positive_filename, l,    true, rc);
+    std::clog << "\tPositive file read." << endl;
 
-        std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true, rc);
-        std::clog << "\tPositive file read." << endl;
-        std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false, rc);
-        std::clog << "\tNegative file read." << endl;
-    }
-    else {
-        std::clog << "\tBeginning to read positive file..." << endl;
-        global_motif_count_positive = fill_hash_map(*hash_map_holder[0], positive_filename, l, true, rc);
-        std::clog << "\tPositive file read." << endl;
-        std::clog << "\tBeginning to read negative file..." << endl;
-        global_motif_count_negative = fill_hash_map(*hash_map_holder[0], negative_filename, l, false, rc);
-        std::clog << "\tNegative file read." << endl;
-    }
+    std::clog << "\tBeginning to read negative file..." << endl;
+    if(input.cmdOptionExists("-p"))
+         global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false, rc);
+    else global_motif_count_negative = fill_hash_map         (*hash_map_holder[0], negative_filename, l,    false, rc);
+    std::clog << "\tNegative file read." << endl;
 
     auto end_chrono_counting = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> counting_time = end_chrono_counting - start_chrono_counting;
