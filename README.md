@@ -22,6 +22,10 @@ Pour exécuter le programme vous devez fournir les options suivantes :
 
         ./dinamo -nf sequences/controle.fa -pf sequences/signal.fa -l 6
 
+  Veuillez noter que le programme crée tous les motifs possibles par défaut, en comptant aussi leur reverse-complement.
+    - Pour ne considérer que les motifs situés à une certaine position dans les séquences, veuillez utiliser l'option -p. Ceci désactive aussi le compte des reverse-complement.
+    - Pour ne pas considérer les reverse-complement des motifs sans utiliser l'option -p, veuillez utiliser l'option -norc.
+
 ### Options
 
 Les options suivantes sont aussi disponibles :

@@ -100,8 +100,9 @@ int main (int argc, char **argv) {
         {'T', 0}
     };
 
-    if(input.cmdOptionExists("-p")) {
+    string meme_filename = input.getCmdOption("-o");
 
+    if(input.cmdOptionExists("-p")) {
         const string &position = input.getCmdOption("-p");
         int signed_p;
         if (position.empty()) {
@@ -127,6 +128,11 @@ int main (int argc, char **argv) {
                 exit(EXIT_FAILURE);
             }
             p = signed_p;
+        }
+    } else {
+        if (meme_filename.empty()){
+            std::clog << "warning : you did not input a meme output file. \"dinamo_results.meme\" will be created/overriden as default output." << endl;
+            meme_filename = "dinamo_results.meme";
         }
     }
 
@@ -280,7 +286,7 @@ int main (int argc, char **argv) {
     }
 
     if (!input.cmdOptionExists("-p"))
-        create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count, l);
+        create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count, l, meme_filename);
 
     // std::clog << endl << "======== Cleaning ========" << endl << endl;
     //

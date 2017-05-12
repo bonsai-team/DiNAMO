@@ -38,16 +38,15 @@ void generate_exact_successor_motifs(vector<string> &res, const string &motif, u
 int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
                      sparse_hash_map<string, pair<int, Node *>> &exact_motifs,
                      sparse_hash_map<char, unsigned int> &neg_nuc_count,
-                     unsigned int l) {
+                     unsigned int l,
+                     string &filename) {
 
     ofstream meme_file;
 
-    string meme_filename("results.meme");
-
-    meme_file.open(meme_filename, std::ios::out | std::ios::trunc);
+    meme_file.open(filename, std::ios::out | std::ios::trunc);
     // checking if the file could be opened
     if (!meme_file.is_open()) {
-        cerr << "Error opening meme file, make sure that the program has write access to \"" << meme_filename << "\"." << endl;
+        cerr << "Error opening meme file, make sure that the program has write access to \"" << filename << "\"." << endl;
         cerr << "Meme file creation has failed" << endl;
         return 1;
     }
