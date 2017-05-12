@@ -8,6 +8,7 @@ using spp::sparse_hash_map;
 #include "mutual_information.hpp"
 #include "fisher_test.hpp"
 #include "graph_simplification.hpp"
+#include "meme_format.hpp"
 
 #include <utility>
 using std::pair;
@@ -92,6 +93,12 @@ int main (int argc, char **argv) {
     }
 
     unsigned int p = 0;
+    sparse_hash_map<char, unsigned int> neg_nuc_count{
+        {'A', 0},
+        {'C', 0},
+        {'G', 0},
+        {'T', 0}
+    };
 
     if(input.cmdOptionExists("-p")) {
 
@@ -154,19 +161,18 @@ int main (int argc, char **argv) {
     std::clog << "\tBeginning to read positive file..." << endl;
     if(input.cmdOptionExists("-p"))
          global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true, rc);
-    else global_motif_count_positive = fill_hash_map         (*hash_map_holder[0], positive_filename, l,    true, rc);
+    else global_motif_count_positive = fill_hash_map         (*hash_map_holder[0], positive_filename, l,    true, rc, neg_nuc_count);
     std::clog << "\tPositive file read." << endl;
 
     std::clog << "\tBeginning to read negative file..." << endl;
     if(input.cmdOptionExists("-p"))
          global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false, rc);
-    else global_motif_count_negative = fill_hash_map         (*hash_map_holder[0], negative_filename, l,    false, rc);
+    else global_motif_count_negative = fill_hash_map         (*hash_map_holder[0], negative_filename, l,    false, rc, neg_nuc_count);
     std::clog << "\tNegative file read." << endl;
 
     auto end_chrono_counting = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> counting_time = end_chrono_counting - start_chrono_counting;
     std::clog << "Counting done in : " << counting_time.count() << " seconds" << endl;
-
 
     auto start_chrono_degeneration = std::chrono::high_resolution_clock::now();
     std::clog << endl << "======== Degeneration ========" << endl << endl;
@@ -272,6 +278,9 @@ int main (int argc, char **argv) {
     for (auto &entry : mi_sorted_hash_map_entries) {
         std::cout << entry->first << "\t" << entry->second.second->get_mi() << endl;
     }
+
+    if (!input.cmdOptionExists("-p"))
+        create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count, l);
 
     // std::clog << endl << "======== Cleaning ========" << endl << endl;
     //

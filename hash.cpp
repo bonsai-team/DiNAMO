@@ -61,7 +61,8 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
                         const string &filepath,
                         unsigned int l,
                         bool is_positive_file,
-                        bool rc
+                        bool rc,
+                        sparse_hash_map<char, unsigned int> &neg_nuc_count
                         ) {
     ifstream infile;
     open_file(infile, filepath);
@@ -77,7 +78,6 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
             deque.clear();
         }
         else {
-
             for (char nuc : data) {
                 //filtering accepted characters in fasta file
                 switch(nuc) {
@@ -85,6 +85,8 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
                     case 'C':
                     case 'G':
                     case 'T':
+                        if (!is_positive_file)
+                            ++neg_nuc_count[nuc];
                         deque.emplace_back(nuc);
                         break;
                     //lowercases to be added as uppercases
@@ -92,6 +94,8 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
                     case 't':
                     case 'g':
                     case 'c':
+                        if (!is_positive_file)
+                            ++neg_nuc_count[toupper(nuc)];
                         deque.emplace_back(toupper(nuc));
                         break;
                     //if character is invalid, emptying deque
