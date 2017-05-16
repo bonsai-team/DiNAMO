@@ -183,12 +183,21 @@ int main (int argc, char **argv) {
     auto start_chrono_degeneration = std::chrono::high_resolution_clock::now();
     std::clog << endl << "======== Degeneration ========" << endl << endl;
 
+    std::clog << "Before : Total motif count before degeneration" << endl;
+    std::clog << "After  : Total motif count after degeneration" << endl;
+    std::clog << "\t\t\tBefore\t\tAfter\t\tRatio" << endl;
+    unsigned int total_motif_created = hash_map_holder[0]->size();
+
     for (unsigned int i=0; i < d; i++) {
 
-        std::clog << "\tLevel " << i << " : degeneration ongoing" << endl;
+        double count_before_deg = total_motif_created;
+        std::clog << "\tLevel " << i+1 << "\t\t" << total_motif_created << "\t\t";
 
         hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
         degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l, rc);
+
+        total_motif_created += hash_map_holder[i+1]->size();
+        std::clog << total_motif_created << "\t\t" << total_motif_created / count_before_deg << endl;
     }
 
     auto end_chrono_degeneration = std::chrono::high_resolution_clock::now();
