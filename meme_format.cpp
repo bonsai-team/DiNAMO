@@ -31,7 +31,7 @@ void normalize_freq(vector<double> &freq_vec) {
     }
     double diff = 1.0 - freq_sum;
 
-    *std::max_element(freq_vec.begin(), freq_vec.end()) += diff;
+    *max_element(freq_vec.begin(), freq_vec.end()) += diff;
 }
 
 

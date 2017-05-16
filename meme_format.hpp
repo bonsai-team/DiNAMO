@@ -21,6 +21,12 @@
     #include <unordered_set>
     using std::unordered_set;
 
+    #include <algorithm>
+    using std::max_element;
+
+    #include <cmath>
+    using std::floor;
+
     //=====================
     //  Included libs
     //=====================
