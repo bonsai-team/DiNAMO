@@ -18,6 +18,23 @@ sparse_hash_map<char, unordered_set<char>> iupac_or_nuc_to_nucs {
     {'N', {'A','C','G','T'}}
 };
 
+void round_to_hundred_thousandth( double &d ) {
+    d = (double) floor((d * 100000.0 ) + 0.5) / 100000;
+}
+
+void normalize_freq(vector<double> &freq_vec) {
+
+    double freq_sum = 0.0;
+    for (auto &freq : freq_vec) {
+        round_to_hundred_thousandth(freq);
+        freq_sum += freq;
+    }
+    double diff = 1.0 - freq_sum;
+
+    *std::max_element(freq_vec.begin(), freq_vec.end()) += diff;
+}
+
+
 void generate_exact_successor_motifs_rec(vector<string> &res, const string &motif, string &acc, unsigned int pos, unsigned int l) {
     if (pos == l) {
         res.emplace_back(acc);
@@ -56,11 +73,14 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
         total_neg_nuc_count += entry.second;
     }
 
-    double A_frequency = neg_nuc_count['A'] / total_neg_nuc_count;
-    double C_frequency = neg_nuc_count['C'] / total_neg_nuc_count;
-    double G_frequency = neg_nuc_count['G'] / total_neg_nuc_count;
-    double T_frequency = neg_nuc_count['T'] / total_neg_nuc_count;
+    vector<double> background_frequencies{
+        neg_nuc_count['A'] / total_neg_nuc_count,
+        neg_nuc_count['C'] / total_neg_nuc_count,
+        neg_nuc_count['G'] / total_neg_nuc_count,
+        neg_nuc_count['T'] / total_neg_nuc_count
+    };
 
+    normalize_freq(background_frequencies);
 
     //en-tête
     meme_file << "MEME version 4" << endl
@@ -70,7 +90,10 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
               << "strands: + -" << endl
               << endl
               << "Background letter frequencies" << endl
-              << "A " << A_frequency << " C " << C_frequency << " G " << G_frequency << " T " << T_frequency << endl
+              << "A " << background_frequencies[0] <<
+                " C " << background_frequencies[1] <<
+                " G " << background_frequencies[2] <<
+                " T " << background_frequencies[3] << endl
               << endl;
 
     //corps
@@ -94,10 +117,20 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
                 nuc_counts[motif[i]] += exact_motifs[motif].second->get_positive_count();
                 exact_motifs_count += exact_motifs[motif].second->get_positive_count();
             }
-            meme_file << nuc_counts['A'] / exact_motifs_count << "\t"
-                      << nuc_counts['C'] / exact_motifs_count << "\t"
-                      << nuc_counts['G'] / exact_motifs_count << "\t"
-                      << nuc_counts['T'] / exact_motifs_count << endl;
+
+            vector<double> motif_nuc_frequencies{
+                nuc_counts['A'] / exact_motifs_count,
+                nuc_counts['C'] / exact_motifs_count,
+                nuc_counts['G'] / exact_motifs_count,
+                nuc_counts['T'] / exact_motifs_count
+            };
+
+            normalize_freq(motif_nuc_frequencies);
+
+            meme_file << motif_nuc_frequencies[0] << "\t"
+                      << motif_nuc_frequencies[1] << "\t"
+                      << motif_nuc_frequencies[2] << "\t"
+                      << motif_nuc_frequencies[3] << endl;
         }
         meme_file << endl;
     }
