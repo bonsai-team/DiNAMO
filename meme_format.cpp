@@ -56,6 +56,12 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
         total_neg_nuc_count += entry.second;
     }
 
+    double A_frequency = neg_nuc_count['A'] / total_neg_nuc_count;
+    double C_frequency = neg_nuc_count['C'] / total_neg_nuc_count;
+    double G_frequency = neg_nuc_count['G'] / total_neg_nuc_count;
+    double T_frequency = neg_nuc_count['T'] / total_neg_nuc_count;
+
+
     //en-tête
     meme_file << "MEME version 4" << endl
               << endl
@@ -64,7 +70,7 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
               << "strands: + -" << endl
               << endl
               << "Background letter frequencies" << endl
-              << "A " << neg_nuc_count['A'] / total_neg_nuc_count << " C " << neg_nuc_count['C'] / total_neg_nuc_count << " G " << neg_nuc_count['G'] / total_neg_nuc_count << " T " << neg_nuc_count['T'] / total_neg_nuc_count << endl
+              << "A " << A_frequency << " C " << C_frequency << " G " << G_frequency << " T " << T_frequency << endl
               << endl;
 
     //corps
@@ -78,7 +84,7 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
         generate_exact_successor_motifs(exact_successor_motifs, entry->first, l);
         for (size_t i=0; i < l; i++) {
             size_t exact_motifs_count = 0;
-            sparse_hash_map<char, float> nuc_counts{
+            sparse_hash_map<char, double> nuc_counts{
                 {'A', 0.0},
                 {'C', 0.0},
                 {'G', 0.0},
@@ -91,10 +97,7 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
             meme_file << nuc_counts['A'] / exact_motifs_count << "\t"
                       << nuc_counts['C'] / exact_motifs_count << "\t"
                       << nuc_counts['G'] / exact_motifs_count << "\t"
-                      << 1.0 - nuc_counts['A'] / exact_motifs_count
-                             - nuc_counts['C'] / exact_motifs_count
-                             - nuc_counts['G'] / exact_motifs_count
-                      << endl;
+                      << nuc_counts['T'] / exact_motifs_count << endl;
         }
         meme_file << endl;
     }
