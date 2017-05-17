@@ -14,11 +14,16 @@ double mutual_information(  unsigned positive_motif_count,        /////////// po
     }
 
     double t = positive_total_count + negative_total_count;
+    double mi = 0;
 
-    double mi = (pm / t) * log2((pm / pt) * (t / (pm + nm))) +
-                (nm / t) * log2((nm / nt) * (t / (pm + nm))) +
-                ((pt - pm) / t) * log2(((pt - pm) / ((pt - pm) + (nt - nm))) * (t / pt)) +
-                ((nt - nm) / t) * log2(((nt - nm) / ((pt - pm) + (nt - nm))) * (t / nt));
+    if (pm != 0)
+        mi += (pm / t) * log2((pm / pt) * (t / (pm + nm)));
+
+    if (nm != 0)
+        mi += (nm / t) * log2((nm / nt) * (t / (pm + nm)));
+
+    mi +=   ((pt - pm) / t) * log2(((pt - pm) / ((pt - pm) + (nt - nm))) * (t / pt)) +
+            ((nt - nm) / t) * log2(((nt - nm) / ((pt - pm) + (nt - nm))) * (t / nt));
 
     return mi;
 }
