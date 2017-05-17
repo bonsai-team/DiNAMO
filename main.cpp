@@ -241,6 +241,7 @@ int main (int argc, char **argv) {
     unsigned int m = 0;
     for (auto &entry : mi_sorted_hash_map_entries) {
         if (entry->second.second->get_state() == validated) {
+            entry->second.second->suppress();
             entry->second.second->calculate_pvalue(global_motif_count_positive, global_motif_count_negative);
             pvalue_sorted_hash_map_entries.push_back(entry);
             m++;
