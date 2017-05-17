@@ -21,7 +21,8 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     # needed for modern c+++
-    - g++-6
+    #- g++-6
+    - g++-5
     # boost dependency (hypergeometric distribution needed to perform fisher exact test)
     - libboost-math-dev
 
@@ -29,9 +30,9 @@ addons:
 
 # making sure we use latest g++
 before_script:
-  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  - sudo ln -s /usr/bin/g++-5 /usr/local/bin/g++
   - g++ -v
-  - export CXX=/usr/bin/g++-6
+  - export CXX=/usr/bin/g++-5
   - chmod ugo+x scripts/compile.sh
   - chmod ugo+x scripts/run_tests.sh
 
