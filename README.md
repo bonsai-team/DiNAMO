@@ -39,3 +39,7 @@ Les options suivantes sont aussi disponibles :
         -p position_du_motif
 
   (Veuillez noter que le comptage se fait depuis la fin de la séquence, ainsi la position 0 correspond au dernier motif de chaque séquence)
+
+  * changer le seuil pour le test de Holm-Bonferroni sur les p-valeurs (par défaut à 0.05, soit 95%)
+
+        -t alpha

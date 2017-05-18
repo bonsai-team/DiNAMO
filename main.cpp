@@ -15,6 +15,10 @@ using std::pair;
 
 #include <chrono>
 
+#include <string>
+using std::stoi;
+using std::stod;
+
 
 int main (int argc, char **argv) {
 
@@ -146,6 +150,38 @@ int main (int argc, char **argv) {
         rc = false;
     }
 
+    double alpha = 0.05;
+
+    if(input.cmdOptionExists("-t")) {
+        const string &threshold_str = input.getCmdOption("-t");
+        if (threshold_str.empty()) {
+            cerr << "You specified the option -t (set pvalue threshold) but did not input a value." << endl;
+            cerr << "Option usage : append \"-t X\" to the end of your command line." << endl;
+            cerr << "Description : sets the threshold of the Holm-Bonferroni to X." << endl;
+            cerr << "Please note that X must be a value between 0 and 1." << endl;
+            exit(EXIT_FAILURE);
+        } else {
+            try {
+                alpha = stod(threshold_str);
+            } catch (std::invalid_argument &e) {
+                cerr << "The alpha you entered (" << threshold_str << ") could not be converted to a double." << endl;
+                exit(EXIT_FAILURE);
+            } catch (std::out_of_range &e) {
+                cerr << "The alpha you entered (" << threshold_str << ") is too big !" << endl;
+                cerr << "Please remember that 0 <= alpha <= 1" << endl;
+                exit(EXIT_FAILURE);
+            }
+            if (alpha < 0) {
+                cerr << "Alpha must be positive !" << endl;
+                exit(EXIT_FAILURE);
+            } else if (alpha > 1){
+                cerr << "Alpha must be less than 1 !" << endl;
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
+    std::cout << alpha << endl;
+
     auto end_chrono_parsing_options = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> parsing_options_time = end_chrono_parsing_options - start_chrono_parsing_options;
     std::clog << "Parsed options in : " << parsing_options_time.count() << " seconds\n";
@@ -271,9 +307,8 @@ int main (int argc, char **argv) {
     mi_sorted_hash_map_entries.clear();
 
     unsigned int k = 0;
-    double alpha = 0.05;
     while (pvalue_sorted_hash_map_entries[k]->second.second->get_pvalue()
-           <= (alpha / ((double)(m + 1 - k)))
+           <= (alpha / ((double)(m + 1 - k))) //alpha is defined when parsing options
           ) {
         mi_sorted_hash_map_entries.push_back(pvalue_sorted_hash_map_entries[k]);
         k++;
