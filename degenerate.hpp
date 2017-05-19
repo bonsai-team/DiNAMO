@@ -32,6 +32,8 @@
 
     #include "reverse_complement.hpp"
 
+    #include "relation_tables.hpp"
+
     //=====================
 
     const string find_neighbor_motifs(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<char, pair<string, Node *>> &, const string &, unsigned int);

@@ -37,6 +37,8 @@
 
     #include "reverse_complement.hpp"
 
+    #include "relation_tables.hpp"
+
     //=====================
 
     void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &, unsigned int);
