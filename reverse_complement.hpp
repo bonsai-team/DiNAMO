@@ -26,6 +26,6 @@
 
     //=====================
 
-    string reverse_complement(string &);
+    string reverse_complement(const string &);
 
 #endif

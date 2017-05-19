@@ -18,7 +18,7 @@ sparse_hash_map<char, char> iupac_to_complement {
     {'N','N'}
 };
 
-string reverse_complement(string &motif) {
+string reverse_complement(const string &motif) {
     string rv(motif);
     transform(rv.begin(), rv.end(), rv.begin(),
     [](char nuc) {return iupac_to_complement[nuc]; });

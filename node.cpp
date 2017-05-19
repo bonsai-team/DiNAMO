@@ -79,6 +79,10 @@ double Node::get_pvalue() {
     return this->pvalue;
 }
 
+void Node::reset_state() {
+    this->state = unvisited;
+}
+
 void Node::validate() {
     this->state = validated;
 }

@@ -55,6 +55,7 @@
         void calculate_pvalue(unsigned int, unsigned int);
         double get_pvalue();
 
+        void reset_state();
         void validate();
         void suppress();
         void tag();

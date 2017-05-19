@@ -9,6 +9,7 @@ using spp::sparse_hash_map;
 #include "fisher_test.hpp"
 #include "graph_simplification.hpp"
 #include "meme_format.hpp"
+#include "find_redundant_motif.hpp"
 
 #include <utility>
 using std::pair;
@@ -324,6 +325,10 @@ int main (int argc, char **argv) {
     auto end_chrono_holm_test = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> holm_test_time = end_chrono_holm_test - start_chrono_holm_test;
     std::clog << "Holm method performed in : " << holm_test_time.count() << " seconds\n";
+
+    std::clog << endl << "======== Filtering redundant motif ========" << endl << endl;
+
+    filter_redundant_motif(mi_sorted_hash_map_entries, l);
 
     std::clog << endl << "======== Results ========" << endl << endl;
     for (auto &entry : mi_sorted_hash_map_entries) {
