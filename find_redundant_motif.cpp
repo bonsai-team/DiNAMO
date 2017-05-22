@@ -9,10 +9,10 @@ bool motifs_match(const string &motif1, const string &motif2, unsigned int l) {
 
     else {
         for (unsigned int pos=0; pos < l; pos++) {
-            unordered_set<char> nuc_intersection;
-            set_intersection(iupac_to_nucs[motif1[pos]].begin(), iupac_to_nucs[motif1[pos]].end(),
-                             iupac_to_nucs[motif2[pos]].begin(), iupac_to_nucs[motif2[pos]].end(),
-                             std::inserter(nuc_intersection,nuc_intersection.begin()));
+            vector<char> nuc_intersection;
+            set_intersection((iupac_to_nucs[motif1[pos]]).begin(), (iupac_to_nucs[motif1[pos]]).end(),
+                             (iupac_to_nucs[motif2[pos]]).begin(), (iupac_to_nucs[motif2[pos]]).end(),
+                             std::back_inserter(nuc_intersection));
             if (nuc_intersection.empty())
                 return false;
         }
@@ -55,7 +55,7 @@ void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &re
                     /* motif      |------|-|
                        base [...]-|------| */
                     if (letter_added_right < side_addition_limit &&
-                        motifs_match(string(base, base.size() - (l-1), l-1), string(motif, 0, l-1), l)) {
+                        motifs_match(string(base, base.size() - (l-1), l-1), string(motif, 0, l-1), l-1)) {
                         base.push_back(motif[l-1]);
                         found_motif = true;
                         letter_added_right++;
@@ -63,7 +63,7 @@ void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &re
                     /* motif |-|-----|
                        base    |-----|-[...] */
                     else if (letter_added_left < side_addition_limit &&
-                             motifs_match(string(base, 0, l-1), string(motif, 1, l-1), l)) {
+                             motifs_match(string(base, 0, l-1), string(motif, 1, l-1), l-1)) {
                         base.insert(0, 1, motif[0]);
                         found_motif = true;
                         letter_added_left++;

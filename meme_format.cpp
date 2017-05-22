@@ -1,23 +1,5 @@
 #include "meme_format.hpp"
 
-sparse_hash_map<char, unordered_set<char>> iupac_or_nuc_to_nucs {
-    {'A', {'A'}},
-    {'C', {'C'}},
-    {'G', {'G'}},
-    {'T', {'T'}},
-    {'R', {'A','G'}},
-    {'Y', {'C','T'}},
-    {'S', {'G','C'}},
-    {'W', {'A','T'}},
-    {'K', {'G','T'}},
-    {'M', {'A','C'}},
-    {'B', {'C','G','T'}},
-    {'D', {'A','G','T'}},
-    {'H', {'A','C','T'}},
-    {'V', {'A','C','G'}},
-    {'N', {'A','C','G','T'}}
-};
-
 void round_to_hundred_thousandth( double &d ) {
     d = (double) floor((d * 100000.0 ) + 0.5) / 100000;
 }
@@ -40,7 +22,7 @@ void generate_exact_successor_motifs_rec(vector<string> &res, const string &moti
         res.emplace_back(acc);
         return;
     }
-    for (auto nuc : iupac_or_nuc_to_nucs[motif[pos]]) {
+    for (auto nuc : iupac_to_nucs[motif[pos]]) {
         acc.push_back(nuc);
         generate_exact_successor_motifs_rec(res, motif, acc, pos+1, l);
         acc.pop_back();

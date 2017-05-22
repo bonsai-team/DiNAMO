@@ -30,7 +30,7 @@ sparse_hash_map<char, unordered_set<char>> iupacs_dependencies {
     {'M', {'A','C'}}
 };
 
-sparse_hash_map<char, unordered_set<char>> iupac_to_nucs {
+sparse_hash_map<char, vector<char>> iupac_to_nucs {
     {'N', {'A', 'C', 'G', 'T'}},
     {'B', {'C', 'G', 'T'}},
     {'D', {'A', 'G', 'T'}},
@@ -41,5 +41,9 @@ sparse_hash_map<char, unordered_set<char>> iupac_to_nucs {
     {'K', {'G', 'T'}},
     {'R', {'A', 'G'}},
     {'W', {'A', 'T'}},
-    {'M', {'A', 'C'}}
+    {'M', {'A', 'C'}},
+    {'A', {'A'}},
+    {'C', {'C'}},
+    {'G', {'G'}},
+    {'T', {'T'}}
 };
