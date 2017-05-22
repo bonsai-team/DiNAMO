@@ -6,6 +6,14 @@ double fisher_test_p_value( unsigned positive_motif_count,
                             unsigned negative_total_count,
                             Methods method) {
 
+    // Pseudo count added to each count to ensure that p-value = 0 never happens
+    // very very hacky
+    positive_motif_count++;
+    negative_motif_count++;
+    positive_total_count++;
+    negative_total_count++;
+    //=========================================================================
+
     hypergeometric_distribution<> hgd ( positive_total_count, //r (number of defective inside the total population)
                                         positive_motif_count + negative_motif_count, //n (sample ie. occurrences of the motif inside both files)
                                         positive_total_count + negative_total_count);//N (total population)
