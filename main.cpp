@@ -25,17 +25,42 @@ int main (int argc, char **argv) {
 
     auto start_chrono_parsing_options = std::chrono::high_resolution_clock::now();
 
+    std::initializer_list<const string> positive_file_options = {"-pf", "--positive-file"};
+    std::initializer_list<const string> negative_file_options = {"-nf", "--negative-file"};
+    std::initializer_list<const string> motif_length_options = {"-l", "--motif-length"};
+    std::initializer_list<const string> degeneration_level_options = {"-d", "--degeneration-level"};
+    std::initializer_list<const string> output_file_options = {"-o", "--output-file"};
+    std::initializer_list<const string> position_options = {"-p", "--position"};
+    std::initializer_list<const string> no_reverse_complement_options = {"--norc"};
+    std::initializer_list<const string> pvalue_threshold_options = {"-t", "--threshold"};
+    std::initializer_list<const string> help_options = {"-h", "--help"};
+
     InputParser input(argc, argv);
 
     /* Parsing filename */
 
-    const string &positive_filename = input.getCmdOption("-pf");
+    if (input.cmdOptionExists(help_options)) {
+        std::cout << "Usage :" << endl <<
+                     "dinamo (-pf|--positive-file) path/to/positive (-nf|--negative-file) path/to/negative (-l|--motif-length) k" << endl;
+        std::cout << "Available options :" << endl;
+        std::cout << "\t(-d|--degeneration-level) k         : Limits the degeneration to at most k positions" << endl;
+        std::cout << "\t(-o|--output-file) path/to/output   : Output the meme file to the desired path (has no effect when -p option is used)" << endl;
+        std::cout << "\t(-p|--position) k                   : Only process motif that end at position k in the sequence." << endl <<
+                     "\t\t(Important note : position 0 corresponds to the last motif of each sequence)" << endl;
+        std::cout << "\t--norc                              : When -p is not used, prevents dinamo to link motif to their reverse complement" << endl <<
+                     "\t\t(Please be warned : not linking the motif to their reverse complement usually doubles memory usage)" << endl;
+        std::cout << "\t(-t|--threshold) r                  : Sets the pvalue threshold to r (0 <= r <= 1)" << endl;
+        std::cout << "\t(-h|--help)                         : Displays this help" << endl;
+        exit(EXIT_SUCCESS);
+    }
+
+    const string &positive_filename = input.getCmdOption(positive_file_options);
     if (positive_filename.empty()){
         cerr << "You did not input the positive sequence file, try adding \"-pf path/to/positive\" to the end of your command line" << endl;
         exit(EXIT_FAILURE);
     }
 
-    const string &negative_filename = input.getCmdOption("-nf");
+    const string &negative_filename = input.getCmdOption(negative_file_options);
     if (negative_filename.empty()){
         cerr << "You did not input the negative sequence file, try adding \"-nf path/to/negative\" to the end of your command line" << endl;
         exit(EXIT_FAILURE);
@@ -43,7 +68,7 @@ int main (int argc, char **argv) {
 
     /* Parsing kmere's size */
 
-    const string &length_string = input.getCmdOption("-l");
+    const string &length_string = input.getCmdOption(motif_length_options);
     if (length_string.empty()){
         cerr << "Please input a motif length putting \"-l length\" to the end of your command line" << endl;
         exit(EXIT_FAILURE);
@@ -68,9 +93,9 @@ int main (int argc, char **argv) {
     unsigned int l = signed_l;
     unsigned int d = l;
 
-    if(input.cmdOptionExists("-d")) {
+    if(input.cmdOptionExists(degeneration_level_options)) {
 
-        const string &degeneration_level = input.getCmdOption("-d");
+        const string &degeneration_level = input.getCmdOption(degeneration_level_options);
         int signed_d;
         if (degeneration_level.empty()) {
             cerr << "You specified the option -d (limit degeneration) but did not input a value." << endl;
@@ -105,10 +130,10 @@ int main (int argc, char **argv) {
         {'T', 0}
     };
 
-    string meme_filename = input.getCmdOption("-o");
+    string meme_filename = input.getCmdOption(output_file_options);
 
-    if(input.cmdOptionExists("-p")) {
-        const string &position = input.getCmdOption("-p");
+    if(input.cmdOptionExists(position_options)) {
+        const string &position = input.getCmdOption(position_options);
         int signed_p;
         if (position.empty()) {
             cerr << "You specified the option -p (count only motif that end at a certain pos) but did not input a value." << endl;
@@ -141,10 +166,10 @@ int main (int argc, char **argv) {
         }
     }
 
-    bool rc = !input.cmdOptionExists("-p");
+    bool rc = !input.cmdOptionExists(position_options);
 
-    if(input.cmdOptionExists("-p") && input.cmdOptionExists("-norc")) {
-        const string &norc_str = input.getCmdOption("-norc");
+    if(input.cmdOptionExists(position_options) && input.cmdOptionExists(no_reverse_complement_options)) {
+        const string &norc_str = input.getCmdOption(no_reverse_complement_options);
         if (!norc_str.empty()) {
             std::cerr << "warning : you provided an argument (" << norc_str << ") to the -norc option but this option doesn't require one." << endl;
         }
@@ -153,8 +178,8 @@ int main (int argc, char **argv) {
 
     double alpha = 0.05;
 
-    if(input.cmdOptionExists("-t")) {
-        const string &threshold_str = input.getCmdOption("-t");
+    if(input.cmdOptionExists(pvalue_threshold_options)) {
+        const string &threshold_str = input.getCmdOption(pvalue_threshold_options);
         if (threshold_str.empty()) {
             cerr << "You specified the option -t (set pvalue threshold) but did not input a value." << endl;
             cerr << "Option usage : append \"-t X\" to the end of your command line." << endl;
@@ -181,7 +206,6 @@ int main (int argc, char **argv) {
             }
         }
     }
-    std::cout << alpha << endl;
 
     auto end_chrono_parsing_options = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> parsing_options_time = end_chrono_parsing_options - start_chrono_parsing_options;
@@ -202,13 +226,13 @@ int main (int argc, char **argv) {
     std::clog << "======== Counting ========" << endl << endl;
 
     std::clog << "\tBeginning to read positive file..." << endl;
-    if(input.cmdOptionExists("-p"))
+    if(input.cmdOptionExists(position_options))
          global_motif_count_positive = fill_hash_map_from_pos(*hash_map_holder[0], positive_filename, l, p, true, rc);
     else global_motif_count_positive = fill_hash_map         (*hash_map_holder[0], positive_filename, l,    true, rc, neg_nuc_count);
     std::clog << "\tPositive file read." << endl;
 
     std::clog << "\tBeginning to read negative file..." << endl;
-    if(input.cmdOptionExists("-p"))
+    if(input.cmdOptionExists(position_options))
          global_motif_count_negative = fill_hash_map_from_pos(*hash_map_holder[0], negative_filename, l, p, false, rc);
     else global_motif_count_negative = fill_hash_map         (*hash_map_holder[0], negative_filename, l,    false, rc, neg_nuc_count);
     std::clog << "\tNegative file read." << endl;
@@ -270,7 +294,7 @@ int main (int argc, char **argv) {
 
     std::clog << "\tSimplificating graph..." << endl;
 
-    graph_simplification(mi_sorted_hash_map_entries, input.cmdOptionExists("-p"));
+    graph_simplification(mi_sorted_hash_map_entries, input.cmdOptionExists(position_options));
 
     std::clog << "\tSimplification done !" << endl << endl;
 
@@ -335,7 +359,7 @@ int main (int argc, char **argv) {
         std::cout << entry->first << "\t" << entry->second.second->get_mi() << endl;
     }
 
-    if (!input.cmdOptionExists("-p"))
+    if (!input.cmdOptionExists(position_options))
         create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count, l, meme_filename);
 
     // std::clog << endl << "======== Cleaning ========" << endl << endl;

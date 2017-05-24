@@ -29,9 +29,9 @@
         public:
             InputParser (int &, char **);
 
-            const string& getCmdOption(const string &) const;
+            const string& getCmdOption(const std::initializer_list<const string> &) const;
 
-            bool cmdOptionExists(const string &) const;
+            bool cmdOptionExists(const std::initializer_list<const string> &) const;
     };
 
 #endif
