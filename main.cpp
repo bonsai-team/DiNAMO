@@ -352,7 +352,8 @@ int main (int argc, char **argv) {
 
     std::clog << endl << "======== Filtering redundant motif ========" << endl << endl;
 
-    filter_redundant_motif(mi_sorted_hash_map_entries, l);
+    if (!input.cmdOptionExists(position_options))
+        filter_redundant_motif(mi_sorted_hash_map_entries, l);
 
     std::clog << endl << "======== Results ========" << endl << endl;
     for (auto &entry : mi_sorted_hash_map_entries) {
