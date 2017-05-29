@@ -356,7 +356,7 @@ int main (int argc, char **argv) {
 
     std::clog << endl << "======== Results ========" << endl << endl;
     for (auto &entry : mi_sorted_hash_map_entries) {
-        std::cout << entry->first << "\t" << entry->second.second->get_mi() << endl;
+        std::cout << entry->first << "\t" << entry->second.second->get_mi() << "\t" << entry->second.second->get_pvalue() << endl;
     }
 
     if (!input.cmdOptionExists(position_options))
