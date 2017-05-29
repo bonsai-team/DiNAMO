@@ -33,4 +33,6 @@
     //second member needs to be ordered (ordering used by set_intersection)
     extern sparse_hash_map<char, vector<char>> iupac_to_nucs;
 
+    extern sparse_hash_map<char, vector<char>> iupac_to_successors;
+
 #endif

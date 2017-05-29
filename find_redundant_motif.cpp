@@ -1,23 +1,22 @@
 #include "find_redundant_motif.hpp"
 
+bool is_included(const string &motif1, const string &motif2, unsigned int l) {
+    for (unsigned int pos=0; pos < l; pos++) {
+        auto const &successors = iupac_to_successors[motif1[pos]];
+        if (find(successors.begin(), successors.end(), motif2[pos]) == successors.end())
+            return false;
+    }
+    return true;
+}
+
 bool motifs_match(const string &motif1, const string &motif2, unsigned int l) {
     unordered_set<string> matching_motif1;
     unordered_set<string> matching_motif2;
 
     if(motif1 == motif2)
         return true;
-
-    else {
-        for (unsigned int pos=0; pos < l; pos++) {
-            vector<char> nuc_intersection;
-            set_intersection((iupac_to_nucs[motif1[pos]]).begin(), (iupac_to_nucs[motif1[pos]]).end(),
-                             (iupac_to_nucs[motif2[pos]]).begin(), (iupac_to_nucs[motif2[pos]]).end(),
-                             std::back_inserter(nuc_intersection));
-            if (nuc_intersection.empty())
-                return false;
-        }
-    }
-    return true;
+    else
+        return is_included(motif1, motif2, l) || is_included(motif2, motif1, l);
 }
 
 void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &remaining_hash_map_entries, unsigned int l) {

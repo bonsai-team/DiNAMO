@@ -47,3 +47,21 @@ sparse_hash_map<char, vector<char>> iupac_to_nucs {
     {'G', {'G'}},
     {'T', {'T'}}
 };
+
+sparse_hash_map<char, vector<char>> iupac_to_successors {
+    {'N', {'N', 'B', 'D', 'H', 'V', 'Y', 'S', 'K', 'R', 'W', 'M', 'A', 'C', 'G', 'T'}},
+    {'B', {'B', 'Y', 'S', 'K', 'C', 'G', 'T'}},
+    {'D', {'D', 'R', 'W', 'K', 'A', 'G', 'T'}},
+    {'H', {'H', 'Y', 'W', 'M', 'A', 'C', 'T'}},
+    {'V', {'V', 'R', 'S', 'M', 'A', 'C', 'G'}},
+    {'Y', {'Y', 'C', 'T'}},
+    {'S', {'S', 'C', 'G'}},
+    {'K', {'K', 'G', 'T'}},
+    {'R', {'R', 'A', 'G'}},
+    {'W', {'W', 'A', 'T'}},
+    {'M', {'M', 'A', 'C'}},
+    {'A', {'A'}},
+    {'C', {'C'}},
+    {'G', {'G'}},
+    {'T', {'T'}}
+};
