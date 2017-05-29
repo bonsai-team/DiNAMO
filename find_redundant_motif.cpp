@@ -77,7 +77,7 @@ void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &re
                         }
                     }
                     if(found_motif) {
-                        std::cout << (*entry_it)->first << " " << motif << "\tbase: " << base << std::endl;
+                        //std::clog << (*entry_it)->first << " " << motif << "\tbase: " << base << std::endl;
                         entry->second.second->suppress();
                         break;
                     }
