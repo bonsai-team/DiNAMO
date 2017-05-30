@@ -37,7 +37,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
         //pour chaque motif dans la table
         for (auto const &motif_it : motifs) {
             //s'il n'a pas été marqué pour cette position ou si la position a déjà été dégénérée
-            if(motif_it.second.first == pos || motif_it.second.first == kmer_size || !string("ACGT").find(motif_it.first[pos])) {
+            if((motif_it.second.first == pos) || (motif_it.second.first == kmer_size) || (!string("ACGT").find(motif_it.first[pos]))) {
                 continue;
             }
 
@@ -61,7 +61,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
             iupac_to_node.reserve(11);
 
             // pour tous les iupacs dérivant des nucléotides
-            for (int degeneration_degree = 0; degeneration_degree < iupacs->second.size(); degeneration_degree++) {
+            for (unsigned int degeneration_degree = 0; degeneration_degree < iupacs->second.size(); degeneration_degree++) {
                 for (auto const iupac : iupacs->second[degeneration_degree]) {
 
                     degenerated_motif.replace(pos, 1, 1, iupac);
@@ -74,25 +74,41 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                     }
                     else {
                         //node creation
-                        current_node_ptr = new Node(0, 0);
+                        bool missing_successor_positive = false;
+                        bool missing_successor_negative = false;
                         unsigned int degenerated_motif_positive_count = 0;
                         unsigned int degenerated_motif_negative_count = 0;
+
                         for (auto const &nuc : iupac_to_nucs[iupac]) {
-                            //add child count
-                            if (degenerated_motif_positive_count > ~0 - neighbor_motifs[nuc].second->get_positive_count()) {
+
+                            unsigned int successor_positive_count = neighbor_motifs[nuc].second->get_positive_count();
+                            unsigned int successor_negative_count = neighbor_motifs[nuc].second->get_negative_count();
+
+                            //add positive successor count or raise flag
+                            if (degenerated_motif_positive_count > ~0 - successor_positive_count) {
                                 std::cerr << "Error : an overflow occurred while setting the positive count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
                                 exit(EXIT_FAILURE);
                             }
-                            degenerated_motif_positive_count += neighbor_motifs[nuc].second->get_positive_count();
+                            if (successor_positive_count == 0)
+                                missing_successor_positive = true;
+                            else
+                                degenerated_motif_positive_count += successor_positive_count;
 
-                            if (degenerated_motif_negative_count > ~0 - neighbor_motifs[nuc].second->get_negative_count()) {
+                            //add negative successor count or raise flag
+                            if (degenerated_motif_negative_count > ~0 - successor_negative_count) {
                                 std::cerr << "Error : an overflow occurred while setting the negative count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
                                 exit(EXIT_FAILURE);
                             }
-                            degenerated_motif_negative_count += neighbor_motifs[nuc].second->get_negative_count();
+                            if (successor_negative_count == 0)
+                                missing_successor_negative = true;
+                            else
+                                degenerated_motif_negative_count += successor_negative_count;
                         }
-                        current_node_ptr->set_positive_count(degenerated_motif_positive_count);
-                        current_node_ptr->set_negative_count(degenerated_motif_negative_count);
+                        //if a successor is missing in each datasets, then the motif should not be created
+                        if (missing_successor_positive && missing_successor_negative)
+                            continue;
+
+                        current_node_ptr = new Node(degenerated_motif_positive_count, degenerated_motif_negative_count);
                         // current_node_ptr->set_motif(degenerated_motif);
                         degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, current_node_ptr)));
                         if (rc) {
@@ -109,14 +125,15 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                     //then we create the nodes that depends on the previous one, etc.
                     if (degeneration_degree == 0) {
                         for (char nuc : iupacs_dependencies[iupac]) {
-
-                            // std::cout << degenerated_motif  << "->" << neighbor_motifs[nuc].second->get_motif()<< ";" << endl;
                             current_node_ptr->add_successor(neighbor_motifs[nuc].second);
                             neighbor_motifs[nuc].second->add_predecessor(current_node_ptr);
                         }
                     } else {
                         for (char iupac_dependency : iupacs_dependencies[iupac]) {
-                            // std::cout << degenerated_motif  << "->" << iupac_to_node[iupac_dependency]->get_motif() << ";" << endl;
+                            if (iupac_to_node.find(iupac_dependency) == iupac_to_node.end()) {
+                                std::cerr << "Tried to link a node to an non-existing one" << std::endl;
+                                exit(EXIT_FAILURE);
+                            }
                             current_node_ptr->add_successor(iupac_to_node[iupac_dependency]);
                             iupac_to_node[iupac_dependency]->add_predecessor(current_node_ptr);
                         }
