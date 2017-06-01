@@ -28,9 +28,10 @@ DiNAMO takes as input two fasta files, which contain respectively the positive d
         -d <i>
         
 
-  *  Only process motifs at a offset i (0..N)  related to the **end** of each sequence 
+  *  Only process motifs at a offset i (0..N)  related to the **end** of each sequence
 
         -p <i>
+        
 
   * output file
 
