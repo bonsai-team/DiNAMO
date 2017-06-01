@@ -1,45 +1,43 @@
-# DiNAMO
+# DiNAMO: An exact and efficient method for IUPAC motif discovery in DNA sequences
 
 [![Build Status](https://travis-ci.org/bonsai-team/DiNAMO.svg?branch=master)](https://travis-ci.org/bonsai-team/DiNAMO)
 
-C++ implementation of Chadi Saad's algorithm
+The DiNAMO software implements an exhaustive algorithm to detect over-represented IUPAC motifs in a set of DNA sequences. It has two modes: *scanning* mode (default), where all windows are parsed, or *fixed-position* mode (see optional parameter *-p* ), where only motifs occurring at a specific position in the sequences are taken into account.  
+
+DiNAMO can be used in a variety of applications, such as ChIP-seq peak analysis for transcription factor binding sites identification, or finding motifs that induce systematic sequencing errors.
+
+## Dependancies
+
+    Boost library (if not in the standard includes, please use -I /path/to/boost in the Makefile)
+
 
 ## Compilation
-
-Pour compiler :
-
     make
 
-## Exécution
+## Usage
 
-Pour exécuter le programme vous devez fournir les options suivantes :
+DiNAMO takes as input two fasta files, which contain respectively the positive dataset (signal.fa) and the negative dataset (control.fa). You should specify also the motif length '-l'. Optionally, you can provide a maximum number of degenerate letters '-d'. The output file contains the over-represented motifs found in the positive dataset compared to the negative dataset, in the MEME format (see http://meme-suite.org/doc/meme-format.html).
 
-  * -nf *chemin/vers/votre/fichier/negatif*
-  * -pf *chemin/vers/votre/fichier/positif*
-  * -l  *taille\_de\_motif\_désirée*
+        ./dinamo -pf signal.fa  -nf controle.fa -l 6
 
-  Une ligne de commande typique pourrait être :
+### Optional Parameters
 
-        ./dinamo -nf sequences/controle.fa -pf sequences/signal.fa -l 6
 
-  Veuillez noter que le programme crée tous les motifs possibles par défaut, en comptant aussi leur reverse-complement.
-    - Pour ne considérer que les motifs situés à une certaine position dans les séquences, veuillez utiliser l'option -p. Ceci désactive aussi le compte des reverse-complement.
-    - Pour ne pas considérer les reverse-complement des motifs sans utiliser l'option -p, veuillez utiliser l'option -norc.
+  * maximum number *i* of degenerate letters
 
-### Options
+        -d <i>
+        
 
-Les options suivantes sont aussi disponibles :
+  *  Only process motifs at a offset i (0..N)  related to the **end** of each sequence 
 
-  * limiter le nombre de positions qui pourront être dégénérées
+        -p <i>
 
-        -d limite
+  * output file
 
-  * ne compter que les motifs qui sont à une certaine position dans la séquence
+        -o <file>
 
-        -p position_du_motif
 
-  (Veuillez noter que le comptage se fait depuis la fin de la séquence, ainsi la position 0 correspond au dernier motif de chaque séquence)
+  * change Fisher's exact test p-value threshold *f* (default: 0.05)
 
-  * changer le seuil pour le test de Holm-Bonferroni sur les p-valeurs (par défaut à 0.05, soit 95%)
+        -t <f>
 
-        -t alpha
