@@ -23,22 +23,19 @@ DiNAMO takes as input two fasta files, which contain respectively the positive d
 ### Optional Parameters
 
 
-  * maximum number *i* of degenerate letters
+* maximum number *i* of degenerate letters
 
         -d <i>
-        
 
-  *  Only process motifs at a offset i (0..N)  related to the **end** of each sequence
+*  Only process motifs at a offset i (0..N)  related to the **end** of each sequence
 
         -p <i>
-        
 
-  * output file
+* output file
 
         -o <file>
 
-
-  * change Fisher's exact test p-value threshold *f* (default: 0.05)
+* change Fisher's exact test p-value threshold *f* (default: 0.05)
 
         -t <f>
 
