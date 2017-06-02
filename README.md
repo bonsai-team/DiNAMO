@@ -6,7 +6,7 @@ The DiNAMO software implements an exhaustive algorithm to detect over-represente
 
 DiNAMO can be used in a variety of applications, such as ChIP-seq peak analysis for transcription factor binding sites identification, or finding motifs that induce systematic sequencing errors.
 
-## Dependancies
+## Dependencies
 
     Boost library (if not in the standard includes, please use -I /path/to/boost in the Makefile)
 
@@ -38,4 +38,3 @@ DiNAMO takes as input two fasta files, which contain respectively the positive d
 * change Fisher's exact test p-value threshold *f* (default: 0.05)
 
         -t <f>
-
