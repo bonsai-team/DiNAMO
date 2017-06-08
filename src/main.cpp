@@ -1,4 +1,4 @@
-#include "lib/sparsepp.h"
+#include "sparsepp.h"
 using spp::sparse_hash_map;
 
 #include "optionsParser.hpp"

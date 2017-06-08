@@ -1,14 +1,15 @@
-#Object files
-*.o
+#build dir
+build
 
-#Dependency files
-*.d
+# Ignore any executables
+bin
 
 #Generated files
-dinamo
 test/graph.html
 test/std
 test/sparse
 
 #Sequences
 sequences/*
+
+*~

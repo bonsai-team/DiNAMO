@@ -6,7 +6,7 @@
 
 #else
     /* Use Sparse++ */
-    #include "../lib/sparsepp.h"
+    #include "sparsepp.h"
     using spp::sparse_hash_map;
     #define __MAP__ sparse_hash_map<string, int>
 

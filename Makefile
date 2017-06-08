@@ -1,19 +1,38 @@
-#CXX = g++
-CXXFLAGS += -std=c++14 -Wall -Ofast
+CC := g++ # This is the main compiler
+# CC := clang --analyze # and comment out the linker last line for sanity
 
-SRCS=main.cpp hash.cpp optionsParser.cpp degenerate.cpp node.cpp mutual_information.cpp fisher_test.cpp graph_simplification.cpp reverse_complement.cpp meme_format.cpp find_redundant_motif.cpp relation_tables.cpp
-OBJS=$(subst .cpp,.o,$(SRCS))
-DEPS=$(subst .cpp,.d,$(SRCS))
+SRCDIR := src
+BUILDDIR := build
+EXECDIR := bin
+TARGET := bin/dinamo
+INC := -I include
 
-all: dinamo
+SRCEXT := cpp
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
-dinamo: $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
+CFLAGS := -std=c++14 -Wall -Ofast
+
+
+$(TARGET): $(OBJECTS)
+	@echo " Linking..."
+	@mkdir -p $(EXECDIR)
+	@echo " $(CC) $^ -o $(TARGET) "; $(CC) $^ -o $(TARGET) 
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(BUILDDIR)
+	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	rm -f $(OBJS) $(DEPS)
+	@echo " Cleaning..."; 
+	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
 
-realclean: clean
-	rm -f ./dinamo
+# Tests
+# tester:
+#	$(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 
-.PHONY: all clean realclean artifact
+# Spikes
+# ticket:
+#	$(CC) $(CFLAGS) spikes/ticket.cpp $(INC) $(LIB) -o bin/ticket
+
+.PHONY: clean

@@ -46,7 +46,7 @@
 
     #include "node.hpp"
 
-    #include "lib/sparsepp.h"
+    #include "sparsepp.h"
     using spp::sparse_hash_map;
 
     #include "reverse_complement.hpp"
