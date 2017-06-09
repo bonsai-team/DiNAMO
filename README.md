@@ -20,7 +20,7 @@ The executable file is located in the bin/ directory
 
 DiNAMO takes as input two fasta files, which contain respectively the positive dataset (signal.fa) and the negative dataset (control.fa). You should specify also the motif length '-l'. Optionally, you can provide a maximum number of degenerate letters '-d'. The output file contains the over-represented motifs found in the positive dataset compared to the negative dataset, in the MEME format (see http://meme-suite.org/doc/meme-format.html).
 
-        dinamo -pf signal.fa  -nf controle.fa -l 6
+        dinamo -pf signal.fa  -nf control.fa -l 6
 
 ### Optional Parameters
 
