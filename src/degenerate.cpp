@@ -74,8 +74,6 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                     }
                     else {
                         //node creation
-                        bool missing_successor_positive = false;
-                        bool missing_successor_negative = false;
                         unsigned int degenerated_motif_positive_count = 0;
                         unsigned int degenerated_motif_negative_count = 0;
 
@@ -89,25 +87,15 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                                 std::cerr << "Error : an overflow occurred while setting the positive count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
                                 exit(EXIT_FAILURE);
                             }
-                            if (successor_positive_count == 0)
-                                missing_successor_positive = true;
-                            else
-                                degenerated_motif_positive_count += successor_positive_count;
+                            degenerated_motif_positive_count += successor_positive_count;
 
                             //add negative successor count or raise flag
                             if (degenerated_motif_negative_count > ~0 - successor_negative_count) {
                                 std::cerr << "Error : an overflow occurred while setting the negative count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
                                 exit(EXIT_FAILURE);
                             }
-                            if (successor_negative_count == 0)
-                                missing_successor_negative = true;
-                            else
-                                degenerated_motif_negative_count += successor_negative_count;
+                            degenerated_motif_negative_count += successor_negative_count;
                         }
-                        //if a successor is missing in each datasets, then the motif should not be created
-                        if (missing_successor_positive && missing_successor_negative)
-                            continue;
-
                         current_node_ptr = new Node(degenerated_motif_positive_count, degenerated_motif_negative_count);
                         // current_node_ptr->set_motif(degenerated_motif);
                         degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, current_node_ptr)));

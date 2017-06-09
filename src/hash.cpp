@@ -20,14 +20,14 @@ void inc_global_count(unsigned &global_motif_count, bool rc) {
     } else ++global_motif_count;
 }
 
-void on_valid_motif(string &motif,
+bool on_valid_motif(string &motif,
                     sparse_hash_map<string, pair<int, Node *>> &encounters,
                     unsigned int l,
                     bool is_positive_file,
                     bool rc
                    ) {
     auto motif_it = encounters.find(motif);
-    if (motif_it != encounters.end())
+    if (motif_it != encounters.end()){
         if (is_positive_file) {
             (motif_it->second).second->increment_positive_count();
             if (rc && reverse_complement(motif) == motif)
@@ -38,23 +38,22 @@ void on_valid_motif(string &motif,
             if (rc && reverse_complement(motif) == motif)
                 (motif_it->second).second->increment_negative_count();
         }
-    else {
+        return true;
+    }
+    else if (is_positive_file) {
         Node *new_node_ptr;
-        if (is_positive_file)
-            new_node_ptr = new Node(1, 0);
-        else new_node_ptr = new Node(0, 1);
-        // new_node_ptr->set_motif(motif);
+        new_node_ptr = new Node(1, 0);
         encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
         // case of reverse complements
         if (rc) {
             string rv_cmp(reverse_complement(motif));
             if (rv_cmp != motif)
                 encounters.emplace(make_pair(rv_cmp, make_pair(l, new_node_ptr)));
-            else if (is_positive_file)
-                new_node_ptr->increment_positive_count();
-            else new_node_ptr->increment_negative_count();
+            else new_node_ptr->increment_positive_count();
         }
+        return true;
     }
+    return false;
 }
 
 unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
@@ -131,8 +130,7 @@ bool on_sequence_end(deque<char> &deque,
     if(deque.size() == l + p) {
         string motif(deque.begin(), next(deque.begin(), l));
         if(motif.find_first_not_of("ACGT") == string::npos) {
-            on_valid_motif(motif, encounters, l, is_positive_file, rc);
-            return true;
+            return on_valid_motif(motif, encounters, l, is_positive_file, rc);
         }
     }
     return false;
