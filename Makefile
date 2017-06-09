@@ -1,4 +1,4 @@
-CC := g++ # This is the main compiler
+CXX := g++ # This is the main compiler
 # CC := clang --analyze # and comment out the linker last line for sanity
 
 SRCDIR := src
@@ -8,23 +8,24 @@ TARGET := bin/dinamo
 INC := -I include
 
 SRCEXT := cpp
-SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
+OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
-CFLAGS := -std=c++14 -Wall -Ofast
+CXXFLAGS := --std=c++14 -Wall -Ofast
 
+all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@mkdir -p $(EXECDIR)
-	@echo " $(CC) $^ -o $(TARGET) "; $(CC) $^ -o $(TARGET) 
+	@echo " $(CXX) $^ -o $(TARGET) "; $(CXX) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
-	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@echo " $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<"; $(CXX) $(CXXFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	@echo " Cleaning..."; 
+	@echo " Cleaning...";
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
 
 # Tests
