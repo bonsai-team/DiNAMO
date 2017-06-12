@@ -294,7 +294,8 @@ int main (int argc, char **argv) {
 
     std::clog << "\tSimplificating graph..." << endl;
 
-    graph_simplification(mi_sorted_hash_map_entries, input.cmdOptionExists(position_options));
+    // graph_simplification(mi_sorted_hash_map_entries, input.cmdOptionExists(position_options));
+    graph_simplification(mi_sorted_hash_map_entries, false);
 
     std::clog << "\tSimplification done !" << endl << endl;
 
