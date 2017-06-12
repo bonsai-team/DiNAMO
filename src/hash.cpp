@@ -20,7 +20,7 @@ void inc_global_count(unsigned &global_motif_count, bool rc) {
     } else ++global_motif_count;
 }
 
-bool on_valid_motif(string &motif,
+void on_valid_motif(string &motif,
                     sparse_hash_map<string, pair<int, Node *>> &encounters,
                     unsigned int l,
                     bool is_positive_file,
@@ -38,7 +38,6 @@ bool on_valid_motif(string &motif,
             if (rc && reverse_complement(motif) == motif)
                 (motif_it->second).second->increment_negative_count();
         }
-        return true;
     }
     else if (is_positive_file) {
         Node *new_node_ptr;
@@ -51,9 +50,7 @@ bool on_valid_motif(string &motif,
                 encounters.emplace(make_pair(rv_cmp, make_pair(l, new_node_ptr)));
             else new_node_ptr->increment_positive_count();
         }
-        return true;
     }
-    return false;
 }
 
 unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
@@ -130,7 +127,8 @@ bool on_sequence_end(deque<char> &deque,
     if(deque.size() == l + p) {
         string motif(deque.begin(), next(deque.begin(), l));
         if(motif.find_first_not_of("ACGT") == string::npos) {
-            return on_valid_motif(motif, encounters, l, is_positive_file, rc);
+            on_valid_motif(motif, encounters, l, is_positive_file, rc);
+            return true;
         }
     }
     return false;
