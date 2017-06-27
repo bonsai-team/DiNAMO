@@ -1,5 +1,0 @@
-_ Remove hard coded types and make them configuration dependant
-_ implement node size reduction and hash_table size reduction
-    + unions
-    + hexa conversion
-    + multiple flags removal
