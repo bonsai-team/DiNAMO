@@ -65,6 +65,7 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
 
     unsigned global_motif_count = 0;
     string data;
+    unordered_set<string> already_in_sequence;
     deque<char> deque(l);
     bool dequeReady = (l == 1);
 
@@ -72,6 +73,7 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
         if(is_new_sequence(data)) {
             dequeReady = false;
             deque.clear();
+            already_in_sequence.clear();
         }
         else {
             for (char nuc : data) {
@@ -101,9 +103,13 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
                         break;
                 }
                 if (dequeReady) {
-                    inc_global_count(global_motif_count, rc);
                     string motif(deque.begin(), deque.end());
-                    on_valid_motif(motif, encounters, l, is_positive_file, rc);
+                    //if the same motif appears twice inside the sequence, count only once
+                    if(already_in_sequence.find(motif) == already_in_sequence.end()) {
+                        inc_global_count(global_motif_count, rc);
+                        on_valid_motif(motif, encounters, l, is_positive_file, rc);
+                        already_in_sequence.insert(motif);
+                    }
                     deque.pop_front();
                 }
                 else

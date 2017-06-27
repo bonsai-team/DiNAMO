@@ -40,6 +40,9 @@
     using std::transform;
     using std::reverse;
 
+    #include <unordered_set>
+    using std::unordered_set;
+
     //=====================
     //  Included libs
     //=====================
