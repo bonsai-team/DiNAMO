@@ -24,15 +24,16 @@ if [ "$TRAVIS_BRANCH" = "unstable" ]; then
 		diff temp.meme $TEST_DIR/$DATASET/dinamo_6_6.meme
 		if [ $? -ne 0 ]; then
         	echo "Failed test; the program did not output the expected file while testing for $DATASET with -l 6 -d 6" >&2
-			return 1;
+			exit(1);
     	fi
 		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 7 -d 3 -o temp.meme
 		diff temp.meme $TEST_DIR/$DATASET/dinamo_7_3.meme
 		if [ $? -ne 0 ]; then
         	echo "Failed test; the program did not output the expected file while testing for $DATASET with -l 7 -d 3" >&2
-			return 1;
+			exit(1);
+		else
+			echo "Test passed, no differences found"
     	fi
 	done
 	rm temp.meme
-	return 0;
 fi
