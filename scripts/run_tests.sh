@@ -7,6 +7,9 @@ if [ "$TRAVIS_BRANCH" = "unstable" ]; then
 	YELLOW='\033[1;33m'
 	NC='\033[0m' # No Color
 
+	CHECK_MARK='\u2714'
+	CROSS='\u2716'
+
 	TEST_DIR='test'
 
 	DATASETS=''
@@ -27,24 +30,39 @@ if [ "$TRAVIS_BRANCH" = "unstable" ]; then
 
 	for DATASET in $DATASETS
 	do
-		echo -e "Testing ChIP-Seq mode on $DATASET with -l 6 -d 6..."
+		echo -e "Now testing with $DATASET dataset :"
+		echo -e "\t Testing ChIP-Seq mode with parameters -l 6, -d 6..."
 		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 6 -d 6 -o temp.meme --no-log > /dev/null
-		diff temp.meme $TEST_DIR/$DATASET/dinamo_6_6.meme
+		diff temp.meme $TEST_DIR/$DATASET/chipseq_6_6.meme
 		if [ $? -ne 0 ]; then
-        	echo -e "${RED}\u2716${NC}  Test failed; the program did not output the expected file." >&2
+        	echo -e "${RED}${CROSS}${NC}\t Test failed; the program did not output the expected file." >&2
 			exit 1
-		else
-			echo -e "${GREEN}\u2714${NC}  Test passed, no difference found."
     	fi
-			echo -e "Testing ChIP-Seq mode on $DATASET with -l 7 -d 3..."
+
+		echo -e "\t Testing ChIP-Seq mode with parameters -l 7, -d 3..."
 		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 7 -d 3 -o temp.meme --no-log > /dev/null
-		diff temp.meme $TEST_DIR/$DATASET/dinamo_7_3.meme
+		diff temp.meme $TEST_DIR/$DATASET/chipseq_7_3.meme
 		if [ $? -ne 0 ]; then
-        	echo -e "${RED}\u2716${NC}  Test failed; the program did not output the expected file." >&2
+        	echo -e "${RED}${CROSS}${NC}\t Test failed; the program did not output the expected file." >&2
 			exit 1
-		else
-			echo -e "${GREEN}\u2714${NC}  Test passed, no difference found."
     	fi
+
+		echo -e "\t Testing fixed position mode with parameters -l 5, -d 5, -p 1..."
+		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 5 -d 5 -p 1 --no-log > temp.res
+		diff temp.res $TEST_DIR/$DATASET/position_5_5_1.results
+		if [ $? -ne 0 ]; then
+        	echo -e "${RED}${CROSS}${NC}\t Test failed; the program did not output the expected file." >&2
+			exit 1
+    	fi
+
+		echo -e "\t Testing fixed position mode with parameters -l 7, -d 7, -p 4..."
+		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 7 -d 7 -p 4 --no-log > temp.res
+		diff temp.res $TEST_DIR/$DATASET/position_7_7_4.results
+		if [ $? -ne 0 ]; then
+        	echo -e "${RED}${CROSS}${NC}\t Test failed; the program did not output the expected file." >&2
+			exit 1
+    	fi
+		echo -e "${GREEN}$DATASET tests were successful !${NC}\n"
 	done
 	rm temp.meme
 fi
