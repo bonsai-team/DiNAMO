@@ -38,7 +38,7 @@ before_script:
 
 script:
   - scripts/compile.sh
-  #- scripts/run_tests.sh
+  - scripts/run_tests.sh
 
 after_success:
   - chmod ugo+x scripts/travis_auto_merger.sh
