@@ -1,0 +1,165 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.25019 C 0.2504 G 0.24469 T 0.25472
+
+MOTIF GBGYGK
+
+#	MI	P-value
+#	0.000776135	2.31815e-91
+
+letter-probability matrix:
+0	0	1	0
+0	0.07903	0.59235	0.32862
+0	0	1	0
+0	0.2005	0	0.7995
+0	0	1	0
+0	0	0.50832	0.49168
+
+MOTIF TTATCD
+
+#	MI	P-value
+#	0.000414344	8.47059e-50
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+1	0	0	0
+0	0	0	1
+0	1	0	0
+0.37666	0	0.04509	0.57825
+
+MOTIF WSYCWS
+
+#	MI	P-value
+#	0.000143903	1.38991e-18
+
+letter-probability matrix:
+0.47161	0	0	0.52839
+0	0.50044	0.49956	0
+0	0.55163	0	0.44837
+0	1	0	0
+0.49779	0	0	0.50221
+0	0.43219	0.56781	0
+
+MOTIF CWKCYK
+
+#	MI	P-value
+#	8.86728e-05	3.60751e-12
+
+letter-probability matrix:
+0	1	0	0
+0.4809	0	0	0.5191
+0	0	0.60368	0.39632
+0	1	0	0
+0	0.35266	0	0.64734
+0	0	0.42497	0.57503
+
+MOTIF TTWAAD
+
+#	MI	P-value
+#	5.31887e-05	4.98935e-08
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0.493	0	0	0.507
+1	0	0	0
+1	0	0	0
+0.40896	0	0.32773	0.26331
+
+MOTIF GYGGNG
+
+#	MI	P-value
+#	5.27355e-05	5.76066e-08
+
+letter-probability matrix:
+0	0	1	0
+0	0.17227	0	0.82773
+0	0	1	0
+0	0	1	0
+0.28992	0.05462	0.35714	0.29832
+0	0	1	0
+
+MOTIF AACGTT
+
+#	MI	P-value
+#	4.27397e-05	3.14511e-06
+
+letter-probability matrix:
+1	0	0	0
+1	0	0	0
+0	1	0	0
+0	0	1	0
+0	0	0	1
+0	0	0	1
+
+MOTIF BCYWTC
+
+#	MI	P-value
+#	3.76249e-05	3.80082e-06
+
+letter-probability matrix:
+0	0.37545	0.30274	0.32181
+0	1	0	0
+0	0.53039	0	0.46961
+0.43147	0	0	0.56853
+0	0	0	1
+0	1	0	0
+
+MOTIF DACGCC
+
+#	MI	P-value
+#	3.70134e-05	3.85847e-06
+
+letter-probability matrix:
+0.42857	0	0.3	0.27143
+1	0	0	0
+0	1	0	0
+0	0	1	0
+0	1	0	0
+0	1	0	0
+
+MOTIF TSTASA
+
+#	MI	P-value
+#	3.61599e-05	5.31513e-06
+
+letter-probability matrix:
+0	0	0	1
+0	0.55385	0.44615	0
+0	0	0	1
+1	0	0	0
+0	0.44615	0.55385	0
+1	0	0	0
+
+MOTIF KTTMCT
+
+#	MI	P-value
+#	3.15032e-05	1.94554e-05
+
+letter-probability matrix:
+0	0	0.36576	0.63424
+0	0	0	1
+0	0	0	1
+0.34241	0.65759	0	0
+0	1	0	0
+0	0	0	1
+
+MOTIF GRAAAC
+
+#	MI	P-value
+#	2.9879e-05	2.90834e-05
+
+letter-probability matrix:
+0	0	1	0
+0.47581	0	0.52419	0
+1	0	0	0
+1	0	0	0
+1	0	0	0
+0	1	0	0
+
