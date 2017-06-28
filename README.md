@@ -40,3 +40,7 @@ DiNAMO takes as input two fasta files, which contain respectively the positive d
 * change Fisher's exact test p-value threshold *f* (default: 0.05)
 
         -t <f>
+
+* do not display logs
+
+        --no-log

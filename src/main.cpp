@@ -56,6 +56,7 @@ int main (int argc, char **argv) {
                      "\t\t(Please be warned : not linking the motif to their reverse complement usually doubles memory usage)" << endl;
         std::cout << "\t(-t|--threshold) r                  : Sets the pvalue threshold to r (0 <= r <= 1)" << endl;
         std::cout << "\t(-h|--help)                         : Displays this help" << endl;
+        std::cout << "\t--no-log                            : Prevents the log ouput from being displayed" << endl;
         exit(EXIT_SUCCESS);
     }
 
