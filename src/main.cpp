@@ -34,8 +34,13 @@ int main (int argc, char **argv) {
     std::initializer_list<const string> no_reverse_complement_options = {"--norc"};
     std::initializer_list<const string> pvalue_threshold_options = {"-t", "--threshold"};
     std::initializer_list<const string> help_options = {"-h", "--help"};
+    std::initializer_list<const string> no_log_options = {"--no-log"};
 
     InputParser input(argc, argv);
+
+    if (input.cmdOptionExists(no_log_options)) {
+        std::clog.setstate(std::ios_base::badbit);
+    }
 
     /* Parsing filename */
 
