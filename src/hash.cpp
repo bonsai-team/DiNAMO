@@ -21,7 +21,7 @@ void inc_global_count(unsigned &global_motif_count, bool rc) {
 }
 
 void on_valid_motif(string &motif,
-                    sparse_hash_map<string, pair<int, Node *>> &encounters,
+                    sparse_hash_map<string, Node *> &encounters,
                     unsigned int l,
                     bool is_positive_file,
                     bool rc
@@ -29,31 +29,31 @@ void on_valid_motif(string &motif,
     auto motif_it = encounters.find(motif);
     if (motif_it != encounters.end()){
         if (is_positive_file) {
-            (motif_it->second).second->increment_positive_count();
+            (motif_it->second)->increment_positive_count();
             if (rc && reverse_complement(motif) == motif)
-                (motif_it->second).second->increment_positive_count();
+                (motif_it->second)->increment_positive_count();
         }
         else {
-            (motif_it->second).second->increment_negative_count();
+            (motif_it->second)->increment_negative_count();
             if (rc && reverse_complement(motif) == motif)
-                (motif_it->second).second->increment_negative_count();
+                (motif_it->second)->increment_negative_count();
         }
     }
     else if (is_positive_file) {
         Node *new_node_ptr;
         new_node_ptr = new Node(1, 0);
-        encounters.emplace(make_pair(motif, make_pair(-1, new_node_ptr)));
+        encounters.emplace(make_pair(motif, new_node_ptr));
         // case of reverse complements
         if (rc) {
             string rv_cmp(reverse_complement(motif));
             if (rv_cmp != motif)
-                encounters.emplace(make_pair(rv_cmp, make_pair(l, new_node_ptr)));
+                encounters.emplace(make_pair(rv_cmp, new_node_ptr));
             else new_node_ptr->increment_positive_count();
         }
     }
 }
 
-unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
+unsigned fill_hash_map( sparse_hash_map<string, Node *> &encounters,
                         const string &filepath,
                         unsigned int l,
                         bool is_positive_file,
@@ -132,7 +132,7 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
 }
 
 bool on_sequence_end(deque<char> &deque,
-                     sparse_hash_map<string, pair<int, Node *>> &encounters,
+                     sparse_hash_map<string, Node *> &encounters,
                      unsigned int l,
                      unsigned int p,
                      bool is_positive_file,
@@ -150,7 +150,7 @@ bool on_sequence_end(deque<char> &deque,
 }
 
 
-unsigned fill_hash_map_from_pos(sparse_hash_map<string, pair<int, Node *>> &encounters,
+unsigned fill_hash_map_from_pos(sparse_hash_map<string, Node *> &encounters,
                                 const string &filepath,
                                 unsigned int l,
                                 unsigned int p,

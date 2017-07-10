@@ -41,6 +41,6 @@
 
     //=====================
 
-    void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &, unsigned int);
+    void filter_redundant_motif(vector<pair<const string, Node *> *> &, unsigned int);
 
 #endif

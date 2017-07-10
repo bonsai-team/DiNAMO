@@ -18,18 +18,18 @@ bool motifs_match(const string &motif1, const string &motif2, unsigned int l) {
         return true;
 }
 
-void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &remaining_hash_map_entries, unsigned int l) {
+void filter_redundant_motif(vector<pair<const string, Node *> *> &remaining_hash_map_entries, unsigned int l) {
 
     unsigned int side_addition_limit = ceil(l / 2.0);
     //resetting node state
     for (auto const &entry : remaining_hash_map_entries)
-        entry->second.second->reset_state();
+        entry->second->reset_state();
 
     //finding nodes that were not processed yet
     auto entry_it = remaining_hash_map_entries.begin();
     while (entry_it != remaining_hash_map_entries.end()) {
 
-        (*entry_it)->second.second->validate();
+        (*entry_it)->second->validate();
         string base = (*entry_it)->first;
         unsigned int letter_added_left = 0;
         unsigned int letter_added_right= 0;
@@ -43,7 +43,7 @@ void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &re
             //for each entry
             for (auto &entry : remaining_hash_map_entries) {
                 //that isn't tagged
-                if(entry->second.second->get_state() != unvisited)
+                if(entry->second->get_state() != unvisited)
                     continue;
 
                 //compute reverse_complement
@@ -77,7 +77,7 @@ void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &re
                     }
                     if(found_motif) {
                         //std::clog << (*entry_it)->first << " " << motif << "\tbase: " << base << std::endl;
-                        entry->second.second->suppress();
+                        entry->second->suppress();
                         break;
                     }
                 }
@@ -87,13 +87,13 @@ void filter_redundant_motif(vector<pair<const string, pair<int, Node *> > *> &re
         }
         entry_it = find_if(remaining_hash_map_entries.begin(),
                            remaining_hash_map_entries.end(),
-                           [](const pair<const string, pair<int, Node *> > *entry) -> bool
-                            { return entry->second.second->get_state() == unvisited; });
+                           [](const pair<const string, Node *> *entry) -> bool
+                            { return entry->second->get_state() == unvisited; });
     }
     remaining_hash_map_entries.erase(
         remove_if(remaining_hash_map_entries.begin(),
                   remaining_hash_map_entries.end(),
                   [](auto &entry)
-                    {return entry->second.second->get_state() != validated;}),
+                    {return entry->second->get_state() != validated;}),
         remaining_hash_map_entries.end());
 }

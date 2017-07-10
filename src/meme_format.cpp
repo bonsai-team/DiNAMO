@@ -34,8 +34,8 @@ void generate_exact_successor_motifs(vector<string> &res, const string &motif, u
     generate_exact_successor_motifs_rec(res, motif, acc, 0, l);
 }
 
-int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
-                     sparse_hash_map<string, pair<int, Node *>> &exact_motifs,
+int create_meme_file(vector<pair<const string, Node *> *> &entries,
+                     sparse_hash_map<string, Node *> &exact_motifs,
                      sparse_hash_map<char, unsigned int> &neg_nuc_count,
                      unsigned int l,
                      string &filename) {
@@ -82,7 +82,7 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
     for (auto const &entry : entries) {
         meme_file << "MOTIF " << entry->first << endl << endl;
         meme_file << "#\tMI\tP-value" << endl;
-        meme_file << "#\t" << entry->second.second->get_mi() << "\t" << entry->second.second->get_pvalue() << endl << endl;
+        meme_file << "#\t" << entry->second->get_mi() << "\t" << entry->second->get_pvalue() << endl << endl;
         meme_file << "letter-probability matrix:" << endl;
 
         vector<string> exact_successor_motifs;
@@ -96,8 +96,8 @@ int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &entries,
                 {'T', 0.0}
             };
             for (auto const &motif : exact_successor_motifs) {
-                nuc_counts[motif[i]] += exact_motifs[motif].second->get_positive_count();
-                exact_motifs_count += exact_motifs[motif].second->get_positive_count();
+                nuc_counts[motif[i]] += exact_motifs[motif]->get_positive_count();
+                exact_motifs_count += exact_motifs[motif]->get_positive_count();
             }
 
             vector<double> motif_nuc_frequencies{

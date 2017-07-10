@@ -1,8 +1,8 @@
 #include "graph_simplification.hpp"
 
-void graph_simplification(vector<pair<const string, pair<int, Node *> > *> mi_sorted_entry_ptr, bool fixed_pos) {
+void graph_simplification(vector<pair<const string, Node *> *> mi_sorted_entry_ptr, bool fixed_pos) {
     for (auto &entry_ptr : mi_sorted_entry_ptr) {
-        Node *node_ptr = entry_ptr->second.second;
+        Node *node_ptr = entry_ptr->second;
         switch (node_ptr->get_state()) {
         case unvisited:
             // std::cout << entry_ptr->first << " unvisited->validated " << node_ptr << endl;

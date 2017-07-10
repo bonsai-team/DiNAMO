@@ -218,10 +218,10 @@ int main (int argc, char **argv) {
     std::clog << "Parsed options in : " << parsing_options_time.count() << " seconds\n";
 
     //vector of pointers to hash_map
-    vector<sparse_hash_map<string, pair<int, Node *>> *> hash_map_holder(d+1);
+    vector<sparse_hash_map<string, Node *> *> hash_map_holder(d+1);
 
     //0_degree_motifs_hash_map
-    hash_map_holder[0] = new sparse_hash_map<string, pair<int, Node *>>();
+    hash_map_holder[0] = new sparse_hash_map<string, Node *>();
 
     unsigned int global_motif_count_positive;
     unsigned int global_motif_count_negative;
@@ -260,7 +260,7 @@ int main (int argc, char **argv) {
         double count_before_deg = total_motif_created;
         std::clog << "\tLevel " << i+1 << "\t\t" << total_motif_created << "\t\t";
 
-        hash_map_holder[i+1] = new sparse_hash_map<string, pair<int, Node *>>();
+        hash_map_holder[i+1] = new sparse_hash_map<string, Node *>();
         degenerate(*(hash_map_holder[i]), *(hash_map_holder[i+1]), l, rc);
 
         total_motif_created += hash_map_holder[i+1]->size();
@@ -277,13 +277,13 @@ int main (int argc, char **argv) {
 
     std::clog << "\tGenerating MIs..." << endl;
     //TODO get the number of nodes to define the vector as an array
-    std::vector<pair<const string, pair<int, Node *> > *> mi_sorted_hash_map_entries;
-    std::vector<pair<const string, pair<int, Node *> > *> pvalue_sorted_hash_map_entries;
+    std::vector<pair<const string, Node *> *> mi_sorted_hash_map_entries;
+    std::vector<pair<const string, Node *> *> pvalue_sorted_hash_map_entries;
 
     for (auto const &hash_map_reference : hash_map_holder) {
         for (auto &hash_map_entry_ref : *hash_map_reference ) {
             mi_sorted_hash_map_entries.push_back(&hash_map_entry_ref);
-            hash_map_entry_ref.second.second->calculate_mi(global_motif_count_positive, global_motif_count_negative);
+            hash_map_entry_ref.second->calculate_mi(global_motif_count_positive, global_motif_count_negative);
         }
     }
 
@@ -293,7 +293,7 @@ int main (int argc, char **argv) {
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
+                    return entry_one->second->get_mi() > entry_two->second->get_mi();
                 }
              );
 
@@ -308,9 +308,9 @@ int main (int argc, char **argv) {
     std::clog << "\tGenerating pvalue of the remaining entries..." << endl;
     unsigned int m = 0;
     for (auto &entry : mi_sorted_hash_map_entries) {
-        if (entry->second.second->get_state() == validated) {
-            entry->second.second->suppress();
-            entry->second.second->calculate_pvalue(global_motif_count_positive, global_motif_count_negative);
+        if (entry->second->get_state() == validated) {
+            entry->second->suppress();
+            entry->second->calculate_pvalue(global_motif_count_positive, global_motif_count_negative);
             pvalue_sorted_hash_map_entries.push_back(entry);
             m++;
         }
@@ -321,7 +321,7 @@ int main (int argc, char **argv) {
     std::sort(  pvalue_sorted_hash_map_entries.begin(),
                 pvalue_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second.second->get_pvalue() < entry_two->second.second->get_pvalue();
+                    return entry_one->second->get_pvalue() < entry_two->second->get_pvalue();
                 }
              );
 
@@ -339,7 +339,7 @@ int main (int argc, char **argv) {
     mi_sorted_hash_map_entries.clear();
 
     unsigned int k = 0;
-    while (pvalue_sorted_hash_map_entries[k]->second.second->get_pvalue()
+    while (pvalue_sorted_hash_map_entries[k]->second->get_pvalue()
            <= (alpha / ((double)(m + 1 - k))) //alpha is defined when parsing options
           ) {
         mi_sorted_hash_map_entries.push_back(pvalue_sorted_hash_map_entries[k]);
@@ -349,7 +349,7 @@ int main (int argc, char **argv) {
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second.second->get_mi() > entry_two->second.second->get_mi();
+                    return entry_one->second->get_mi() > entry_two->second->get_mi();
                 }
              );
 
@@ -364,7 +364,7 @@ int main (int argc, char **argv) {
 
     std::clog << endl << "======== Results ========" << endl << endl;
     for (auto &entry : mi_sorted_hash_map_entries) {
-        std::cout << entry->first << "\t" << entry->second.second->get_mi() << "\t" << entry->second.second->get_pvalue() << endl;
+        std::cout << entry->first << "\t" << entry->second->get_mi() << "\t" << entry->second->get_pvalue() << endl;
     }
 
     if (!input.cmdOptionExists(position_options))

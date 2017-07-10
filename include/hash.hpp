@@ -56,8 +56,8 @@
 
     //=====================
 
-    unsigned int fill_hash_map(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, bool, bool, sparse_hash_map<char, unsigned int> &);
+    unsigned int fill_hash_map(sparse_hash_map<string, Node *> &, const string &, unsigned int, bool, bool, sparse_hash_map<char, unsigned int> &);
 
-    unsigned int fill_hash_map_from_pos(sparse_hash_map<string, pair<int, Node *>> &, const string &, unsigned int, unsigned int, bool, bool);
+    unsigned int fill_hash_map_from_pos(sparse_hash_map<string, Node *> &, const string &, unsigned int, unsigned int, bool, bool);
 
 #endif

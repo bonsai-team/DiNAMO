@@ -1,7 +1,7 @@
 #include "degenerate.hpp"
 
 //retourne les nucléotides concaténés dans l'ordre (assuré par une itération sur le vecteur nucleotides)
-const string find_neighbor_motifs(  sparse_hash_map<string, pair<int, Node *>> &motifs,
+const string find_neighbor_motifs(  sparse_hash_map<string, Node *> &motifs,
                                     sparse_hash_map<char, pair<string, Node *>> &neighbor_motifs,
                                     const string &motif,
                                     unsigned int pos) {
@@ -18,16 +18,16 @@ const string find_neighbor_motifs(  sparse_hash_map<string, pair<int, Node *>> &
         auto const motif_it = motifs.find(neighbor_motif);
         if(motif_it == motifs.end())
             continue;
-        motif_it->second.first = pos;
+        (motif_it->second)->set_last_checked_position(pos);
         //sinon, on insère dans la table des résultats le motif et son compte
-        neighbor_motifs[nuc] = make_pair(neighbor_motif, motifs[neighbor_motif].second);
+        neighbor_motifs[nuc] = *motif_it;//make_pair(neighbor_motif, motifs[neighbor_motif].second);
         neighbors_nuc.push_back(nuc);
     }
     return neighbors_nuc;
 }
 
-void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
-                sparse_hash_map<string, pair<int, Node *>> &degenerated_motifs,
+void degenerate(sparse_hash_map<string, Node *> &motifs,
+                sparse_hash_map<string, Node *> &degenerated_motifs,
                 const unsigned int kmer_size,
                 bool rc) {
 
@@ -37,7 +37,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
         //pour chaque motif dans la table
         for (auto const &motif_it : motifs) {
             //s'il n'a pas été marqué pour cette position ou si la position a déjà été dégénérée
-            if((motif_it.second.first == pos) || (motif_it.second.first == kmer_size) || (!string("ACGT").find(motif_it.first[pos]))) {
+            if(((motif_it.second)->get_last_checked_position() == pos) || (!string("ACGT").find(motif_it.first[pos]))) {
                 continue;
             }
 
@@ -70,7 +70,7 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                     //checks if the node has already been created
                     auto entry_ptr = degenerated_motifs.find(degenerated_motif);
                     if(entry_ptr != degenerated_motifs.end()) {
-                        current_node_ptr = entry_ptr->second.second;
+                        current_node_ptr = entry_ptr->second;
                     }
                     else {
                         //node creation
@@ -98,9 +98,9 @@ void degenerate(sparse_hash_map<string, pair<int, Node *>> &motifs,
                         }
                         current_node_ptr = new Node(degenerated_motif_positive_count, degenerated_motif_negative_count);
                         // current_node_ptr->set_motif(degenerated_motif);
-                        degenerated_motifs.emplace(make_pair(degenerated_motif, make_pair(-1, current_node_ptr)));
+                        degenerated_motifs.emplace(make_pair(degenerated_motif, current_node_ptr));
                         if (rc) {
-                            degenerated_motifs.emplace(make_pair(reverse_complement(degenerated_motif), make_pair(kmer_size, current_node_ptr)));
+                            degenerated_motifs.emplace(make_pair(reverse_complement(degenerated_motif), current_node_ptr));
                         }
                     }
                     //remembering the node that we created to be able to find them easily

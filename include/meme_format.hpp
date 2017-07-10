@@ -40,6 +40,6 @@
 
     //=====================
 
-    int create_meme_file(vector<pair<const string, pair<int, Node *> > *> &, sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<char, unsigned int> &, unsigned int, string &);
+    int create_meme_file(vector<pair<const string, Node *> *> &, sparse_hash_map<string, Node *> &, sparse_hash_map<char, unsigned int> &, unsigned int, string &);
 
 #endif

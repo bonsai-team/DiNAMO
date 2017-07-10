@@ -23,7 +23,7 @@
 
     //====================
 
-    void graph_simplification(vector<pair<const string, pair<int, Node *> > *>, bool);
+    void graph_simplification(vector<pair<const string, Node *> *>, bool);
 
     void suppress_predecessors(Node *);
 

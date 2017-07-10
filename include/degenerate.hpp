@@ -36,8 +36,8 @@
 
     //=====================
 
-    const string find_neighbor_motifs(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<char, pair<string, Node *>> &, const string &, unsigned int);
+    const string find_neighbor_motifs(sparse_hash_map<string, Node *> &, sparse_hash_map<char, pair<string, Node *>> &, const string &, unsigned int);
 
-    void degenerate(sparse_hash_map<string, pair<int, Node *>> &, sparse_hash_map<string, pair<int, Node *>> &, unsigned int, bool);
+    void degenerate(sparse_hash_map<string, Node *> &, sparse_hash_map<string, Node *> &, unsigned int, bool);
 
 #endif
