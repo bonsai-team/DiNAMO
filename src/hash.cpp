@@ -67,6 +67,7 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
     string data;
     unordered_set<string> already_in_sequence;
     deque<char> deque(l);
+    bool ill_formed = false;
     bool dequeReady = (l == 1);
 
     while(getline(infile, data)) {
@@ -98,9 +99,17 @@ unsigned fill_hash_map( sparse_hash_map<string, pair<int, Node *>> &encounters,
                         break;
                     //if character is invalid, emptying deque
                     default:
-                        deque.clear();
-                        dequeReady = false;
-                        break;
+                        if (nuc == ' ' || nuc == '\t')
+                            continue; //silently ignores all spaces and tabs
+                        else {
+                            if (!ill_formed) {
+                                ill_formed = true;
+                                cerr << "Warning : an unexpected character '" << nuc << "' was found while parsing the file. Each motif overlapping with this unexpected character will be ignored. This warning will display only once." << endl;
+                            }
+                            deque.clear();
+                            dequeReady = false;
+                            break;
+                        }
                 }
                 if (dequeReady) {
                     string motif(deque.begin(), deque.end());
