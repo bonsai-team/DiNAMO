@@ -6,7 +6,6 @@ Node::Node(unsigned int positive_count, unsigned int negative_count) {
     this->successors  = vector<Node *>();
     this->predecessors = vector<Node *>();
     this->state = unvisited;
-    this->last_checked_pos = ~0;
 }
 
 void Node::add_predecessor(Node *child) {
@@ -98,14 +97,6 @@ void Node::tag() {
 
 State Node::get_state() {
     return this->state;
-}
-
-unsigned int Node::get_last_checked_position() {
-    return this->last_checked_pos;
-}
-
-void Node::set_last_checked_position(unsigned int pos) {
-    this->last_checked_pos = pos;
 }
 
 // void Node::set_motif(string motif) {

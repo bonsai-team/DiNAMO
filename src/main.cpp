@@ -283,6 +283,7 @@ int main (int argc, char **argv) {
     for (auto const &hash_map_reference : hash_map_holder) {
         for (auto &hash_map_entry_ref : *hash_map_reference ) {
             mi_sorted_hash_map_entries.push_back(&hash_map_entry_ref);
+            hash_map_entry_ref.second->reset_state();
             hash_map_entry_ref.second->calculate_mi(global_motif_count_positive, global_motif_count_negative);
         }
     }

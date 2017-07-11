@@ -34,7 +34,6 @@
         State state;
         vector<Node *> successors;
         vector<Node *> predecessors;
-        unsigned int last_checked_pos;
 
     public:
         Node(unsigned int, unsigned int);
@@ -61,9 +60,6 @@
         void suppress();
         void tag();
         State get_state();
-
-        unsigned int get_last_checked_position();
-        void set_last_checked_position(unsigned int);
     };
 
 #endif
