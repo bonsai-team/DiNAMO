@@ -3,17 +3,17 @@
 Node::Node(unsigned int positive_count, unsigned int negative_count) {
     this->positive_count = positive_count;
     this->negative_count = negative_count;
-    this->successors  = vector<Node *>();
+    this->successors = vector<Node *>();
     this->predecessors = vector<Node *>();
     this->state = unvisited;
 }
 
-void Node::add_predecessor(Node *child) {
-    this->predecessors.push_back(child);
+void Node::add_predecessor(Node *predecessor) {
+    this->predecessors.push_back(predecessor);
 }
 
-void Node::add_successor(Node *parent) {
-    this->successors.push_back(parent);
+void Node::add_successor(Node *successor) {
+    this->successors.push_back(successor);
 }
 
 vector<Node *> &Node::get_predecessors() {

@@ -28,6 +28,8 @@
 
     extern sparse_hash_map<string, vector<unordered_set<char>>> nucs_to_iupacs;
 
+    extern sparse_hash_map<string, char> nucs_to_iupac;
+
     extern sparse_hash_map<char, unordered_set<char>> iupacs_dependencies;
 
     //second member needs to be ordered (ordering used by set_intersection)

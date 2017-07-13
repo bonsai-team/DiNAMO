@@ -16,6 +16,20 @@ sparse_hash_map<string, vector<unordered_set<char>>> nucs_to_iupacs {
     {"GT"  , {{'K'}}}
 };
 
+sparse_hash_map<string, char> nucs_to_iupac {
+    {"ACGT", 'N'},
+    {"ACG" , 'V'},
+    {"ACT" , 'H'},
+    {"AGT" , 'D'},
+    {"CGT" , 'B'},
+    {"AC"  , 'M'},
+    {"AG"  , 'R'},
+    {"AT"  , 'W'},
+    {"CG"  , 'S'},
+    {"CT"  , 'Y'},
+    {"GT"  , 'K'}
+};
+
 sparse_hash_map<char, unordered_set<char>> iupacs_dependencies {
     {'N', {'B','D','H','V'}},
     {'B', {'Y','S','K'}},

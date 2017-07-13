@@ -1,145 +1,211 @@
 #include "degenerate.hpp"
 
-//retourne les nucléotides concaténés dans l'ordre (assuré par une itération sur le vecteur nucleotides)
-const string find_neighbor_motifs(  sparse_hash_map<string, Node *> &motifs,
-                                    sparse_hash_map<char, pair<string, Node *>> &neighbor_motifs,
-                                    const string &motif,
-                                    unsigned int pos,
-                                    sparse_hash_map<string, int> &last_checked_pos) {
+const string find_neighbours_at_pos(sparse_hash_map<string, Node *> &,
+                                    sparse_hash_map<char, Node *> &,
+                                    const string,
+                                    const unsigned int);
 
-    string neighbor_motif(motif);
-    string neighbors_nuc;
-    neighbors_nuc.reserve(4);
-    //pour tous les nucléotides
-    for (auto const &nuc : nucleotides) {
-        //on remplace la (pos)ième position du motif de base par ce nucléotide
-        neighbor_motif.replace(pos, 1, 1, nuc);
+Node *create_successor( Node *,
+                        const string &,
+                        sparse_hash_map<string, Node *> &,
+                        sparse_hash_map<string, Node *> &,
+                        bool);
 
-        //on passe au suivant si le voisin n'est pas dans la table
-        auto const motif_it = motifs.find(neighbor_motif);
-        if(motif_it == motifs.end())
-            continue;
-        last_checked_pos[motif_it->first] = pos;
-        //sinon, on insère dans la table des résultats le motif et son compte
-        neighbor_motifs[nuc] = *motif_it;//make_pair(neighbor_motif, motifs[neighbor_motif].second);
-        neighbors_nuc.push_back(nuc);
-    }
-    return neighbors_nuc;
-}
+void create_links(Node *, Node *);
+
+void create_graph_from_node(sparse_hash_map<string, Node *> &,
+                            sparse_hash_map<string, Node *> &,
+                            const string,
+                            Node *,
+                            bool);
+
+void successor_motifs_at_pos(const string &, unsigned int, vector<string> &);
+
+Node *node_creation(sparse_hash_map<string, Node *> &,
+                    sparse_hash_map<char, Node *> &,
+                    const string &,
+                    bool);
+
+/*      Function prototypes            */
 
 void degenerate(sparse_hash_map<string, Node *> &motifs,
                 sparse_hash_map<string, Node *> &degenerated_motifs,
-                const unsigned int kmer_size,
-                bool rc) {
+                const unsigned int motif_size,
+                const bool rc) {
 
-    sparse_hash_map<string, int> last_checked_pos;
-    last_checked_pos.reserve(motifs.size());
-    for (auto const &motif_it : motifs) {
-        if (motif_it.second->get_state() == unvisited) {
-            last_checked_pos[motif_it.first] = -1;
-            motif_it.second->validate();
+    for (unsigned int pos = 0; pos < motif_size; pos++) {
+        for (auto const &motif_it : motifs){
+            if (motif_it.first[pos] != 'A' && motif_it.first[pos] != 'C' && motif_it.first[pos] != 'G' && motif_it.first[pos] != 'T')
+                continue;
+
+            const string motif = motif_it.first;
+            //find_neighbours at current position
+            sparse_hash_map<char, Node *> neighbours;
+            neighbours.reserve(4);
+            const string neighbours_nuc = find_neighbours_at_pos(motifs, neighbours, motif, pos);
+
+            //generate appropriate degenerated motif
+            //this needs the string to be sorted alphabetically
+            auto generated_iupac_entry = nucs_to_iupac.find(neighbours_nuc);
+            assert(generated_iupac_entry != nucs_to_iupac.end());
+            char generated_iupac = generated_iupac_entry->second;
+
+            string degenerated_motif(motif);
+            degenerated_motif.replace(pos, 1, 1, generated_iupac);
+
+            if (degenerated_motifs.find(degenerated_motif) != degenerated_motifs.end())
+                continue;
+
+            Node *degenerated_motif_ptr = node_creation(degenerated_motifs, neighbours, degenerated_motif, rc);
+
+            create_graph_from_node(motifs, degenerated_motifs, degenerated_motif, degenerated_motif_ptr, rc);
         }
-        else
-            last_checked_pos[motif_it.first] = kmer_size;
     }
+}
 
-    //pour chaque position
-    for (unsigned int pos = 0; pos < kmer_size; pos++) {
+const string find_neighbours_at_pos(sparse_hash_map<string, Node *> &motifs,
+                                    sparse_hash_map<char, Node *> &neighbours,
+                                    const string motif,
+                                    const unsigned int pos) {
 
-        //pour chaque motif dans la table
-        for (auto const &motif_it : motifs) {
-            //s'il n'a pas été marqué pour cette position ou si la position a déjà été dégénérée
-            if((last_checked_pos[motif_it.first] == kmer_size) || (last_checked_pos[motif_it.first] == pos) || (!string("ACGT").find(motif_it.first[pos]))) {
-                continue;
-            }
+    string neighbours_nuc; //each nucleotides found on neighbours at the current pos
+    string hypothetical_neighbour = motif; //string that we will transform to look for neighbours in the hash table
+    for (char nuc : nucleotides) {
+        hypothetical_neighbour.replace(pos, 1, 1, nuc);
+        auto const neighbour_ptr = motifs.find(hypothetical_neighbour); // checking if the neighbour is present in the hash table
+        if (neighbour_ptr != motifs.end()) {
+            neighbours_nuc.push_back(nuc);
+            neighbours[nuc] = neighbour_ptr->second;
+        }
+    }
+    return neighbours_nuc;
+}
 
-            sparse_hash_map<char, pair<string, Node *>> neighbor_motifs;
-            neighbor_motifs.reserve(4);
-            //on trouve les voisins du kmer par rapport à la position courante
-            const string neighbors_nuc = find_neighbor_motifs(motifs, neighbor_motifs, motif_it.first, pos, last_checked_pos);
+Node *create_successor( Node *predecessor_ptr,
+                        const string &degenerated_motif,
+                        sparse_hash_map<string, Node *> &motifs,
+                        sparse_hash_map<string, Node *> &degenerated_motifs,
+                        bool rc) {
 
-            if (neighbors_nuc.size() <= 1) {
-                continue;
-            }
-            //this is where things can explode if the string is not sorted alphabetically
-            auto iupacs = nucs_to_iupacs.find(neighbors_nuc);
-            assert(iupacs != nucs_to_iupacs.end());
+    auto const entry_ptr = degenerated_motifs.find(degenerated_motif);
+    if (entry_ptr != degenerated_motifs.end()) {
+        Node *degenerated_motif_ptr = (*entry_ptr).second;
+        create_links(predecessor_ptr, degenerated_motif_ptr);
+    } else {
+        //finding neighbours
+        sparse_hash_map<char, Node *> neighbours;
+        neighbours.reserve(4);
+        unsigned int pos = degenerated_motif.find_first_not_of("ACGT");
+        string neighbour(degenerated_motif);
+        for (const char nuc : iupac_to_nucs[degenerated_motif[pos]]){
+            neighbour.replace(pos, 1, 1, nuc);
+            neighbours[nuc] = motifs[neighbour];
+        }
 
-            //string that will be transformed into the degenerated motif later
-            string degenerated_motif(motif_it.first);
+        //creating the new node
+        Node *degenerated_motif_ptr = node_creation(degenerated_motifs, neighbours, degenerated_motif, rc);
 
-            //TODO not required since lookup in a hashtable is O(1)
-            sparse_hash_map<char, Node *> iupac_to_node;
-            iupac_to_node.reserve(11);
+        //creating the link between the newly created node and its predecessor
+        create_links(predecessor_ptr, degenerated_motif_ptr);
 
-            // pour tous les iupacs dérivant des nucléotides
-            for (unsigned int degeneration_degree = 0; degeneration_degree < iupacs->second.size(); degeneration_degree++) {
-                for (auto const iupac : iupacs->second[degeneration_degree]) {
+        create_graph_from_node(motifs, degenerated_motifs, degenerated_motif, degenerated_motif_ptr, rc);
+    }
+}
 
-                    degenerated_motif.replace(pos, 1, 1, iupac);
-                    Node *current_node_ptr;
+void create_links(Node *predecessor_ptr, Node *successor_ptr) {
+    successor_ptr->add_predecessor(predecessor_ptr);
+    predecessor_ptr->add_successor(successor_ptr);
+}
 
-                    //checks if the node has already been created
-                    auto entry_ptr = degenerated_motifs.find(degenerated_motif);
-                    if(entry_ptr != degenerated_motifs.end()) {
-                        current_node_ptr = entry_ptr->second;
-                    }
-                    else {
-                        //node creation
-                        unsigned int degenerated_motif_positive_count = 0;
-                        unsigned int degenerated_motif_negative_count = 0;
+void create_graph_from_node(sparse_hash_map<string, Node *> &motifs,
+                            sparse_hash_map<string, Node *> &degenerated_motifs,
+                            const string degenerated_motif,
+                            Node *degenerated_motif_ptr,
+                            bool rc) {
 
-                        for (auto const &nuc : iupac_to_nucs[iupac]) {
+    for (unsigned int pos = 0; pos < degenerated_motif.size(); pos++) {
+        char current_iupac = degenerated_motif[pos];
+        switch (current_iupac) {
 
-                            unsigned int successor_positive_count = neighbor_motifs[nuc].second->get_positive_count();
-                            unsigned int successor_negative_count = neighbor_motifs[nuc].second->get_negative_count();
+        case 'A':
+        case 'C':
+        case 'G':
+        case 'T':
+            continue;
+            break;
 
-                            //add positive successor count or raise flag
-                            if (degenerated_motif_positive_count > ~0 - successor_positive_count) {
-                                std::cerr << "Error : an overflow occurred while setting the positive count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
-                                exit(EXIT_FAILURE);
-                            }
-                            degenerated_motif_positive_count += successor_positive_count;
-
-                            //add negative successor count or raise flag
-                            if (degenerated_motif_negative_count > ~0 - successor_negative_count) {
-                                std::cerr << "Error : an overflow occurred while setting the negative count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
-                                exit(EXIT_FAILURE);
-                            }
-                            degenerated_motif_negative_count += successor_negative_count;
-                        }
-                        current_node_ptr = new Node(degenerated_motif_positive_count, degenerated_motif_negative_count);
-                        // current_node_ptr->set_motif(degenerated_motif);
-                        degenerated_motifs.emplace(make_pair(degenerated_motif, current_node_ptr));
-                        if (rc) {
-                            degenerated_motifs.emplace(make_pair(reverse_complement(degenerated_motif), current_node_ptr));
-                        }
-                    }
-                    //remembering the node that we created to be able to find them easily
-                    //TODO this is not required since lookup in a hash table is O(1)
-                    iupac_to_node[iupac] = current_node_ptr;
-
-                    //adding links between nodes
-
-                    //here we create the nodes that depends on the nucleotides first,
-                    //then we create the nodes that depends on the previous one, etc.
-                    if (degeneration_degree == 0) {
-                        for (char nuc : iupacs_dependencies[iupac]) {
-                            current_node_ptr->add_successor(neighbor_motifs[nuc].second);
-                            neighbor_motifs[nuc].second->add_predecessor(current_node_ptr);
-                        }
-                    } else {
-                        for (char iupac_dependency : iupacs_dependencies[iupac]) {
-                            if (iupac_to_node.find(iupac_dependency) == iupac_to_node.end()) {
-                                std::cerr << "Tried to link a node to an non-existing one" << std::endl;
-                                exit(EXIT_FAILURE);
-                            }
-                            current_node_ptr->add_successor(iupac_to_node[iupac_dependency]);
-                            iupac_to_node[iupac_dependency]->add_predecessor(current_node_ptr);
-                        }
-                    }
+        //cases where successors may not exist yet
+        case 'B':
+        case 'D':
+        case 'H':
+        case 'V':
+        case 'N':
+            {
+                vector<string> successors_at_pos(4);
+                successor_motifs_at_pos(degenerated_motif, pos, successors_at_pos);
+                for (string successor_motif : successors_at_pos) {
+                    create_successor(degenerated_motif_ptr, successor_motif, motifs, degenerated_motifs, rc);
                 }
+                break;
+            }
+
+        //cases where we are sure that sucessors exist
+        default:
+            {
+                vector<string> successors_at_pos(4);
+                successor_motifs_at_pos(degenerated_motif, pos, successors_at_pos);
+                for (string successor_motif : successors_at_pos) {
+                    Node *successor_ptr = motifs[successor_motif];
+                    create_links(degenerated_motif_ptr, successor_ptr);
+                }
+                break;
             }
         }
     }
+}
+
+void successor_motifs_at_pos(const string &degenerated_motif, unsigned int pos, vector<string> &successors_at_pos) {
+    successors_at_pos.clear();
+    string successor(degenerated_motif);
+    for (const char iupac : iupacs_dependencies[degenerated_motif[pos]]) {
+        successor.replace(pos, 1, 1, iupac);
+        successors_at_pos.push_back(successor);
+    }
+}
+
+Node *node_creation(sparse_hash_map<string, Node *> &degenerated_motifs,
+                    sparse_hash_map<char, Node *> &neighbours,
+                    const string &degenerated_motif,
+                    bool rc) {
+
+    unsigned int degenerated_motif_positive_count = 0;
+    unsigned int degenerated_motif_negative_count = 0;
+
+    for (auto const &entry_ptr : neighbours) {
+
+        unsigned int successor_positive_count = entry_ptr.second->get_positive_count();
+        unsigned int successor_negative_count = entry_ptr.second->get_negative_count();
+
+        //add positive successor count or raise flag
+        if (degenerated_motif_positive_count > ~0 - successor_positive_count) {
+            std::cerr << "Error : an overflow occurred while setting the positive count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
+            exit(EXIT_FAILURE);
+        }
+        degenerated_motif_positive_count += successor_positive_count;
+
+        //add negative successor count or raise flag
+        if (degenerated_motif_negative_count > ~0 - successor_negative_count) {
+            std::cerr << "Error : an overflow occurred while setting the negative count of a degenerated motif. You should consider switching to a bigger unsigned type." << endl;
+            exit(EXIT_FAILURE);
+        }
+        degenerated_motif_negative_count += successor_negative_count;
+    }
+    Node *current_node_ptr = new Node(degenerated_motif_positive_count, degenerated_motif_negative_count);
+    degenerated_motifs.emplace(make_pair(degenerated_motif, current_node_ptr));
+    if (rc) {
+        string degenerated_motif_rc = reverse_complement(degenerated_motif);
+        if (degenerated_motif_rc != degenerated_motif)
+            degenerated_motifs.emplace(make_pair(degenerated_motif_rc, current_node_ptr));
+    }
+    return current_node_ptr;
 }

@@ -248,6 +248,7 @@ int main (int argc, char **argv) {
     std::clog << "Counting done in : " << counting_time.count() << " seconds" << endl;
 
     auto start_chrono_degeneration = std::chrono::high_resolution_clock::now();
+
     std::clog << endl << "======== Degeneration ========" << endl << endl;
 
     std::clog << "Before : Total motif count before degeneration" << endl;
@@ -271,6 +272,10 @@ int main (int argc, char **argv) {
     std::chrono::duration<double> degeneration_time = end_chrono_degeneration - start_chrono_degeneration;
     std::clog << "Degeneration done in : " << degeneration_time.count() << " seconds\n";
 
+    // for (auto const &hash_map_reference : hash_map_holder)
+    //     for (auto const &motif : *hash_map_reference)
+    //         std::cerr << motif.first << "\t" << motif.second->get_positive_count() << "\t" << motif.second->get_negative_count() << "\t" << motif.second->get_predecessors().size() << "\t" << motif.second->get_successors().size() << endl;
+
 
     auto start_chrono_simplification = std::chrono::high_resolution_clock::now();
     std::clog << endl << "======== Simplification ========" << endl << endl;
@@ -283,7 +288,6 @@ int main (int argc, char **argv) {
     for (auto const &hash_map_reference : hash_map_holder) {
         for (auto &hash_map_entry_ref : *hash_map_reference ) {
             mi_sorted_hash_map_entries.push_back(&hash_map_entry_ref);
-            hash_map_entry_ref.second->reset_state();
             hash_map_entry_ref.second->calculate_mi(global_motif_count_positive, global_motif_count_negative);
         }
     }
