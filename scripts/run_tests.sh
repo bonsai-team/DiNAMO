@@ -49,7 +49,8 @@ if [ "$TRAVIS_BRANCH" = "unstable" ]; then
 
 		echo -e "\t Testing fixed position mode with parameters -l 5, -d 5, -p 1..."
 		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 5 -d 5 -p 1 --no-log > temp.res
-		diff temp.res $TEST_DIR/$DATASET/position_5_5_1.results
+		sort -k1,1 temp.res > temp.res.sorted
+		diff temp.res.sorted $TEST_DIR/$DATASET/position_5_5_1.results.sorted
 		if [ $? -ne 0 ]; then
         	echo -e "${RED}${CROSS}${NC}\t Test failed; the program did not output the expected file." >&2
 			exit 1
@@ -57,7 +58,8 @@ if [ "$TRAVIS_BRANCH" = "unstable" ]; then
 
 		echo -e "\t Testing fixed position mode with parameters -l 7, -d 7, -p 4..."
 		bin/dinamo -pf $TEST_DIR/$DATASET/$SIG_FILE -nf $TEST_DIR/$DATASET/$CTRL_FILE -l 7 -d 7 -p 4 --no-log > temp.res
-		diff temp.res $TEST_DIR/$DATASET/position_7_7_4.results
+		sort -k1,1 temp.res > temp.res.sorted
+		diff temp.res.sorted $TEST_DIR/$DATASET/position_7_7_4.results.sorted
 		if [ $? -ne 0 ]; then
         	echo -e "${RED}${CROSS}${NC}\t Test failed; the program did not output the expected file." >&2
 			exit 1
