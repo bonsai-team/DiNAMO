@@ -7,31 +7,31 @@ strands: + -
 Background letter frequencies
 A 0.25019 C 0.2504 G 0.24469 T 0.25472
 
-MOTIF GBGYGK
+MOTIF MCRCVC
 
 #	MI	P-value
 #	0.000776135	2.31815e-91
 
 letter-probability matrix:
-0	0	1	0
-0	0.07903	0.59235	0.32862
-0	0	1	0
-0	0.2005	0	0.7995
-0	0	1	0
-0	0	0.50832	0.49168
+0.49168	0.50832	0	0
+0	1	0	0
+0.7995	0	0.2005	0
+0	1	0	0
+0.32862	0.59235	0.07903	0
+0	1	0	0
 
-MOTIF TTATCD
+MOTIF HGATAA
 
 #	MI	P-value
 #	0.000414344	8.47059e-50
 
 letter-probability matrix:
-0	0	0	1
-0	0	0	1
+0.57825	0.04509	0	0.37666
+0	0	1	0
 1	0	0	0
 0	0	0	1
-0	1	0	0
-0.37666	0	0.04509	0.57825
+1	0	0	0
+1	0	0	0
 
 MOTIF WSYCWS
 
@@ -98,31 +98,18 @@ letter-probability matrix:
 0	0	0	1
 0	0	0	1
 
-MOTIF BCYWTC
-
-#	MI	P-value
-#	3.76249e-05	3.80082e-06
-
-letter-probability matrix:
-0	0.37545	0.30274	0.32181
-0	1	0	0
-0	0.53039	0	0.46961
-0.43147	0	0	0.56853
-0	0	0	1
-0	1	0	0
-
-MOTIF DACGCC
+MOTIF GGCGTH
 
 #	MI	P-value
 #	3.70134e-05	3.85847e-06
 
 letter-probability matrix:
-0.42857	0	0.3	0.27143
-1	0	0	0
-0	1	0	0
+0	0	1	0
 0	0	1	0
 0	1	0	0
-0	1	0	0
+0	0	1	0
+0	0	0	1
+0.27143	0.3	0	0.42857
 
 MOTIF TSTASA
 
@@ -137,18 +124,31 @@ letter-probability matrix:
 0	0.44615	0.55385	0
 1	0	0	0
 
-MOTIF KTTMCT
+MOTIF VBTTTA
+
+#	MI	P-value
+#	3.25537e-05	1.49745e-05
+
+letter-probability matrix:
+0.3445	0.32536	0.33014	0
+0	0.38278	0.23923	0.37799
+0	0	0	1
+0	0	0	1
+0	0	0	1
+1	0	0	0
+
+MOTIF AGKAAM
 
 #	MI	P-value
 #	3.15032e-05	1.94554e-05
 
 letter-probability matrix:
-0	0	0.36576	0.63424
-0	0	0	1
-0	0	0	1
-0.34241	0.65759	0	0
-0	1	0	0
-0	0	0	1
+1	0	0	0
+0	0	1	0
+0	0	0.65759	0.34241
+1	0	0	0
+1	0	0	0
+0.63424	0.36576	0	0
 
 MOTIF GRAAAC
 

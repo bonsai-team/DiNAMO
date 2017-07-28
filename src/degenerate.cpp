@@ -44,6 +44,13 @@ void degenerate(sparse_hash_map<string, Node *> &motifs,
             neighbours.reserve(4);
             const string neighbours_nuc = find_neighbours_at_pos(motifs, neighbours, motif, pos);
 
+
+	    
+            if (neighbours_nuc.size() <= 1) {
+	      continue;
+            }
+
+
             //generate appropriate degenerated motif
             //this needs the string to be sorted alphabetically
             auto generated_iupac_entry = nucs_to_iupac.find(neighbours_nuc);

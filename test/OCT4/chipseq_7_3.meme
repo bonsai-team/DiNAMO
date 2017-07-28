@@ -49,33 +49,33 @@ letter-probability matrix:
 0	0.57662	0.42338	0
 1	0	0	0
 
-MOTIF GGNNGNG
+MOTIF CNCNNCC
 
 #	MI	P-value
 #	0.00013513	1.01224e-58
 
 letter-probability matrix:
-0	0	1	0
-0	0	1	0
-0.256	0.27182	0.31927	0.15291
-0.286	0.13636	0.34564	0.232
-0	0	1	0
-0.25145	0.15764	0.36273	0.22818
-0	0	1	0
+0	1	0	0
+0.22818	0.36273	0.15764	0.25145
+0	1	0	0
+0.232	0.34564	0.13636	0.286
+0.15291	0.31927	0.27182	0.256
+0	1	0	0
+0	1	0	0
 
-MOTIF BHCATTH
+MOTIF DAATGDV
 
 #	MI	P-value
 #	5.22775e-05	5.48393e-24
 
 letter-probability matrix:
-0	0.35347	0.29875	0.34778
-0.27252	0.36317	0	0.36431
-0	1	0	0
+0.40821	0	0.34892	0.24287
+1	0	0	0
 1	0	0	0
 0	0	0	1
-0	0	0	1
-0.24287	0.34892	0	0.40821
+0	0	1	0
+0.36431	0	0.36317	0.27252
+0.34778	0.29875	0.35347	0
 
 MOTIF CNCNGNG
 
@@ -91,19 +91,19 @@ letter-probability matrix:
 0.28162	0.18576	0.30852	0.2241
 0	0	1	0
 
-MOTIF BTSTTTN
+MOTIF NAAASAV
 
 #	MI	P-value
 #	4.71901e-05	7.71453e-22
 
 letter-probability matrix:
-0	0.34312	0.26265	0.39423
-0	0	0	1
-0	0.52733	0.47267	0
-0	0	0	1
-0	0	0	1
-0	0	0	1
-0.17763	0.24089	0.30365	0.27783
+0.27783	0.30365	0.24089	0.17763
+1	0	0	0
+1	0	0	0
+1	0	0	0
+0	0.47267	0.52733	0
+1	0	0	0
+0.39423	0.26265	0.34312	0
 
 MOTIF TGRCBTY
 
@@ -133,19 +133,19 @@ letter-probability matrix:
 0	1	0	0
 1	0	0	0
 
-MOTIF CACGTGR
+MOTIF YCACGTG
 
 #	MI	P-value
 #	2.69446e-05	2.55942e-13
 
 letter-probability matrix:
+0	0.58879	0	0.41121
 0	1	0	0
 1	0	0	0
 0	1	0	0
 0	0	1	0
 0	0	0	1
 0	0	1	0
-0.41121	0	0.58879	0
 
 MOTIF TYGTGAT
 
@@ -175,19 +175,19 @@ letter-probability matrix:
 0	1	0	0
 0.48626	0	0	0.51374
 
-MOTIF HRGYTCC
+MOTIF GGARCYD
 
 #	MI	P-value
 #	1.52565e-05	2.76737e-08
 
 letter-probability matrix:
-0.36215	0.3512	0	0.28665
-0.49453	0	0.50547	0
 0	0	1	0
-0	0.61816	0	0.38184
-0	0	0	1
+0	0	1	0
+1	0	0	0
+0.38184	0	0.61816	0
 0	1	0	0
-0	1	0	0
+0	0.50547	0	0.49453
+0.28665	0	0.3512	0.36215
 
 MOTIF TTTMHTC
 
@@ -217,33 +217,33 @@ letter-probability matrix:
 0	0	1	0
 0	1	0	0
 
-MOTIF GKAAMWC
+MOTIF GWKTTMC
 
 #	MI	P-value
 #	1.08347e-05	2.16993e-06
 
 letter-probability matrix:
 0	0	1	0
-0	0	0.69345	0.30655
-1	0	0	0
-1	0	0	0
-0.5506	0.4494	0	0
-0.4881	0	0	0.5119
+0.5119	0	0	0.4881
+0	0	0.4494	0.5506
+0	0	0	1
+0	0	0	1
+0.30655	0.69345	0	0
 0	1	0	0
 
-MOTIF DGYRGGT
+MOTIF ACCYRCH
 
 #	MI	P-value
 #	1.05096e-05	3.14917e-06
 
 letter-probability matrix:
-0.33941	0	0.331	0.32959
-0	0	1	0
-0	0.54418	0	0.45582
-0.53717	0	0.46283	0
-0	0	1	0
-0	0	1	0
-0	0	0	1
+1	0	0	0
+0	1	0	0
+0	1	0	0
+0	0.46283	0	0.53717
+0.45582	0	0.54418	0
+0	1	0	0
+0.32959	0.331	0	0.33941
 
 MOTIF GCGCRSN
 
@@ -259,19 +259,19 @@ letter-probability matrix:
 0	0.51552	0.48448	0
 0.21175	0.30488	0.30155	0.18182
 
-MOTIF TCTYATK
+MOTIF MATRAGA
 
 #	MI	P-value
 #	1.02246e-05	3.99567e-06
 
 letter-probability matrix:
-0	0	0	1
-0	1	0	0
-0	0	0	1
-0	0.55627	0	0.44373
+0.48232	0.51768	0	0
 1	0	0	0
 0	0	0	1
-0	0	0.51768	0.48232
+0.44373	0	0.55627	0
+1	0	0	0
+0	0	1	0
+1	0	0	0
 
 MOTIF WAGGYST
 
@@ -287,19 +287,19 @@ letter-probability matrix:
 0	0.6831	0.3169	0
 0	0	0	1
 
-MOTIF SGGATTH
+MOTIF DAATCCS
 
 #	MI	P-value
 #	9.3207e-06	9.63432e-06
 
 letter-probability matrix:
-0	0.2246	0.7754	0
-0	0	1	0
-0	0	1	0
+0.35829	0	0.3369	0.30481
+1	0	0	0
 1	0	0	0
 0	0	0	1
-0	0	0	1
-0.30481	0.3369	0	0.35829
+0	1	0	0
+0	1	0	0
+0	0.7754	0.2246	0
 
 MOTIF RAGRACA
 
@@ -315,19 +315,19 @@ letter-probability matrix:
 0	1	0	0
 1	0	0	0
 
-MOTIF CACMRCA
+MOTIF TGYKGTG
 
 #	MI	P-value
 #	9.04358e-06	1.3332e-05
 
 letter-probability matrix:
-0	1	0	0
-1	0	0	0
-0	1	0	0
-0.61473	0.38527	0	0
-0.51841	0	0.48159	0
-0	1	0	0
-1	0	0	0
+0	0	0	1
+0	0	1	0
+0	0.48159	0	0.51841
+0	0	0.38527	0.61473
+0	0	1	0
+0	0	0	1
+0	0	1	0
 
 MOTIF SGTDCAC
 
@@ -343,31 +343,31 @@ letter-probability matrix:
 1	0	0	0
 0	1	0	0
 
-MOTIF TTTACAM
+MOTIF KTGTAAA
 
 #	MI	P-value
 #	8.5015e-06	2.15347e-05
 
 letter-probability matrix:
+0	0	0.3629	0.6371
 0	0	0	1
-0	0	0	1
+0	0	1	0
 0	0	0	1
 1	0	0	0
-0	1	0	0
 1	0	0	0
-0.6371	0.3629	0	0
+1	0	0	0
 
-MOTIF TTSTGTD
+MOTIF HACASAA
 
 #	MI	P-value
 #	8.48504e-06	2.38309e-05
 
 letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0	0.50346	0.49654	0
-0	0	0	1
-0	0	1	0
-0	0	0	1
-0.2448	0	0.38338	0.37182
+0.37182	0.38338	0	0.2448
+1	0	0	0
+0	1	0	0
+1	0	0	0
+0	0.49654	0.50346	0
+1	0	0	0
+1	0	0	0
 

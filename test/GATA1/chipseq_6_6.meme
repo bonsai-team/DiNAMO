@@ -20,31 +20,18 @@ letter-probability matrix:
 0.50824	0.49176	0	0
 0.47294	0	0.16802	0.35904
 
-MOTIF VMCASV
+MOTIF BSTGKB
 
 #	MI	P-value
 #	0.000142665	1.71879e-228
 
 letter-probability matrix:
-0.27386	0.42455	0.30159	0
-0.50101	0.49899	0	0
-0	1	0	0
-1	0	0	0
-0	0.39697	0.60303	0
-0.42264	0.33824	0.23912	0
-
-MOTIF RGRARV
-
-#	MI	P-value
-#	0.000120127	8.78486e-193
-
-letter-probability matrix:
-0.52777	0	0.47223	0
+0	0.23912	0.33824	0.42264
+0	0.60303	0.39697	0
+0	0	0	1
 0	0	1	0
-0.46532	0	0.53468	0
-1	0	0	0
-0.46898	0	0.53102	0
-0.3297	0.26728	0.40302	0
+0	0	0.49899	0.50101
+0	0.30159	0.42455	0.27386
 
 MOTIF SVTATC
 
@@ -59,96 +46,57 @@ letter-probability matrix:
 0	0	0	1
 0	1	0	0
 
-MOTIF MVGCWG
+MOTIF THHCCR
 
 #	MI	P-value
-#	5.98902e-05	2.7311e-97
-
-letter-probability matrix:
-0.56353	0.43647	0	0
-0.55835	0.09565	0.346	0
-0	0	1	0
-0	1	0	0
-0.51611	0	0	0.48389
-0	0	1	0
-
-MOTIF TAATCT
-
-#	MI	P-value
-#	3.14246e-05	3.79526e-52
+#	3.65803e-05	2.7649e-60
 
 letter-probability matrix:
 0	0	0	1
+0.22043	0.46012	0	0.31945
+0.26659	0.36836	0	0.36505
+0	1	0	0
+0	1	0	0
+0.83317	0	0.16683	0
+
+MOTIF DMASTG
+
+#	MI	P-value
+#	1.49136e-05	8.85218e-26
+
+letter-probability matrix:
+0.33845	0	0.33646	0.32509
+0.382	0.618	0	0
 1	0	0	0
-1	0	0	0
+0	0.51133	0.48867	0
 0	0	0	1
-0	1	0	0
-0	0	0	1
-
-MOTIF TTMCRG
-
-#	MI	P-value
-#	1.55944e-05	6.74245e-27
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0.38199	0.61801	0	0
-0	1	0	0
-0.85625	0	0.14375	0
 0	0	1	0
 
-MOTIF CMCGCC
-
-#	MI	P-value
-#	1.47012e-05	1.67537e-25
-
-letter-probability matrix:
-0	1	0	0
-0.48667	0.51333	0	0
-0	1	0	0
-0	0	1	0
-0	1	0	0
-0	1	0	0
-
-MOTIF YGGTTT
-
-#	MI	P-value
-#	1.37337e-05	6.08719e-24
-
-letter-probability matrix:
-0	0.15991	0	0.84009
-0	0	1	0
-0	0	1	0
-0	0	0	1
-0	0	0	1
-0	0	0	1
-
-MOTIF GTGACN
+MOTIF NGTCAC
 
 #	MI	P-value
 #	1.21963e-05	1.85967e-21
 
 letter-probability matrix:
+0.33724	0.06412	0.23397	0.36467
 0	0	1	0
 0	0	0	1
-0	0	1	0
+0	1	0	0
 1	0	0	0
 0	1	0	0
-0.36467	0.23397	0.06412	0.33724
 
-MOTIF DTTAAM
+MOTIF KTTAAH
 
 #	MI	P-value
 #	1.20248e-05	3.47237e-21
 
 letter-probability matrix:
-0.3237	0	0.29986	0.37644
+0	0	0.42991	0.57009
 0	0	0	1
 0	0	0	1
 1	0	0	0
 1	0	0	0
-0.57009	0.42991	0	0
+0.37644	0.29986	0	0.3237
 
 MOTIF GGATAA
 
@@ -189,19 +137,6 @@ letter-probability matrix:
 0	1	0	0
 0	1	0	0
 
-MOTIF CAGANG
-
-#	MI	P-value
-#	9.41505e-06	5.51221e-17
-
-letter-probability matrix:
-0	1	0	0
-1	0	0	0
-0	0	1	0
-1	0	0	0
-0.2968	0.05631	0.34867	0.29822
-0	0	1	0
-
 MOTIF GATABW
 
 #	MI	P-value
@@ -215,31 +150,31 @@ letter-probability matrix:
 0	0.33187	0.45478	0.21335
 0.52239	0	0	0.47761
 
-MOTIF MACABT
+MOTIF TSTGTA
 
 #	MI	P-value
-#	7.37299e-06	1.07059e-13
+#	8.39758e-06	2.27888e-15
 
 letter-probability matrix:
-0.40036	0.59964	0	0
-1	0	0	0
-0	1	0	0
-1	0	0	0
-0	0.38058	0.38336	0.23606
 0	0	0	1
+0	0.54218	0.45782	0
+0	0	0	1
+0	0	1	0
+0	0	0	1
+1	0	0	0
 
-MOTIF CTGBAG
+MOTIF YGTYCY
 
 #	MI	P-value
-#	7.06615e-06	3.33064e-13
+#	7.0088e-06	4.12243e-13
 
 letter-probability matrix:
-0	1	0	0
+0	0.16536	0	0.83464
+0	0	1	0
 0	0	0	1
-0	0	1	0
-0	0.45793	0.35094	0.19113
-1	0	0	0
-0	0	1	0
+0	0.52443	0	0.47557
+0	1	0	0
+0	0.45737	0	0.54263
 
 MOTIF GWAAAC
 
@@ -254,44 +189,18 @@ letter-probability matrix:
 1	0	0	0
 0	1	0	0
 
-MOTIF AGCSAT
+MOTIF ATSGCT
 
 #	MI	P-value
 #	5.92498e-06	2.2149e-11
 
 letter-probability matrix:
 1	0	0	0
-0	0	1	0
-0	1	0	0
-0	0.82357	0.17643	0
-1	0	0	0
 0	0	0	1
-
-MOTIF GKGCTG
-
-#	MI	P-value
-#	5.33204e-06	2.10244e-10
-
-letter-probability matrix:
-0	0	1	0
-0	0	0.50421	0.49579
+0	0.17643	0.82357	0
 0	0	1	0
 0	1	0	0
 0	0	0	1
-0	0	1	0
-
-MOTIF MACAAA
-
-#	MI	P-value
-#	4.7433e-06	1.8711e-09
-
-letter-probability matrix:
-0.46601	0.53399	0	0
-1	0	0	0
-0	1	0	0
-1	0	0	0
-1	0	0	0
-1	0	0	0
 
 MOTIF MCCKTA
 
@@ -332,6 +241,19 @@ letter-probability matrix:
 0	0	1	0
 0.45712	0	0.54288	0
 
+MOTIF ATAGCV
+
+#	MI	P-value
+#	2.53204e-06	8.06384e-06
+
+letter-probability matrix:
+1	0	0	0
+0	0	0	1
+1	0	0	0
+0	0	1	0
+0	1	0	0
+0.51463	0.38925	0.09612	0
+
 MOTIF GBGSAG
 
 #	MI	P-value
@@ -358,6 +280,32 @@ letter-probability matrix:
 0	0	1	0
 0	0.53289	0	0.46711
 
+MOTIF TCTCRG
+
+#	MI	P-value
+#	2.461e-06	1.06671e-05
+
+letter-probability matrix:
+0	0	0	1
+0	1	0	0
+0	0	0	1
+0	1	0	0
+0.86566	0	0.13434	0
+0	0	1	0
+
+MOTIF TTCCTA
+
+#	MI	P-value
+#	2.41675e-06	1.21772e-05
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0	1	0	0
+0	1	0	0
+0	0	0	1
+1	0	0	0
+
 MOTIF RCCCCR
 
 #	MI	P-value
@@ -371,19 +319,6 @@ letter-probability matrix:
 0	1	0	0
 0.80578	0	0.19422	0
 
-MOTIF CCACCA
-
-#	MI	P-value
-#	2.26688e-06	2.21631e-05
-
-letter-probability matrix:
-0	1	0	0
-0	1	0	0
-1	0	0	0
-0	1	0	0
-0	1	0	0
-1	0	0	0
-
 MOTIF GACGTC
 
 #	MI	P-value
@@ -396,6 +331,45 @@ letter-probability matrix:
 0	0	1	0
 0	0	0	1
 0	1	0	0
+
+MOTIF RTTACA
+
+#	MI	P-value
+#	2.22366e-06	2.60112e-05
+
+letter-probability matrix:
+0.52651	0	0.47349	0
+0	0	0	1
+0	0	0	1
+1	0	0	0
+0	1	0	0
+1	0	0	0
+
+MOTIF CKCCTK
+
+#	MI	P-value
+#	2.14462e-06	3.6708e-05
+
+letter-probability matrix:
+0	1	0	0
+0	0	0.17437	0.82563
+0	1	0	0
+0	1	0	0
+0	0	0	1
+0	0	0.57143	0.42857
+
+MOTIF AKCGTG
+
+#	MI	P-value
+#	2.05211e-06	4.89573e-05
+
+letter-probability matrix:
+1	0	0	0
+0	0	0.61905	0.38095
+0	1	0	0
+0	0	1	0
+0	0	0	1
+0	0	1	0
 
 MOTIF CACATS
 
@@ -422,32 +396,6 @@ letter-probability matrix:
 0	1	0	0
 1	0	0	0
 0	0	1	0
-
-MOTIF CAGARC
-
-#	MI	P-value
-#	1.89293e-06	9.66335e-05
-
-letter-probability matrix:
-0	1	0	0
-1	0	0	0
-0	0	1	0
-1	0	0	0
-0.38135	0	0.61865	0
-0	1	0	0
-
-MOTIF GGTTMC
-
-#	MI	P-value
-#	1.86631e-06	0.000103991
-
-letter-probability matrix:
-0	0	1	0
-0	0	1	0
-0	0	0	1
-0	0	0	1
-0.34434	0.65566	0	0
-0	1	0	0
 
 MOTIF TGGCCA
 
