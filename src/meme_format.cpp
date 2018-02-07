@@ -83,7 +83,7 @@ int create_meme_file(vector<pair<const string, Node *> *> &entries,
     //corps
     for (auto const &entry : entries) {
         meme_file << "MOTIF " << entry->first << endl << endl;
-        meme_file << "#\tMI\tP-value\t#MotifPos/#TotalPos\t#MotifPos/#TotalPos" << endl;
+        meme_file << "#\tMI\tP-value\t#MotifPos/#TotalPos\t#MotifNeg/#TotalNeg" << endl;
         meme_file << "#\t" << entry->second->get_mi()
                   <<  "\t" << entry->second->get_pvalue()
                   <<  "\t" << entry->second->get_positive_count() << "/" << global_motif_count_positive
