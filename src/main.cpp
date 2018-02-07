@@ -298,7 +298,7 @@ int main (int argc, char **argv) {
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second->get_mi() > entry_two->second->get_mi();
+		  return (entry_one->second->get_mi() > entry_two->second->get_mi()) || ((entry_one->second->get_mi() == entry_two->second->get_mi()) && (entry_one->first > entry_two->first));
                 }
              );
 
@@ -326,7 +326,7 @@ int main (int argc, char **argv) {
     std::sort(  pvalue_sorted_hash_map_entries.begin(),
                 pvalue_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second->get_pvalue() < entry_two->second->get_pvalue();
+                  return (entry_one->second->get_pvalue() > entry_two->second->get_pvalue()) || ((entry_one->second->get_pvalue() == entry_two->second->get_pvalue()) && (entry_one->first > entry_two->first));
                 }
              );
 
@@ -354,7 +354,7 @@ int main (int argc, char **argv) {
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second->get_mi() > entry_two->second->get_mi();
+                  return (entry_one->second->get_mi() > entry_two->second->get_mi()) || ((entry_one->second->get_mi() == entry_two->second->get_mi()) && (entry_one->first > entry_two->first));
                 }
              );
 
