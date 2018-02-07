@@ -368,6 +368,12 @@ int main (int argc, char **argv) {
         filter_redundant_motif(mi_sorted_hash_map_entries, l);
 
     std::clog << endl << "======== Results ========" << endl << endl;
+    std::cout << "# Motif"
+              << "\t" << "MI"
+              << "\t" << "PValue"
+              << "\t" << "#MotifPos/#TotalPos"
+              << "\t" << "#MotifNeg/#TotalNeg"
+              << endl;    
     for (auto &entry : mi_sorted_hash_map_entries) {
       std::cout << entry->first
                 << "\t" << entry->second->get_mi()
