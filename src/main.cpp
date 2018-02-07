@@ -326,7 +326,7 @@ int main (int argc, char **argv) {
     std::sort(  pvalue_sorted_hash_map_entries.begin(),
                 pvalue_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                  return (entry_one->second->get_pvalue() > entry_two->second->get_pvalue()) || ((entry_one->second->get_pvalue() == entry_two->second->get_pvalue()) && (entry_one->first > entry_two->first));
+                  return (entry_one->second->get_pvalue() < entry_two->second->get_pvalue()) || ((entry_one->second->get_pvalue() == entry_two->second->get_pvalue()) && (entry_one->first > entry_two->first));
                 }
              );
 
