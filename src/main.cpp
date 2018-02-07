@@ -369,7 +369,12 @@ int main (int argc, char **argv) {
 
     std::clog << endl << "======== Results ========" << endl << endl;
     for (auto &entry : mi_sorted_hash_map_entries) {
-        std::cout << entry->first << "\t" << entry->second->get_mi() << "\t" << entry->second->get_pvalue() << endl;
+      std::cout << entry->first
+                << "\t" << entry->second->get_mi()
+                << "\t" << entry->second->get_pvalue()
+                << "\t" << entry->second->get_positive_count() << "/" << global_motif_count_positive
+                << "\t" << entry->second->get_negative_count() << "/" << global_motif_count_negative
+                << endl;
     }
 
     if (!input.cmdOptionExists(position_options))
