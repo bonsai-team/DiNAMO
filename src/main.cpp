@@ -384,7 +384,7 @@ int main (int argc, char **argv) {
     }
 
     if (!input.cmdOptionExists(position_options))
-        create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count, l, meme_filename);
+      create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count,  global_motif_count_positive,  global_motif_count_negative, l, meme_filename);
 
     // std::clog << endl << "======== Cleaning ========" << endl << endl;
     //
