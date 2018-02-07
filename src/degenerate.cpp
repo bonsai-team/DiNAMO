@@ -5,7 +5,7 @@ const string find_neighbours_at_pos(sparse_hash_map<string, Node *> &,
                                     const string,
                                     const unsigned int);
 
-Node *create_successor( Node *,
+void create_successor(  Node *,
                         const string &,
                         sparse_hash_map<string, Node *> &,
                         sparse_hash_map<string, Node *> &,
@@ -88,7 +88,7 @@ const string find_neighbours_at_pos(sparse_hash_map<string, Node *> &motifs,
     return neighbours_nuc;
 }
 
-Node *create_successor( Node *predecessor_ptr,
+void  create_successor( Node *predecessor_ptr,
                         const string &degenerated_motif,
                         sparse_hash_map<string, Node *> &motifs,
                         sparse_hash_map<string, Node *> &degenerated_motifs,
