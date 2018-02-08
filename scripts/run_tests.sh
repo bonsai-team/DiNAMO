@@ -6,8 +6,8 @@ GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-CHECK_MARK="\xe2\x9c\x97\x0a"
-CROSS_MARK="\xe2\x9c\x93\x0a "
+CROSS_MARK="\xe2\x9c\x97\x0a"
+CHECK_MARK="\xe2\x9c\x93\x0a "
 
 TEST_DIR='test'
 
@@ -39,10 +39,10 @@ do
             bin/dinamo -pf ${TEST_DIR}/${DATASET}/${SIG_FILE} -nf ${TEST_DIR}/${DATASET}/${CTRL_FILE} -l ${l} -d ${d} -o  ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme 2> /dev/null 1> /dev/null
             diff ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme  ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}.meme
             if [ $? -ne 0 ]; then
-                echo -e "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
+                echo -en "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
                 exit 1
             fi
-            echo -e "\t${GREEN}${CHECK_MARK}${NC}"
+            echo -en "\t${GREEN}${CHECK_MARK}${NC}"
             rm -f ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme
         done
     done
@@ -57,10 +57,10 @@ do
                 bin/dinamo -pf ${TEST_DIR}/${DATASET}/${SIG_FILE}  -nf ${TEST_DIR}/${DATASET}/${SIG_FILE}  -l ${l} -d ${d} -p ${p} --no-log >  ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res
                 diff ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}.res
                 if [ $? -ne 0 ]; then
-                    echo -e "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
+                    echo -en "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
                     exit 1
                 fi
-                echo -e "\t${GREEN}${CHECK_MARK}${NC}"
+                echo -en "\t${GREEN}${CHECK_MARK}${NC}"
                 rm -f ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res
             done
         done
