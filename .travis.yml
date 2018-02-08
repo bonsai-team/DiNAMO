@@ -59,6 +59,9 @@ before_script:
   - chmod ugo+x scripts/run_tests.sh
 
 script:
+  - ${CXX} -v
+  - which ${CXX}
+  - which g++
   - make
   - scripts/run_tests.sh
 
