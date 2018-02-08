@@ -60,7 +60,9 @@ before_script:
 
 script:
   - ${CXX} -v
-  - which ${CXX}
+  - echo ${COMPILER}
+  - which g++-4.9
+  - which g++-5
   - which g++
   - make
   - scripts/run_tests.sh
