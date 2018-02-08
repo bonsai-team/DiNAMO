@@ -14,6 +14,7 @@ sudo: require
 language: cpp
 compiler:
   - gcc
+  - clang
 
 addons:
   apt:
@@ -41,5 +42,5 @@ script:
   - scripts/run_tests.sh
 
 after_success:
-  - chmod ugo+x scripts/travis_auto_merger.sh
-  - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO scripts/travis_auto_merger.sh"
+#  - chmod ugo+x scripts/travis_auto_merger.sh
+#  - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO scripts/travis_auto_merger.sh"
