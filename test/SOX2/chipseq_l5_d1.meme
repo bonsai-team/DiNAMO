@@ -1,0 +1,237 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.26289 C 0.23766 G 0.2353 T 0.26415
+
+MOTIF WTTGT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000639478	5.92726e-309	5432/789508	2251/800842
+
+letter-probability matrix:
+0.4768	0	0	0.5232
+0	0	0	1
+0	0	0	1
+0	0	1	0
+0	0	0	1
+
+MOTIF TATTS
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000111751	6.54759e-56	2081/789508	1210/800842
+
+letter-probability matrix:
+0	0	0	1
+1	0	0	0
+0	0	0	1
+0	0	0	1
+0	0.42383	0.57617	0
+
+MOTIF VGGAA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.83121e-05	3.73487e-30	3584/789508	2731/800842
+
+letter-probability matrix:
+0.52427	0.09459	0.38114	0
+0	0	1	0
+0	0	1	0
+1	0	0	0
+1	0	0	0
+
+MOTIF GGHGG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.52219e-05	1.15111e-28	3095/789508	2324/800842
+
+letter-probability matrix:
+0	0	1	0
+0	0	1	0
+0.46559	0.13603	0	0.39838
+0	0	1	0
+0	0	1	0
+
+MOTIF WATGC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.72425e-05	8.10224e-25	2108/789508	1521/800842
+
+letter-probability matrix:
+0.63378	0	0	0.36622
+1	0	0	0
+0	0	0	1
+0	0	1	0
+0	1	0	0
+
+MOTIF GCDGG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.25482e-05	8.18227e-13	3346/789508	2837/800842
+
+letter-probability matrix:
+0	0	1	0
+0	1	0	0
+0.46354	0	0.11775	0.41871
+0	0	1	0
+0	0	1	0
+
+MOTIF GTCHT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.23152e-05	1.0598e-12	3058/789508	2573/800842
+
+letter-probability matrix:
+0	0	1	0
+0	0	0	1
+0	1	0	0
+0.25638	0.36167	0	0.38195
+0	0	0	1
+
+MOTIF BCTAT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.23043e-05	1.05575e-12	2120/789508	1714/800842
+
+letter-probability matrix:
+0	0.32453	0.30896	0.36651
+0	1	0	0
+0	0	0	1
+1	0	0	0
+0	0	0	1
+
+MOTIF TACAD
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.01757e-05	1.1682e-11	2355/789508	1949/800842
+
+letter-probability matrix:
+0	0	0	1
+1	0	0	0
+0	1	0	0
+1	0	0	0
+0.41571	0	0.32144	0.26285
+
+MOTIF RCGTG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.49021e-05	4.21568e-09	508/789508	347/800842
+
+letter-probability matrix:
+0.47047	0	0.52953	0
+0	1	0	0
+0	0	1	0
+0	0	0	1
+0	0	1	0
+
+MOTIF TTAVC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.31502e-05	3.35541e-08	2268/789508	1949/800842
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+1	0	0	0
+0.32672	0.26587	0.40741	0
+0	1	0	0
+
+MOTIF ATTMT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.00506e-05	1.15753e-06	1705/789508	1463/800842
+
+letter-probability matrix:
+1	0	0	0
+0	0	0	1
+0	0	0	1
+0.34076	0.65924	0	0
+0	0	0	1
+
+MOTIF CTMGG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	8.06811e-06	1.13228e-05	1206/789508	1023/800842
+
+letter-probability matrix:
+0	1	0	0
+0	0	0	1
+0.767	0.233	0	0
+0	0	1	0
+0	0	1	0
+
+MOTIF VTTTA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.77526e-06	1.63387e-05	2568/789508	2314/800842
+
+letter-probability matrix:
+0.34618	0.38046	0.27336	0
+0	0	0	1
+0	0	0	1
+0	0	0	1
+1	0	0	0
+
+MOTIF GTSAC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.73612e-06	1.679e-05	1462/789508	1266/800842
+
+letter-probability matrix:
+0	0	1	0
+0	0	0	1
+0	0.5	0.5	0
+1	0	0	0
+0	1	0	0
+
+MOTIF TGRGA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	6.2167e-06	0.000101281	2594/789508	2369/800842
+
+letter-probability matrix:
+0	0	0	1
+0	0	1	0
+0.49113	0	0.50887	0
+0	0	1	0
+1	0	0	0
+
+MOTIF STTTC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.98978e-06	0.000132074	2399/789508	2186/800842
+
+letter-probability matrix:
+0	0.59233	0.40767	0
+0	0	0	1
+0	0	0	1
+0	0	0	1
+0	1	0	0
+
+MOTIF GSAGC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.72236e-06	0.000181029	2331/789508	2126/800842
+
+letter-probability matrix:
+0	0	1	0
+0	0.50408	0.49592	0
+1	0	0	0
+0	0	1	0
+0	1	0	0
+
+MOTIF GCGST
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.59699e-06	0.000198206	501/789508	402/800842
+
+letter-probability matrix:
+0	0	1	0
+0	1	0	0
+0	0	1	0
+0	0.64072	0.35928	0
+0	0	0	1
+

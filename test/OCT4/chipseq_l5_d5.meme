@@ -1,0 +1,117 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.24251 C 0.25735 G 0.2563 T 0.24384
+
+MOTIF YNYNY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.0002598	1.35433e-105	93820/655084	86348/663288
+
+letter-probability matrix:
+0	0.49386	0	0.50614
+0.20441	0.30514	0.20359	0.28686
+0	0.49491	0	0.50509
+0.19826	0.30812	0.20966	0.28396
+0	0.50896	0	0.49104
+
+MOTIF BYATT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.15167e-05	1.28287e-30	4666/655084	3678/663288
+
+letter-probability matrix:
+0	0.34805	0.32105	0.3309
+0	0.64123	0	0.35877
+1	0	0	0
+0	0	0	1
+0	0	0	1
+
+MOTIF TWACA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.06515e-05	2.66976e-30	1588/655084	1026/663288
+
+letter-probability matrix:
+0	0	0	1
+0.53904	0	0	0.46096
+1	0	0	0
+0	1	0	0
+1	0	0	0
+
+MOTIF CCWGG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	3.39973e-05	1.45358e-15	2994/655084	2448/663288
+
+letter-probability matrix:
+0	1	0	0
+0	1	0	0
+0.5	0	0	0.5
+0	0	1	0
+0	0	1	0
+
+MOTIF RARRC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.12234e-05	2.2386e-10	6972/655084	6340/663288
+
+letter-probability matrix:
+0.50516	0	0.49484	0
+1	0	0	0
+0.48006	0	0.51994	0
+0.38755	0	0.61245	0
+0	1	0	0
+
+MOTIF TAATT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.26919e-05	6.4357e-07	654/655084	498/663288
+
+letter-probability matrix:
+0	0	0	1
+1	0	0	0
+1	0	0	0
+0	0	0	1
+0	0	0	1
+
+MOTIF TWGCA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.10455e-05	3.27294e-06	2116/655084	1858/663288
+
+letter-probability matrix:
+0	0	0	1
+0.37429	0	0	0.62571
+0	0	1	0
+0	1	0	0
+1	0	0	0
+
+MOTIF GYTCC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	9.2418e-06	1.84763e-05	1861/655084	1640/663288
+
+letter-probability matrix:
+0	0	1	0
+0	0.62063	0	0.37937
+0	0	0	1
+0	1	0	0
+0	1	0	0
+
+MOTIF TGKGA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.58546e-06	9.24314e-05	1992/655084	1787/663288
+
+letter-probability matrix:
+0	0	0	1
+0	0	1	0
+0	0	0.54618	0.45382
+0	0	1	0
+1	0	0	0
+

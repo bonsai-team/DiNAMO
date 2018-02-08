@@ -1,0 +1,117 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.22432 C 0.27614 G 0.27026 T 0.22928
+
+MOTIF NTTMC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000349443	1.91167e-95	4965/438514	3173/444860
+
+letter-probability matrix:
+0.18147	0.34864	0.19235	0.27754
+0	0	0	1
+0	0	0	1
+0.21954	0.78046	0	0
+0	1	0	0
+
+MOTIF TDTVT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	6.42488e-05	3.29649e-19	3470/438514	2815/444860
+
+letter-probability matrix:
+0	0	0	1
+0.13718	0	0.40778	0.45504
+0	0	0	1
+0.14813	0.4608	0.39107	0
+0	0	0	1
+
+MOTIF CACGT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	3.63482e-05	9.97355e-12	232/438514	112/444860
+
+letter-probability matrix:
+0	1	0	0
+1	0	0	0
+0	1	0	0
+0	0	1	0
+0	0	0	1
+
+MOTIF TMCCA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.28931e-05	5.38267e-08	1314/438514	1073/444860
+
+letter-probability matrix:
+0	0	0	1
+0.22755	0.77245	0	0
+0	1	0	0
+0	1	0	0
+1	0	0	0
+
+MOTIF ATTST
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.1769e-05	1.07294e-07	811/438514	626/444860
+
+letter-probability matrix:
+1	0	0	0
+0	0	0	1
+0	0	0	1
+0	0.53884	0.46116	0
+0	0	0	1
+
+MOTIF HGCMT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.02814e-05	2.92649e-07	3139/438514	2799/444860
+
+letter-probability matrix:
+0.43995	0.15387	0	0.40618
+0	0	1	0
+0	1	0	0
+0.3224	0.6776	0	0
+0	0	0	1
+
+MOTIF VTGAC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.3059e-05	2.95021e-05	1494/438514	1303/444860
+
+letter-probability matrix:
+0.23561	0.43641	0.32798	0
+0	0	0	1
+0	0	1	0
+1	0	0	0
+0	1	0	0
+
+MOTIF GGAKG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.15349e-05	8.00311e-05	1751/438514	1559/444860
+
+letter-probability matrix:
+0	0	1	0
+0	0	1	0
+1	0	0	0
+0	0	0.69503	0.30497
+0	0	1	0
+
+MOTIF WCCTT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.09357e-05	0.000117721	1446/438514	1275/444860
+
+letter-probability matrix:
+0.44606	0	0	0.55394
+0	1	0	0
+0	1	0	0
+0	0	0	1
+0	0	0	1
+

@@ -1,0 +1,86 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.26289 C 0.23766 G 0.2353 T 0.26415
+
+MOTIF TTGT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000205441	3.11535e-86	5354/672458	3571/681608
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0	0	1	0
+0	0	0	1
+
+MOTIF TYCY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.6076e-05	3.03445e-33	15931/672458	14087/681608
+
+letter-probability matrix:
+0	0	0	1
+0	0.48283	0	0.51717
+0	1	0	0
+0	0.47568	0	0.52432
+
+MOTIF CYWT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.23752e-05	2.23945e-19	15063/672458	13760/681608
+
+letter-probability matrix:
+0	1	0	0
+0	0.51112	0	0.48888
+0.36387	0	0	0.63613
+0	0	0	1
+
+MOTIF MGVC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.22866e-05	2.42873e-19	13350/672458	12114/681608
+
+letter-probability matrix:
+0.82779	0.17221	0	0
+0	0	1	0
+0.27184	0.37176	0.3564	0
+0	1	0	0
+
+MOTIF YCWC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.78929e-05	3.28203e-09	12830/672458	12092/681608
+
+letter-probability matrix:
+0	0.5138	0	0.4862
+0	1	0	0
+0.46945	0	0	0.53055
+0	1	0	0
+
+MOTIF GCRT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.21814e-06	0.000111052	3703/672458	3441/681608
+
+letter-probability matrix:
+0	0	1	0
+0	1	0	0
+0.8296	0	0.1704	0
+0	0	0	1
+
+MOTIF TWAC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.19615e-06	0.000113866	4262/672458	3985/681608
+
+letter-probability matrix:
+0	0	0	1
+0.49883	0	0	0.50117
+1	0	0	0
+0	1	0	0
+

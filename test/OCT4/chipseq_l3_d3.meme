@@ -1,0 +1,19 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.24251 C 0.25735 G 0.2563 T 0.24384
+
+MOTIF YNY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.08953e-05	2.71751e-10	85605/338484	83836/340258
+
+letter-probability matrix:
+0	0.48494	0	0.51506
+0.23049	0.28293	0.20994	0.27664
+0	0.50804	0	0.49196
+
