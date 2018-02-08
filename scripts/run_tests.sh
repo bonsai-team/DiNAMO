@@ -31,7 +31,7 @@ for DATASET in ${DATASETS}
 do
     echo -e "Now testing with ${DATASET} dataset :"
     # ChIP-Seq
-    for (( l=2; l<=6; l++ ))
+    for (( l=2; l<=5; l++ ))
     do
         for (( d=0; d<=$l; d++ ))
         do
@@ -47,7 +47,7 @@ do
         done
     done
     # Fixed pos
-    for (( l=2; l<=6; l++ ))
+    for (( l=2; l<=5; l++ ))
     do
         for (( d=0; d<=$l; d++ ))
         do
