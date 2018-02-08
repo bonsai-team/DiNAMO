@@ -59,11 +59,7 @@ before_script:
   - chmod ugo+x scripts/run_tests.sh
 
 script:
-  - ${CXX} -v
-  - echo ${COMPILER}
-  - which g++-4.9
-  - which g++-5
-  - which g++
+  - export CXX=${COMPILER}
   - make
   - scripts/run_tests.sh
 
