@@ -35,7 +35,7 @@ before_script:
   - chmod ugo+x scripts/run_tests.sh
 
 script:
-  - scripts/compile.sh
+  - make
   - scripts/run_tests.sh
 
 after_success:
