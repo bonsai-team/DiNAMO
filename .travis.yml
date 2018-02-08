@@ -8,30 +8,54 @@ env:
 
 ###############################################
 
-dist: trusty
 sudo: require
-
+dist: trusty
 language: cpp
-compiler:
-  - gcc
-  - clang
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    # boost dependency (hypergeometric distribution needed to perform fisher exact test)
-    - libboost-math-dev
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - libboost-math-dev
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+      env: CXX=g++-4.9
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - libboost-math-dev
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env: CXX=g++-5
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - libboost-math-dev
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.6
+          packages:
+            - clang-3.6
+      env: CXX=clang++-3.6
+    - compiler: clang
+      addons:
+        apt:
+          sources:
+            - libboost-math-dev
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-precise-3.7
+          packages:
+            - clang-3.7
+      env: CXX=clang++-3.7
 
 ################################################
 
 # making sure we use latest g++
 before_script:
-  - sudo ln -s /usr/bin/g++-5 /usr/local/bin/g++
-  - g++ -v
-  - export CXX=/usr/bin/g++-5
-  - chmod ugo+x scripts/compile.sh
   - chmod ugo+x scripts/run_tests.sh
 
 script:
