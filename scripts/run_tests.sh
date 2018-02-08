@@ -42,7 +42,7 @@ do
                 echo -e "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
                 exit 1
             fi
-	    printf "\t${GREEN}${CHECK_MARK}${NC}"
+            echo -e "\t${GREEN}${CHECK_MARK}${NC}"
             rm -f ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme
         done
     done
@@ -60,7 +60,7 @@ do
                     echo -e "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
                     exit 1
                 fi
-		echo -e "\t${GREEN}${CHECK_MARK}${NC}"
+                echo -e "\t${GREEN}${CHECK_MARK}${NC}"
                 rm -f ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res
             done
         done
