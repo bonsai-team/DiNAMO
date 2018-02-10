@@ -11,8 +11,8 @@ CHECK_MARK="\xe2\x9c\x93\x0a "
 
 TEST_DIR='test'
 
-DATASETS=''
-DATASETS+='GATA1 '
+
+DATASETS='GATA1 '
 DATASETS+='KLF1 '
 DATASETS+='OCT4 '
 DATASETS+='SOX2 '
@@ -54,7 +54,7 @@ do
             for p in 1 2 3 4
             do
                 echo -en "\t Testing fixed position mode with parameters -l ${l}, -d ${d}, -p ${p}..."
-                bin/dinamo -pf ${TEST_DIR}/${DATASET}/${SIG_FILE}  -nf ${TEST_DIR}/${DATASET}/${SIG_FILE}  -l ${l} -d ${d} -p ${p} --no-log >  ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res
+                bin/dinamo -pf ${TEST_DIR}/${DATASET}/${SIG_FILE}  -nf ${TEST_DIR}/${DATASET}/${CTRL_FILE}  -l ${l} -d ${d} -p ${p} --no-log >  ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res
                 diff ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}.res
                 if [ $? -ne 0 ]; then
                     echo -en "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2

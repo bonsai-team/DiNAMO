@@ -1,1 +1,3 @@
 # Motif	MI	PValue	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+RAWVC	0.00613539	3.01057e-05	19/944	2/944
+ASWTW	0.00543607	7.13145e-05	20/944	3/944

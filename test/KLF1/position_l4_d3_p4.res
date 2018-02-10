@@ -1,1 +1,3 @@
 # Motif	MI	PValue	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+TSTV	0.00512263	9.48251e-05	40/945	14/945
+RTAG	0.00477834	0.000474214	9/945	0/945
