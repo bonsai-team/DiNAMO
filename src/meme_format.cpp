@@ -37,6 +37,8 @@ void generate_exact_successor_motifs(vector<string> &res, const string &motif, u
 int create_meme_file(vector<pair<const string, Node *> *> &entries,
                      sparse_hash_map<string, Node *> &exact_motifs,
                      sparse_hash_map<char, unsigned int> &neg_nuc_count,
+                     unsigned int global_motif_count_positive,
+                     unsigned int global_motif_count_negative,
                      unsigned int l,
                      string &filename) {
 
@@ -81,8 +83,12 @@ int create_meme_file(vector<pair<const string, Node *> *> &entries,
     //corps
     for (auto const &entry : entries) {
         meme_file << "MOTIF " << entry->first << endl << endl;
-        meme_file << "#\tMI\tP-value" << endl;
-        meme_file << "#\t" << entry->second->get_mi() << "\t" << entry->second->get_pvalue() << endl << endl;
+        meme_file << "#\tMI\tP-value\t#MotifPos/#TotalPos\t#MotifNeg/#TotalNeg" << endl;
+        meme_file << "#\t" << entry->second->get_mi()
+                  <<  "\t" << entry->second->get_pvalue()
+                  <<  "\t" << entry->second->get_positive_count() << "/" << global_motif_count_positive
+                  <<  "\t" << entry->second->get_negative_count() << "/" << global_motif_count_negative
+                  << endl << endl;
         meme_file << "letter-probability matrix:" << endl;
 
         vector<string> exact_successor_motifs;

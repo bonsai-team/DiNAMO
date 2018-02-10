@@ -1,0 +1,153 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.24251 C 0.25735 G 0.2563 T 0.24384
+
+MOTIF TRMAT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000252617	8.44591e-103	4204/655084	2500/663288
+
+letter-probability matrix:
+0	0	0	1
+0.29971	0	0.70029	0
+0.40842	0.59158	0	0
+1	0	0	0
+0	0	0	1
+
+MOTIF YTYCY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000133573	2.22773e-55	9626/655084	7693/663288
+
+letter-probability matrix:
+0	0.51745	0	0.48255
+0	0	0	1
+0	0.52878	0	0.47122
+0	1	0	0
+0	0.51288	0	0.48712
+
+MOTIF BCWTT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	9.9063e-05	1.27786e-41	6598/655084	5217/663288
+
+letter-probability matrix:
+0	0.35966	0.33404	0.3063
+0	1	0	0
+0.45347	0	0	0.54653
+0	0	0	1
+0	0	0	1
+
+MOTIF SSHGG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	8.28044e-05	4.08508e-35	11525/655084	9874/663288
+
+letter-probability matrix:
+0	0.42872	0.57128	0
+0	0.59983	0.40017	0
+0.41501	0.21978	0	0.36521
+0	0	1	0
+0	0	1	0
+
+MOTIF CDSHG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.55796e-05	3.18568e-32	14906/655084	13134/663288
+
+letter-probability matrix:
+0	1	0	0
+0.37274	0	0.20361	0.42365
+0	0.5	0.5	0
+0.42365	0.20361	0	0.37274
+0	0	1	0
+
+MOTIF RTWAY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.75381e-05	5.18126e-21	3558/655084	2854/663288
+
+letter-probability matrix:
+0.55059	0	0.44941	0
+0	0	0	1
+0.5	0	0	0.5
+1	0	0	0
+0	0.44941	0	0.55059
+
+MOTIF GWSWC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	3.29117e-05	4.07562e-15	5194/655084	4494/663288
+
+letter-probability matrix:
+0	0	1	0
+0.49519	0	0	0.50481
+0	0.5	0.5	0
+0.50481	0	0	0.49519
+0	1	0	0
+
+MOTIF ATTGT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.39762e-05	1.56028e-11	919/655084	666/663288
+
+letter-probability matrix:
+1	0	0	0
+0	0	0	1
+0	0	0	1
+0	0	1	0
+0	0	0	1
+
+MOTIF TTCCG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.0587e-05	3.5907e-10	474/655084	308/663288
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0	1	0	0
+0	1	0	0
+0	0	1	0
+
+MOTIF CTAAT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.56484e-05	3.86169e-08	627/655084	458/663288
+
+letter-probability matrix:
+0	1	0	0
+0	0	0	1
+1	0	0	0
+1	0	0	0
+0	0	0	1
+
+MOTIF YCCAG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.24011e-05	9.01873e-07	2600/655084	2298/663288
+
+letter-probability matrix:
+0	0.56692	0	0.43308
+0	1	0	0
+0	1	0	0
+1	0	0	0
+0	0	1	0
+
+MOTIF AKBCT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	9.75233e-06	1.16205e-05	5559/655084	5190/663288
+
+letter-probability matrix:
+1	0	0	0
+0	0	0.57097	0.42903
+0	0.34215	0.38856	0.26929
+0	1	0	0
+0	0	0	1
+

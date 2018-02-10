@@ -298,7 +298,7 @@ int main (int argc, char **argv) {
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second->get_mi() > entry_two->second->get_mi();
+		  return (entry_one->second->get_mi() > entry_two->second->get_mi()) || ((entry_one->second->get_mi() == entry_two->second->get_mi()) && (entry_one->first > entry_two->first));
                 }
              );
 
@@ -326,7 +326,7 @@ int main (int argc, char **argv) {
     std::sort(  pvalue_sorted_hash_map_entries.begin(),
                 pvalue_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second->get_pvalue() < entry_two->second->get_pvalue();
+                  return (entry_one->second->get_pvalue() < entry_two->second->get_pvalue()) || ((entry_one->second->get_pvalue() == entry_two->second->get_pvalue()) && (entry_one->first > entry_two->first));
                 }
              );
 
@@ -354,7 +354,7 @@ int main (int argc, char **argv) {
     std::sort(  mi_sorted_hash_map_entries.begin(),
                 mi_sorted_hash_map_entries.end(),
                 [] (const auto entry_one, const auto entry_two) {
-                    return entry_one->second->get_mi() > entry_two->second->get_mi();
+                  return (entry_one->second->get_mi() > entry_two->second->get_mi()) || ((entry_one->second->get_mi() == entry_two->second->get_mi()) && (entry_one->first > entry_two->first));
                 }
              );
 
@@ -368,12 +368,23 @@ int main (int argc, char **argv) {
         filter_redundant_motif(mi_sorted_hash_map_entries, l);
 
     std::clog << endl << "======== Results ========" << endl << endl;
+    std::cout << "# Motif"
+              << "\t" << "MI"
+              << "\t" << "PValue"
+              << "\t" << "#MotifPos/#TotalPos"
+              << "\t" << "#MotifNeg/#TotalNeg"
+              << endl;    
     for (auto &entry : mi_sorted_hash_map_entries) {
-        std::cout << entry->first << "\t" << entry->second->get_mi() << "\t" << entry->second->get_pvalue() << endl;
+      std::cout << entry->first
+                << "\t" << entry->second->get_mi()
+                << "\t" << entry->second->get_pvalue()
+                << "\t" << entry->second->get_positive_count() << "/" << global_motif_count_positive
+                << "\t" << entry->second->get_negative_count() << "/" << global_motif_count_negative
+                << endl;
     }
 
     if (!input.cmdOptionExists(position_options))
-        create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count, l, meme_filename);
+      create_meme_file(mi_sorted_hash_map_entries, *hash_map_holder[0], neg_nuc_count,  global_motif_count_positive,  global_motif_count_negative, l, meme_filename);
 
     // std::clog << endl << "======== Cleaning ========" << endl << endl;
     //

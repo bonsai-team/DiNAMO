@@ -1,0 +1,334 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.25265 C 0.24823 G 0.24823 T 0.25089
+
+MOTIF TTATCD
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000688415	0	7502/2616366	1252/2641596
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+1	0	0	0
+0	0	0	1
+0	1	0	0
+0.34644	0	0.04692	0.60664
+
+MOTIF RGRAAV
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000120016	1.26052e-192	14876/2616366	10325/2641596
+
+letter-probability matrix:
+0.56299	0	0.43701	0
+0	0	1	0
+0.4471	0	0.5529	0
+1	0	0	0
+1	0	0	0
+0.30519	0.25867	0.43614	0
+
+MOTIF WGATAB
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000103204	5.28593e-166	6181/2616366	3542/2641596
+
+letter-probability matrix:
+0.59343	0	0	0.40657
+0	0	1	0
+1	0	0	0
+0	0	0	1
+1	0	0	0
+0	0.23152	0.49878	0.2697
+
+MOTIF VYGTGV
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.8104e-05	1.866e-94	15004/2616366	11777/2641596
+
+letter-probability matrix:
+0.25726	0.42009	0.32265	0
+0	0.18775	0	0.81225
+0	0	1	0
+0	0	0	1
+0	0	1	0
+0.30465	0.30798	0.38737	0
+
+MOTIF CNGCDG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.09034e-05	3.75837e-67	12266/2616366	9814/2641596
+
+letter-probability matrix:
+0	1	0	0
+0.43812	0.06987	0.0662	0.42581
+0	0	1	0
+0	1	0	0
+0.45394	0	0.07737	0.46869
+0	0	1	0
+
+MOTIF WGATTA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	3.89771e-05	3.86226e-64	1956/2616366	1053/2641596
+
+letter-probability matrix:
+0.59356	0	0	0.40644
+0	0	1	0
+1	0	0	0
+0	0	0	1
+0	0	0	1
+1	0	0	0
+
+MOTIF HGGGYG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.25858e-05	4.46455e-22	3959/2616366	3185/2641596
+
+letter-probability matrix:
+0.43016	0.1028	0	0.46704
+0	0	1	0
+0	0	1	0
+0	0	1	0
+0	0.20763	0	0.79237
+0	0	1	0
+
+MOTIF TTATCC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.19907e-05	3.60817e-21	698/2616366	396/2641596
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+1	0	0	0
+0	0	0	1
+0	1	0	0
+0	1	0	0
+
+MOTIF WVTATC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	9.37802e-06	6.19705e-17	3417/2616366	2796/2641596
+
+letter-probability matrix:
+0.47761	0	0	0.52239
+0.21335	0.45478	0.33187	0
+0	0	0	1
+1	0	0	0
+0	0	0	1
+0	1	0	0
+
+MOTIF TTRTTT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	8.43815e-06	1.93351e-15	1511/2616366	1122/2641596
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0.35672	0	0.64328	0
+0	0	0	1
+0	0	0	1
+0	0	0	1
+
+MOTIF WGGCCW
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	8.00919e-06	1.00663e-14	5592/2616366	4862/2641596
+
+letter-probability matrix:
+0.50483	0	0	0.49517
+0	0	1	0
+0	0	1	0
+0	1	0	0
+0	1	0	0
+0.49517	0	0	0.50483
+
+MOTIF YGTGTM
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.30488e-06	1.33206e-13	2470/2616366	2004/2641596
+
+letter-probability matrix:
+0	0.16032	0	0.83968
+0	0	1	0
+0	0	0	1
+0	0	1	0
+0	0	0	1
+0.42591	0.57409	0	0
+
+MOTIF TSTCCY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.10497e-06	2.88699e-13	5423/2616366	4747/2641596
+
+letter-probability matrix:
+0	0	0	1
+0	0.57699	0.42301	0
+0	0	0	1
+0	1	0	0
+0	1	0	0
+0	0.461	0	0.539
+
+MOTIF RACGTY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.92445e-06	2.11704e-11	656/2616366	444/2641596
+
+letter-probability matrix:
+0.48323	0	0.51677	0
+1	0	0	0
+0	1	0	0
+0	0	1	0
+0	0	0	1
+0	0.51677	0	0.48323
+
+MOTIF ATAAST
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	5.6638e-06	5.8261e-11	1234/2616366	945/2641596
+
+letter-probability matrix:
+1	0	0	0
+0	0	0	1
+1	0	0	0
+1	0	0	0
+0	0.51459	0.48541	0
+0	0	0	1
+
+MOTIF TBGTGG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.17594e-06	1.59725e-08	2611/2616366	2250/2641596
+
+letter-probability matrix:
+0	0	0	1
+0	0.09575	0.49828	0.40597
+0	0	1	0
+0	0	0	1
+0	0	1	0
+0	0	1	0
+
+MOTIF YGYRCG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	3.25275e-06	5.08049e-07	1202/2616366	985/2641596
+
+letter-probability matrix:
+0	0.28453	0	0.71547
+0	0	1	0
+0	0.49584	0	0.50416
+0.50166	0	0.49834	0
+0	1	0	0
+0	0	1	0
+
+MOTIF YGSGTT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.4323e-06	1.17282e-05	1330/2616366	1133/2641596
+
+letter-probability matrix:
+0	0.18647	0	0.81353
+0	0	1	0
+0	0.20376	0.79624	0
+0	0	1	0
+0	0	0	1
+0	0	0	1
+
+MOTIF RAGMYG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.42077e-06	1.27994e-05	6236/2616366	5833/2641596
+
+letter-probability matrix:
+0.47434	0	0.52566	0
+1	0	0	0
+0	0	1	0
+0.41485	0.58515	0	0
+0	0.14929	0	0.85071
+0	0	1	0
+
+MOTIF TTCCTA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.41675e-06	1.21772e-05	794/2616366	642/2641596
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0	1	0	0
+0	1	0	0
+0	0	0	1
+1	0	0	0
+
+MOTIF YGTAAY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.24956e-06	2.36731e-05	1269/2616366	1084/2641596
+
+letter-probability matrix:
+0	0.1379	0	0.8621
+0	0	1	0
+0	0	0	1
+1	0	0	0
+1	0	0	0
+0	0.47281	0	0.52719
+
+MOTIF WAAATA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.24358e-06	2.39125e-05	924/2616366	766/2641596
+
+letter-probability matrix:
+0.54762	0	0	0.45238
+1	0	0	0
+1	0	0	0
+1	0	0	0
+0	0	0	1
+1	0	0	0
+
+MOTIF MAGGMG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.14462e-06	3.6708e-05	3871/2616366	3566/2641596
+
+letter-probability matrix:
+0.42857	0.57143	0	0
+1	0	0	0
+0	0	1	0
+0	0	1	0
+0.82563	0.17437	0	0
+0	0	1	0
+
+MOTIF RAYGGC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.95457e-06	7.51743e-05	1846/2616366	1640/2641596
+
+letter-probability matrix:
+0.43662	0	0.56338	0
+1	0	0	0
+0	0.17714	0	0.82286
+0	0	1	0
+0	0	1	0
+0	1	0	0
+
+MOTIF WACGGD
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.83364e-06	0.000117449	915/2616366	773/2641596
+
+letter-probability matrix:
+0.60546	0	0	0.39454
+1	0	0	0
+0	1	0	0
+0	0	1	0
+0	0	1	0
+0.3836	0	0.31913	0.29727
+

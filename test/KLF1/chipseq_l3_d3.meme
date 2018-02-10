@@ -1,0 +1,19 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.25019 C 0.2504 G 0.24469 T 0.25472
+
+MOTIF WWA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.71704e-05	6.78672e-06	5347/87904	4939/88232
+
+letter-probability matrix:
+0.48457	0	0	0.51543
+0.50439	0	0	0.49561
+1	0	0	0
+

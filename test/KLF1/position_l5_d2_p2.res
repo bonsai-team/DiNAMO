@@ -1,0 +1,3 @@
+# Motif	MI	PValue	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+STAGR	0.0058509	0.000117103	11/944	0/944
+YATYT	0.00567741	5.57496e-05	18/944	2/944

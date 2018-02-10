@@ -33,7 +33,7 @@ unsigned int Node::get_negative_count() {
 }
 
 void Node::increment_positive_count() {
-    if (this->positive_count == ~0) {
+  if (this->positive_count == (unsigned) ~0) {
         std::cerr << "Error : an overflow occurred while incrementing the positive count of a motif. You should consider switching to a bigger unsigned type." << endl;
         exit(EXIT_FAILURE);
     }
@@ -41,7 +41,7 @@ void Node::increment_positive_count() {
 }
 
 void Node::increment_negative_count() {
-    if (this->negative_count == ~0) {
+  if (this->negative_count == (unsigned) ~0) {
         std::cerr << "Error : an overflow occurred while incrementing the negative count of a motif. You should consider switching to a bigger unsigned type." << endl;
         exit(EXIT_FAILURE);
     }

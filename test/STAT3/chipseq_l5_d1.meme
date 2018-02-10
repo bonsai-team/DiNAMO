@@ -1,0 +1,117 @@
+MEME version 4
+
+ALPHABET= ACGT
+
+strands: + -
+
+Background letter frequencies
+A 0.22432 C 0.27614 G 0.27026 T 0.22928
+
+MOTIF NTTCC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	0.000327228	1.57655e-89	3875/438514	2353/444860
+
+letter-probability matrix:
+0.18142	0.36852	0.18529	0.26477
+0	0	0	1
+0	0	0	1
+0	1	0	0
+0	1	0	0
+
+MOTIF GTAAH
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.96699e-05	2.61918e-15	787/438514	516/444860
+
+letter-probability matrix:
+0	0	1	0
+0	0	0	1
+1	0	0	0
+1	0	0	0
+0.44727	0.30114	0	0.25159
+
+MOTIF VTTTC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.34606e-05	1.32906e-13	1874/438514	1477/444860
+
+letter-probability matrix:
+0.24226	0.45251	0.30523	0
+0	0	0	1
+0	0	0	1
+0	0	0	1
+0	1	0	0
+
+MOTIF GBGTG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.32014e-05	1.56588e-13	1953/438514	1549/444860
+
+letter-probability matrix:
+0	0	1	0
+0	0.1403	0.51049	0.34921
+0	0	1	0
+0	0	0	1
+0	0	1	0
+
+MOTIF GGCRG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	4.28067e-05	1.98871e-13	1688/438514	1314/444860
+
+letter-probability matrix:
+0	0	1	0
+0	0	1	0
+0	1	0	0
+0.6795	0	0.3205	0
+0	0	1	0
+
+MOTIF CVCAG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	2.93058e-05	9.62461e-10	2615/438514	2234/444860
+
+letter-probability matrix:
+0	1	0	0
+0.33728	0.52582	0.1369	0
+0	1	0	0
+1	0	0	0
+0	0	1	0
+
+MOTIF TCYGC
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.53441e-05	6.65157e-06	1113/438514	932/444860
+
+letter-probability matrix:
+0	0	0	1
+0	1	0	0
+0	0.2372	0	0.7628
+0	0	1	0
+0	1	0	0
+
+MOTIF GGAKG
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.15349e-05	8.00311e-05	1751/438514	1559/444860
+
+letter-probability matrix:
+0	0	1	0
+0	0	1	0
+1	0	0	0
+0	0	0.69503	0.30497
+0	0	1	0
+
+MOTIF WTAAA
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.10985e-05	0.000101815	573/438514	462/444860
+
+letter-probability matrix:
+0.45375	0	0	0.54625
+0	0	0	1
+1	0	0	0
+1	0	0	0
+1	0	0	0
+

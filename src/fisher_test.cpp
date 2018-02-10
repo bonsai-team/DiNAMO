@@ -38,4 +38,5 @@ double fisher_test_p_value( unsigned positive_motif_count,
     if (method == two_tailed) {
         return cdf(hgd, positive_motif_count) + cdf(complement (hgd, quantile(complement(hgd, pdf(hgd, positive_motif_count)))));
     }
+    return 0.0;
 }

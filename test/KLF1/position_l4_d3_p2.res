@@ -1,0 +1,3 @@
+# Motif	MI	PValue	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+ATHT	0.00613787	2.62197e-05	24/944	4/944
+WGNC	0.00470341	0.000171818	48/944	20/944
