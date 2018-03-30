@@ -312,7 +312,9 @@ int main (int argc, char **argv) {
 
     std::clog << "\tGenerating pvalue of the remaining entries..." << endl;
     unsigned int m = 0;
+    unsigned int all = 0;
     for (auto &entry : mi_sorted_hash_map_entries) {
+	all++;
         if (entry->second->get_state() == validated) {
             entry->second->suppress();
             entry->second->calculate_pvalue(global_motif_count_positive, global_motif_count_negative);
@@ -320,6 +322,8 @@ int main (int argc, char **argv) {
             m++;
         }
     }
+
+
     std::clog << "\tDone generating pvalues." << endl << endl;
 
     std::clog << "\tSorting the remaining entries by pvalue..." << endl;
@@ -345,7 +349,7 @@ int main (int argc, char **argv) {
 
     unsigned int k = 0;
     while (pvalue_sorted_hash_map_entries[k]->second->get_pvalue()
-           <= (alpha / ((double)(m + 1 - k))) //alpha is defined when parsing options
+           <= (alpha / ((double)(all + 1 - k))) //alpha is defined when parsing options
           ) {
         mi_sorted_hash_map_entries.push_back(pvalue_sorted_hash_map_entries[k]);
         k++;
