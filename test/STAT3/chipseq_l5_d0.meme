@@ -235,27 +235,3 @@ letter-probability matrix:
 0	0	0	1
 0	0	1	0
 
-MOTIF TGTCT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.20889e-05	5.36462e-05	668/438514	543/444860
-
-letter-probability matrix:
-0	0	0	1
-0	0	1	0
-0	0	0	1
-0	1	0	0
-0	0	0	1
-
-MOTIF TTACT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.14435e-05	7.88984e-05	342/438514	255/444860
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-1	0	0	0
-0	1	0	0
-0	0	0	1
-

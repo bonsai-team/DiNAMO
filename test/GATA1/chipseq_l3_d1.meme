@@ -27,3 +27,13 @@ letter-probability matrix:
 0.37159	0.12841	0.12841	0.37159
 0	0	1	0
 
+MOTIF TTY
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	7.49807e-06	8.92371e-08	40517/1305830	39269/1312490
+
+letter-probability matrix:
+0	0	0	1
+0	0	0	1
+0	0.54165	0	0.45835
+

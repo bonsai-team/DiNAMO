@@ -67,17 +67,17 @@ letter-probability matrix:
 0.42365	0.20361	0	0.37274
 0	0	1	0
 
-MOTIF RTWAY
+MOTIF TGTTA
 
 #	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	4.75381e-05	5.18126e-21	3558/655084	2854/663288
+#	5.1572e-05	1.13864e-22	856/655084	508/663288
 
 letter-probability matrix:
-0.55059	0	0.44941	0
 0	0	0	1
-0.5	0	0	0.5
+0	0	1	0
+0	0	0	1
+0	0	0	1
 1	0	0	0
-0	0.44941	0	0.55059
 
 MOTIF GWSWC
 
@@ -125,29 +125,5 @@ letter-probability matrix:
 0	0	0	1
 1	0	0	0
 1	0	0	0
-0	0	0	1
-
-MOTIF YCCAG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.24011e-05	9.01873e-07	2600/655084	2298/663288
-
-letter-probability matrix:
-0	0.56692	0	0.43308
-0	1	0	0
-0	1	0	0
-1	0	0	0
-0	0	1	0
-
-MOTIF AKBCT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	9.75233e-06	1.16205e-05	5559/655084	5190/663288
-
-letter-probability matrix:
-1	0	0	0
-0	0	0.57097	0.42903
-0	0.34215	0.38856	0.26929
-0	1	0	0
 0	0	0	1
 

@@ -62,14 +62,3 @@ letter-probability matrix:
 0	1	0	0
 0	0	0	1
 
-MOTIF TGGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.77066e-05	0.000312377	1026/149456	890/151382
-
-letter-probability matrix:
-0	0	0	1
-0	0	1	0
-0	0	1	0
-0	0	1	0
-

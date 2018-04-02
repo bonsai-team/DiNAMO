@@ -103,27 +103,15 @@ letter-probability matrix:
 0.61385	0	0.38615	0
 0	1	0	0
 
-MOTIF YCCAG
+MOTIF TGCGC
 
 #	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.24011e-05	9.01873e-07	2600/655084	2298/663288
+#	2.08101e-05	2.98782e-10	699/655084	494/663288
 
 letter-probability matrix:
-0	0.56692	0	0.43308
-0	1	0	0
-0	1	0	0
-1	0	0	0
-0	0	1	0
-
-MOTIF GWCCT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.02466e-06	0.000158929	1602/655084	1424/663288
-
-letter-probability matrix:
-0	0	1	0
-0.49001	0	0	0.50999
-0	1	0	0
-0	1	0	0
 0	0	0	1
+0	0	1	0
+0	1	0	0
+0	0	1	0
+0	1	0	0
 

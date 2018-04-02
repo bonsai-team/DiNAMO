@@ -27,23 +27,3 @@ letter-probability matrix:
 0	0	1	0
 0	0	0	1
 
-MOTIF CTG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.49402e-06	0.00129298	27067/1305830	26514/1312490
-
-letter-probability matrix:
-0	1	0	0
-0	0	0	1
-0	0	1	0
-
-MOTIF TTC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.35803e-06	0.0016927	21946/1305830	21452/1312490
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0	1	0	0
-

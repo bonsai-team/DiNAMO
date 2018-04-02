@@ -62,14 +62,3 @@ letter-probability matrix:
 1	0	0	0
 0	0	0	1
 
-MOTIF ACGT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	6.83508e-06	0.000513147	664/556236	558/563320
-
-letter-probability matrix:
-1	0	0	0
-0	1	0	0
-0	0	1	0
-0	0	0	1
-

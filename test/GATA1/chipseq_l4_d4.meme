@@ -84,14 +84,3 @@ letter-probability matrix:
 1	0	0	0
 0	0	0	1
 
-MOTIF GCGT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	3.14006e-06	7.08111e-06	2652/2137048	2379/2165904
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-0	0	1	0
-0	0	0	1
-

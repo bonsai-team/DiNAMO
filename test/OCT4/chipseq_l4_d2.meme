@@ -51,14 +51,3 @@ letter-probability matrix:
 1	0	0	0
 0	0	0	1
 
-MOTIF WGAC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.17102e-06	0.000409164	4572/556236	4315/563320
-
-letter-probability matrix:
-0.50831	0	0	0.49169
-0	0	1	0
-1	0	0	0
-0	1	0	0
-

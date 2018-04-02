@@ -150,14 +150,3 @@ letter-probability matrix:
 0	0	0	1
 0	0	1	0
 
-MOTIF GCAG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	5.94642e-06	0.000401016	4000/672458	3759/681608
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-1	0	0	0
-0	0	1	0
-

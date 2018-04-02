@@ -18,36 +18,3 @@ letter-probability matrix:
 0.16767	0.46085	0	0.37148
 0	1	0	0
 
-MOTIF TGYK
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.78608e-05	8.4228e-06	6520/369596	6136/375184
-
-letter-probability matrix:
-0	0	0	1
-0	0	1	0
-0	0.45782	0	0.54218
-0	0	0.40951	0.59049
-
-MOTIF ACGT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.45967e-05	4.55089e-05	438/369596	336/375184
-
-letter-probability matrix:
-1	0	0	0
-0	1	0	0
-0	0	1	0
-0	0	0	1
-
-MOTIF GGCG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	9.51359e-06	0.000803389	1121/369596	993/375184
-
-letter-probability matrix:
-0	0	1	0
-0	0	1	0
-0	1	0	0
-0	0	1	0
-

@@ -73,6 +73,17 @@ letter-probability matrix:
 0	0	1	0
 0	0	0	1
 
+MOTIF CTTT
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.68324e-05	1.50318e-07	3401/556236	3033/563320
+
+letter-probability matrix:
+0	1	0	0
+0	0	0	1
+0	0	0	1
+0	0	0	1
+
 MOTIF GCGC
 
 #	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
@@ -94,26 +105,4 @@ letter-probability matrix:
 0	1	0	0
 0	1	0	0
 0	1	0	0
-
-MOTIF TTTA
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	8.317e-06	0.000154359	2113/556236	1911/563320
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0	0	0	1
-1	0	0	0
-
-MOTIF GCGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.91255e-06	0.000214787	1675/556236	1498/563320
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-0	0	1	0
-0	0	1	0
 
