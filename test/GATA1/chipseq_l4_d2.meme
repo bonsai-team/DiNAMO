@@ -73,14 +73,3 @@ letter-probability matrix:
 1	0	0	0
 0	0	0	1
 
-MOTIF MACC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.60332e-06	0.00097463	18212/2137048	17869/2165904
-
-letter-probability matrix:
-0.43411	0.56589	0	0
-1	0	0	0
-0	1	0	0
-0	1	0	0
-

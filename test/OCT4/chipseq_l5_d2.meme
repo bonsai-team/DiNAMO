@@ -115,15 +115,3 @@ letter-probability matrix:
 1	0	0	0
 1	0	0	0
 
-MOTIF GWCCT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.02466e-06	0.000158929	1602/655084	1424/663288
-
-letter-probability matrix:
-0	0	1	0
-0.49001	0	0	0.50999
-0	1	0	0
-0	1	0	0
-0	0	0	1
-

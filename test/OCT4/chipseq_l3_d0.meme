@@ -7,23 +7,3 @@ strands: + -
 Background letter frequencies
 A 0.24251 C 0.25735 G 0.2563 T 0.24384
 
-MOTIF TTT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.02911e-05	0.000900175	5439/338484	5149/340258
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0	0	0	1
-
-MOTIF TCC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.00058e-05	0.00104439	6208/338484	5905/340258
-
-letter-probability matrix:
-0	0	0	1
-0	1	0	0
-0	1	0	0
-

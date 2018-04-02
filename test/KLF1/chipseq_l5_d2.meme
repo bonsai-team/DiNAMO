@@ -55,27 +55,3 @@ letter-probability matrix:
 0	0.59226	0	0.40774
 0	0	0	1
 
-MOTIF MAGSC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	4.40505e-05	1.2193e-06	1270/178714	1066/182116
-
-letter-probability matrix:
-0.4189	0.5811	0	0
-1	0	0	0
-0	0	1	0
-0	0.48346	0.51654	0
-0	1	0	0
-
-MOTIF VWTTA
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	3.8669e-05	4.92049e-06	888/178714	727/182116
-
-letter-probability matrix:
-0.27703	0.39302	0.32995	0
-0.42117	0	0	0.57883
-0	0	0	1
-0	0	0	1
-1	0	0	0
-

@@ -29,14 +29,3 @@ letter-probability matrix:
 0.77803	0	0.22197	0
 0	1	0	0
 
-MOTIF HCAG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.28248e-05	0.000973388	2977/149456	2782/151382
-
-letter-probability matrix:
-0.32415	0.35707	0	0.31878
-0	1	0	0
-1	0	0	0
-0	0	1	0
-

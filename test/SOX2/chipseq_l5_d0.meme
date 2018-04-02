@@ -331,39 +331,3 @@ letter-probability matrix:
 0	0	1	0
 0	0	1	0
 
-MOTIF CTGAG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	6.60243e-06	6.34432e-05	1606/789508	1418/800842
-
-letter-probability matrix:
-0	1	0	0
-0	0	0	1
-0	0	1	0
-1	0	0	0
-0	0	1	0
-
-MOTIF TTCTC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	6.5159e-06	6.97425e-05	1311/789508	1141/800842
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0	1	0	0
-0	0	0	1
-0	1	0	0
-
-MOTIF TGGAG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	6.21763e-06	9.94463e-05	1456/789508	1282/800842
-
-letter-probability matrix:
-0	0	0	1
-0	0	1	0
-0	0	1	0
-1	0	0	0
-0	0	1	0
-

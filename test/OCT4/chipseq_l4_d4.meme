@@ -40,14 +40,3 @@ letter-probability matrix:
 0	0	0	1
 0	0	0	1
 
-MOTIF YCTY
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.00141e-05	3.92535e-05	11790/556236	11343/563320
-
-letter-probability matrix:
-0	0.55148	0	0.44852
-0	1	0	0
-0	0	0	1
-0	0.49652	0	0.50348
-

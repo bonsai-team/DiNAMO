@@ -55,15 +55,3 @@ letter-probability matrix:
 0.47972	0	0.52028	0
 0.33874	0.28698	0.37428	0
 
-MOTIF HGSCT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.97259e-05	5.36306e-05	1571/178714	1390/182116
-
-letter-probability matrix:
-0.45449	0.08721	0	0.4583
-0	0	1	0
-0	0.5105	0.4895	0
-0	1	0	0
-0	0	0	1
-

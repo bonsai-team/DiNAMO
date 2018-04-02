@@ -37,13 +37,3 @@ letter-probability matrix:
 0	0.5	0.5	0
 0	0	1	0
 
-MOTIF TCY
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.001e-05	0.000361109	14927/409168	14451/411740
-
-letter-probability matrix:
-0	0	0	1
-0	1	0	0
-0	0.49086	0	0.50914
-

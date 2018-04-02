@@ -139,6 +139,18 @@ letter-probability matrix:
 0.32672	0.26587	0.40741	0
 0	1	0	0
 
+MOTIF TGTGD
+
+#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
+#	1.17979e-05	1.59705e-07	3583/789508	3212/800842
+
+letter-probability matrix:
+0	0	0	1
+0	0	1	0
+0	0	0	1
+0	0	1	0
+0.31817	0	0.34859	0.33324
+
 MOTIF ATTMT
 
 #	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
@@ -149,89 +161,5 @@ letter-probability matrix:
 0	0	0	1
 0	0	0	1
 0.34076	0.65924	0	0
-0	0	0	1
-
-MOTIF CTMGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	8.06811e-06	1.13228e-05	1206/789508	1023/800842
-
-letter-probability matrix:
-0	1	0	0
-0	0	0	1
-0.767	0.233	0	0
-0	0	1	0
-0	0	1	0
-
-MOTIF VTTTA
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.77526e-06	1.63387e-05	2568/789508	2314/800842
-
-letter-probability matrix:
-0.34618	0.38046	0.27336	0
-0	0	0	1
-0	0	0	1
-0	0	0	1
-1	0	0	0
-
-MOTIF GTSAC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.73612e-06	1.679e-05	1462/789508	1266/800842
-
-letter-probability matrix:
-0	0	1	0
-0	0	0	1
-0	0.5	0.5	0
-1	0	0	0
-0	1	0	0
-
-MOTIF TGRGA
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	6.2167e-06	0.000101281	2594/789508	2369/800842
-
-letter-probability matrix:
-0	0	0	1
-0	0	1	0
-0.49113	0	0.50887	0
-0	0	1	0
-1	0	0	0
-
-MOTIF STTTC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	5.98978e-06	0.000132074	2399/789508	2186/800842
-
-letter-probability matrix:
-0	0.59233	0.40767	0
-0	0	0	1
-0	0	0	1
-0	0	0	1
-0	1	0	0
-
-MOTIF GSAGC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	5.72236e-06	0.000181029	2331/789508	2126/800842
-
-letter-probability matrix:
-0	0	1	0
-0	0.50408	0.49592	0
-1	0	0	0
-0	0	1	0
-0	1	0	0
-
-MOTIF GCGST
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	5.59699e-06	0.000198206	501/789508	402/800842
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-0	0	1	0
-0	0.64072	0.35928	0
 0	0	0	1
 

@@ -319,39 +319,3 @@ letter-probability matrix:
 0	1	0	0
 0	0	0	1
 
-MOTIF GTATT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	8.10365e-06	5.22436e-05	429/655084	328/663288
-
-letter-probability matrix:
-0	0	1	0
-0	0	0	1
-1	0	0	0
-0	0	0	1
-0	0	0	1
-
-MOTIF GCAGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.75327e-06	7.76471e-05	1430/655084	1252/663288
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-1	0	0	0
-0	0	1	0
-0	0	1	0
-
-MOTIF GTCTC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	7.56107e-06	9.11872e-05	727/655084	600/663288
-
-letter-probability matrix:
-0	0	1	0
-0	0	0	1
-0	1	0	0
-0	0	0	1
-0	1	0	0
-

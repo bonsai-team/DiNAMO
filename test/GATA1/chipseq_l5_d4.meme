@@ -127,51 +127,15 @@ letter-probability matrix:
 0	0	0	1
 0	1	0	0
 
-MOTIF MTGGC
+MOTIF TTWAC
 
 #	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	3.89006e-06	8.71151e-08	7632/2507634	7092/2539188
-
-letter-probability matrix:
-0.37434	0.62566	0	0
-0	0	0	1
-0	0	1	0
-0	0	1	0
-0	1	0	0
-
-MOTIF GCKAT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.56169e-06	1.08788e-05	3045/2507634	2759/2539188
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-0	0	0.22496	0.77504
-1	0	0	0
-0	0	0	1
-
-MOTIF TTTGT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.2726e-06	3.16545e-05	3003/2507634	2737/2539188
+#	4.77166e-06	3.5221e-09	3278/2507634	2864/2539188
 
 letter-probability matrix:
 0	0	0	1
 0	0	0	1
-0	0	0	1
-0	0	1	0
-0	0	0	1
-
-MOTIF CACAT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.14541e-06	5.10101e-05	3697/2507634	3415/2539188
-
-letter-probability matrix:
-0	1	0	0
+0.49908	0	0	0.50092
 1	0	0	0
 0	1	0	0
-1	0	0	0
-0	0	0	1
 

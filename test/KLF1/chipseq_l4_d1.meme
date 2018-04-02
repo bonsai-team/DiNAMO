@@ -29,25 +29,3 @@ letter-probability matrix:
 0	1	0	0
 0	0	1	0
 
-MOTIF GTTT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	3.65109e-05	4.28474e-05	673/149456	545/151382
-
-letter-probability matrix:
-0	0	1	0
-0	0	0	1
-0	0	0	1
-0	0	0	1
-
-MOTIF GYGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	3.48599e-05	6.31589e-05	1092/149456	934/151382
-
-letter-probability matrix:
-0	0	1	0
-0	0.20421	0	0.79579
-0	0	1	0
-0	0	1	0
-

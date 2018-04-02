@@ -95,25 +95,3 @@ letter-probability matrix:
 1	0	0	0
 0	0	1	0
 
-MOTIF GCGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.1848e-05	0.000217378	1118/369596	974/375184
-
-letter-probability matrix:
-0	0	1	0
-0	1	0	0
-0	0	1	0
-0	0	1	0
-
-MOTIF CTGG
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.18158e-05	0.000227862	3030/369596	2808/375184
-
-letter-probability matrix:
-0	1	0	0
-0	0	0	1
-0	0	1	0
-0	0	1	0
-

@@ -17,13 +17,13 @@ letter-probability matrix:
 0	0	1	0
 0	0	1	0
 
-MOTIF TGT
+MOTIF TTC
 
 #	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	1.37074e-05	0.00161771	3762/225522	3540/227170
+#	2.45607e-05	4.13041e-05	4279/225522	3956/227170
 
 letter-probability matrix:
 0	0	0	1
-0	0	1	0
 0	0	0	1
+0	1	0	0
 

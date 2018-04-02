@@ -55,39 +55,3 @@ letter-probability matrix:
 0.4768	0	0	0.5232
 0	1	0	0
 
-MOTIF TTCYN
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	4.84053e-05	3.98282e-07	1968/178714	1706/182116
-
-letter-probability matrix:
-0	0	0	1
-0	0	0	1
-0	1	0	0
-0	0.43191	0	0.56809
-0.2373	0.27083	0.20833	0.28354
-
-MOTIF SYTTC
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	3.66968e-05	8.30891e-06	979/178714	815/182116
-
-letter-probability matrix:
-0	0.56588	0.43412	0
-0	0.54443	0	0.45557
-0	0	0	1
-0	0	0	1
-0	1	0	0
-
-MOTIF WAGAT
-
-#	MI	P-value	#MotifPos/#TotalPos	#MotifNeg/#TotalNeg
-#	2.91191e-05	5.93443e-05	413/178714	317/182116
-
-letter-probability matrix:
-0.60775	0	0	0.39225
-1	0	0	0
-0	0	1	0
-1	0	0	0
-0	0	0	1
-
