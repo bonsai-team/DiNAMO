@@ -37,7 +37,7 @@ do
         do
             echo -en "\t Testing ChIP-Seq mode with parameters -l ${l}, -d ${d}..."
             bin/dinamo -pf ${TEST_DIR}/${DATASET}/${SIG_FILE} -nf ${TEST_DIR}/${DATASET}/${CTRL_FILE} -l ${l} -d ${d} -o  ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme 2> /dev/null 1> /dev/null
-            diff ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme  ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}.meme
+            diff -w ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}_test.meme  ${TEST_DIR}/${DATASET}/chipseq_l${l}_d${d}.meme
             if [ $? -ne 0 ]; then
                 echo -en "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
                 exit 1
@@ -55,7 +55,7 @@ do
             do
                 echo -en "\t Testing fixed position mode with parameters -l ${l}, -d ${d}, -p ${p}..."
                 bin/dinamo -pf ${TEST_DIR}/${DATASET}/${SIG_FILE}  -nf ${TEST_DIR}/${DATASET}/${CTRL_FILE}  -l ${l} -d ${d} -p ${p} --no-log >  ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res
-                diff ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}.res
+                diff -w ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}_test.res ${TEST_DIR}/${DATASET}/position_l${l}_d${d}_p${p}.res
                 if [ $? -ne 0 ]; then
                     echo -en "${RED}${CROSS_MARK}${NC}\t Test failed; the program did not output the expected file." >&2
                     exit 1
