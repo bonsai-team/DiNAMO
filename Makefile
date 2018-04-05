@@ -8,7 +8,7 @@ SRCEXT := cpp
 SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
-CXXFLAGS := --std=c++14 -Wall -Ofast
+CXXFLAGS := --std=c++14 -Wall -Ofast -static
 
 all: $(TARGET)
 
