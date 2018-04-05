@@ -66,3 +66,11 @@ script:
 after_success:
   - chmod ugo+x scripts/travis_auto_merger.sh
   - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO scripts/travis_auto_merger.sh"
+
+deploy:
+  provider: releases
+  api_key: "GITHUB OAUTH TOKEN"
+  file: "FILE TO UPLOAD"
+  skip_cleanup: true
+  on:
+    tags: true
