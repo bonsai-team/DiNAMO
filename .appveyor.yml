@@ -35,7 +35,7 @@ deploy:
   description: 'Release description'
   provider: GitHub
   auth_token:
-    secure: dfdd3590589526ff3bb9591b8c0084e00404d38c
+    secure: 4pbkaIiW4tf9KoszzJw02C1c5Levwbj1F2jmZIARZlmwdI67OSEiJFaQJ1EMHTdQ
   artifact: /iedera.exe/
   draft: false
   prerelease: false
