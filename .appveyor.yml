@@ -27,7 +27,7 @@ build_script:
   - bash -lc true
 
 artifacts:
-  - path: bin\dinamo
+  - path: $APPVEYOR_BUILD_FOLDER\bin\dinamo
     name: Releases
 
 deploy:
