@@ -1,0 +1,32 @@
+environment:
+  matrix:
+  # - MSYSTEM: MINGW64
+  #   PATH: C:\msys64\usr\bin;C:\msys64\mingw64\bin;C:\Windows\System32;C:\Windows;C:\Libraries\boost_1_58_0\boost;%PATH%
+  #   BOOST_ROOT: C:\msys64\mingw32
+  #   BOOST_LIBRARYDIR: C:\msys64\mingw32\lib
+  #   BOOST_INCLUDEDIR: C:\msys64\mingw32\include\boost
+
+  - MINGW_ARCH: x86_64
+    MINGW_ROOT: C:\msys64\mingw64
+    BOOST_ROOT: C:\msys64\mingw64
+    BOOST_LIBRARYDIR: C:\msys64\mingw64\lib
+    BOOST_INCLUDEDIR: C:\msys64\mingw64\include\boost
+    CMAKE_GENERATOR: 'MSYS Makefiles'
+
+
+install:
+#   # update mysy2
+  # - C:\msys64\usr\bin\bash -lc "pacman --needed --noconfirm -Sy pacman-mirrors"
+  # - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Sy"
+  # - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S autoconf automake bison flex"
+  # - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S mingw-w64-i686-oniguruma mingw-w64-x86_64-oniguruma"
+  - set PATH=%BOOST_LIBRARYDIR%;%BOOST_INCLUDEDIR%;%PATH%
+  - if defined MINGW_ROOT set PATH=%MINGW_ROOT%\bin;C:\msys64\usr\bin\;%PATH%
+  - if defined MINGW_ARCH bash -lc "pacman --needed --noconfirm -S mingw-w64-%MINGW_ARCH%-boost"
+  - if defined MSVC_ARCH call "%VS140COMNTOOLS%\..\..\VC\vcvarsall.bat" %MSVC_ARCH%
+
+
+
+build_script:
+  - bash -lc "exec 0</dev/null && cd $APPVEYOR_BUILD_FOLDER && make "
+  - bash -lc true
