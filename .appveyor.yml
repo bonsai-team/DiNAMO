@@ -25,3 +25,20 @@ build_script:
   - bash -lc "exec 0</dev/null && cd $APPVEYOR_BUILD_FOLDER && make "
   # - bash -lc "cd $APPVEYOR_BUILD_FOLDER && scripts/run_tests.sh"
   - bash -lc true
+
+artifacts:
+  - path: src\dinamo.exe
+    name: Releases
+
+deploy:
+  release: myproduct-v$(appveyor_build_version)
+  description: 'Release description'
+  provider: GitHub
+  auth_token:
+    secure: dfdd3590589526ff3bb9591b8c0084e00404d38c
+  artifact: /iedera.exe/
+  draft: false
+  prerelease: false
+  on:
+    appveyor_repo_tag: false
+    platform: x64
