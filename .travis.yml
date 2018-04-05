@@ -13,8 +13,7 @@ dist: trusty
 language: cpp
 matrix:
   include:
-    - os: linux
-      compiler: gcc
+    - compiler: gcc
       addons:
         apt:
           sources:
@@ -23,9 +22,7 @@ matrix:
             - libboost-math-dev
             - g++-4.9
       env: COMPILER=g++-4.9
-      
-    - os: linux
-      compiler: gcc
+    - compiler: gcc
       addons:
         apt:
           sources:
@@ -34,9 +31,7 @@ matrix:
             - libboost-math-dev
             - g++-5
       env: COMPILER=g++-5
-
-    - os: linux
-      compiler: clang
+    - compiler: clang
       addons:
         apt:
           sources:
@@ -46,9 +41,7 @@ matrix:
             - libboost-math-dev
             - clang-3.6
       env: COMPILER=clang++-3.6
-
-    - os: linux
-      compiler: clang
+    - compiler: clang
       addons:
         apt:
           sources:
@@ -58,18 +51,6 @@ matrix:
             - libboost-math-dev
             - clang-3.7
       env: COMPILER=clang++-3.7
-   
-    - os: linux
-      compiler: x86_64-w64-mingw32-g++
-      env: OPJ_CI_CC=x86_64-w64-mingw32-gcc OPJ_CI_CXX=x86_64-w64-mingw32-g++ OPJ_CI_ARCH=x86_64 OPJ_CI_BUILD_CONFIGURATION=Release
-      addons:
-        apt:
-          packages:
-            - gcc-mingw-w64-base
-            - binutils-mingw-w64-x86-64
-            - gcc-mingw-w64-x86-64
-            - gcc-mingw-w64
-            - g++-mingw-w64-x86-64
 
 ################################################
 
@@ -80,7 +61,7 @@ before_script:
 script:
   - export CXX=${COMPILER}
   - make
-  # - scripts/run_tests.sh
+  - scripts/run_tests.sh
 
 after_success:
   - chmod ugo+x scripts/travis_auto_merger.sh
