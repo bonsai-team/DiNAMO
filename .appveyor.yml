@@ -4,12 +4,6 @@ image: Visual Studio 2017
 
 environment:
   matrix:
-  # - MSYSTEM: MINGW64
-  #   PATH: C:\msys64\usr\bin;C:\msys64\mingw64\bin;C:\Windows\System32;C:\Windows;C:\Libraries\boost_1_58_0\boost;%PATH%
-  #   BOOST_ROOT: C:\msys64\mingw32
-  #   BOOST_LIBRARYDIR: C:\msys64\mingw32\lib
-  #   BOOST_INCLUDEDIR: C:\msys64\mingw32\include\boost
-
   - build: g++
     platform: x64
     MINGW_ROOT: C:\msys64\mingw64
@@ -20,11 +14,6 @@ environment:
 
 
 install:
-#   # update mysy2
-  # - C:\msys64\usr\bin\bash -lc "pacman --needed --noconfirm -Sy pacman-mirrors"
-  # - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -Sy"
-  # - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S autoconf automake bison flex"
-  # - C:\msys64\usr\bin\bash -lc "pacman --noconfirm -S mingw-w64-i686-oniguruma mingw-w64-x86_64-oniguruma"
   - set PATH=%MINGW_ROOT%;%MINGW_ROOT%\bin;C:\msys64\usr\bin\;"C:\Program Files\LLVM\bin";%PATH%
   - bash -lc "pacman --needed --noconfirm -S mingw-w64-%MINGW_ARCH%-libelf"
   - bash -lc "pacman --needed --noconfirm -S mingw-w64-%MINGW_ARCH%-boost"
@@ -34,4 +23,4 @@ install:
 
 build_script:
   - bash -lc "exec 0</dev/null && cd $APPVEYOR_BUILD_FOLDER && make "
-  - bash -lc "$APPVEYOR_BUILD_FOLDER/scripts/run_tests.sh"
+  - bash -lc "cd $APPVEYOR_BUILD_FOLDER && scripts/run_tests.sh"
