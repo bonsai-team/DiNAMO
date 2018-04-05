@@ -1,8 +1,6 @@
 # DiNAMO: An exact and efficient method for IUPAC motif discovery in DNA sequences
 
-[![Build Status](https://travis-ci.org/bonsai-team/DiNAMO.svg?branch=master)](https://travis-ci.org/bonsai-team/DiNAMO)
-
-[![Build status](https://ci.appveyor.com/api/projects/status/a9powubl5mqeigvt?svg=true)](https://ci.appveyor.com/project/chadisaad/dinamo)
+[![Build Status](https://travis-ci.org/bonsai-team/DiNAMO.svg?branch=master)](https://travis-ci.org/bonsai-team/DiNAMO)  [![Build status](https://ci.appveyor.com/api/projects/status/a9powubl5mqeigvt?svg=true)](https://ci.appveyor.com/project/chadisaad/dinamo)
 
 The DiNAMO software implements an exhaustive algorithm to detect over-represented IUPAC motifs in a set of DNA sequences. It has two modes: *scanning* mode (default), where all windows are parsed, or *fixed-position* mode (see optional parameter *-p* ), where only motifs occurring at a specific position in the sequences are taken into account.  
 
