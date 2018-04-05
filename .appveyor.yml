@@ -27,7 +27,7 @@ build_script:
   - bash -lc true
 
 artifacts:
-  - path: src\dinamo.exe
+  - path: bin\dinamo
     name: Releases
 
 deploy:
@@ -36,7 +36,7 @@ deploy:
   provider: GitHub
   auth_token:
     secure: 4pbkaIiW4tf9KoszzJw02C1c5Levwbj1F2jmZIARZlmwdI67OSEiJFaQJ1EMHTdQ
-  artifact: /iedera.exe/
+  artifact: /dinamo/
   draft: false
   prerelease: false
   on:
