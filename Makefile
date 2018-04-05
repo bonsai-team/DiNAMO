@@ -2,7 +2,7 @@ SRCDIR := src
 BUILDDIR := build
 EXECDIR := bin
 TARGET := bin/dinamo
-INC := -I include 'C:\msys64\mingw64\include\boostz' -L'C:\msys64\mingw64\lib'
+INC := -I include 'C:\msys64\mingw64\include' -L'C:\msys64\mingw64\lib'
 
 SRCEXT := cpp
 SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
