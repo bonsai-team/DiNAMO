@@ -84,12 +84,12 @@ script:
 - make
 - scripts/run_tests.sh
 
-after_success:
-- chmod ugo+x scripts/travis_auto_merger.sh
-- BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO  scripts/travis_auto_merger.sh
+after_success: # MERGE IS DONE MANUALLY
+#- chmod ugo+x scripts/travis_auto_merger.sh
+#- BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO  scripts/travis_auto_merger.sh
 
 before_deploy:
-#
+# NOTHING TO DO
 
 deploy:
   provider: releases
