@@ -37,8 +37,8 @@ deploy:
   auth_token:
     secure: 4pbkaIiW4tf9KoszzJw02C1c5Levwbj1F2jmZIARZlmwdI67OSEiJFaQJ1EMHTdQ
   artifact: /dinamo/
-  draft: false
-  prerelease: false
+  draft: true
+  prerelease: true
   on:
     appveyor_repo_tag: false
     platform: x64
