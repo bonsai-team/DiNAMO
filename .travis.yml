@@ -56,6 +56,7 @@ before_script:
 - chmod ugo+x scripts/run_tests.sh
 script:
 - export CXX=${COMPILER}
+- export BINARY_NAME=dinamo-${COMPILER}
 - make
 
 after_success:
@@ -63,8 +64,7 @@ after_success:
 - BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO  scripts/travis_auto_merger.sh
 
 before_deploy:
-- export BINARY_NAME=dinamo-${COMPILER}
-
+#
 
 deploy:
   provider: releases
