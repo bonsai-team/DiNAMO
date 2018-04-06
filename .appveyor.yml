@@ -19,6 +19,7 @@ install:
   - bash -lc "pacman --needed --noconfirm -S mingw-w64-%MINGW_ARCH%-boost"
   - set CPATH=%LIBELF_INCLUDE%;%CPATH%
   - set CPLUS_INCLUDE_PATH=%LIBELF_INCLUDE%;%BOOST_ROOT%;%CPLUS_INCLUDE_PATH%
+  - set BINARY_NAME=dinamo-windows-%platform%.exe
 
 
 build_script:
