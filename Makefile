@@ -1,7 +1,6 @@
 SRCDIR := src
 BUILDDIR := build
 EXECDIR := bin
-TARGET := bin/$(BINARY_NAME)
 INC := -I include
 
 SRCEXT := cpp
@@ -10,7 +9,19 @@ OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
 CXXFLAGS := --std=c++14 -Wall -Ofast -static
 
+TARGET := bin/dinamo
+
+ifdef BINARY_NAME
+TARGET := bin/$(BINARY_NAME)
+else
+TARGET := bin/dinamo
+endif
+
+
+
+
 all: $(TARGET)
+
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
