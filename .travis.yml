@@ -61,10 +61,10 @@ matrix:
 
   - os: osx
     osx_image: xcode8
-    compiler: gcc
+    compiler: clang
     sudo: false
     env: 
-      - COMPILER=gcc
+      - COMPILER=clang++
       - OS=osx
 
 
