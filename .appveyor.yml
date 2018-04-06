@@ -31,8 +31,8 @@ artifacts:
     name: Releases
 
 deploy:
-  release: myproduct-v$(appveyor_build_version)
-  description: 'Release description'
+  release: DiNAMO-v$(appveyor_build_version)
+  description: 'Mac OS X and Windows 64 binaries'
   provider: GitHub
   auth_token:
     secure: 4pbkaIiW4tf9KoszzJw02C1c5Levwbj1F2jmZIARZlmwdI67OSEiJFaQJ1EMHTdQ
