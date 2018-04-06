@@ -61,6 +61,7 @@ matrix:
 
   - os: osx
     osx_image: xcode9.2
+    compiler: clang
     sudo: false
 
 
