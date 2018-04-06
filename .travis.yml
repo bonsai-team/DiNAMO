@@ -60,8 +60,7 @@ script:
 
 after_success:
 - chmod ugo+x scripts/travis_auto_merger.sh
-- BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO
-  scripts/travis_auto_merger.sh
+- BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO  scripts/travis_auto_merger.sh
 
 before_deploy:
 - export FILE_TO_UPLOAD=$(ls bin/dinamo)
@@ -71,7 +70,9 @@ deploy:
   provider: releases
   api_key:
     secure: GuDQad/LFQWQIVelb7khj8fLRrMiIsDznfgPZIto+CRk/aCdLZfA46sEE+87dpWaqn0lW+NI8s4CAAXj+mGmd7eRzEOyfPFngWSSHxKkgQq2qiEKXNJktPifhWnELSBWJ0/YP9cXsEP0Ix5C9TKo0MWkKVv/l1xbu1ycM5vKrUrjQZffm4BqK/1RnydGOjId0eGwmo2VuMU/27OI+Q+v796Xqr3kAW0iNkiIKyBv3ocjE/Rjk1yPSPnPeNzwfzyENdNV9B+tpH6hgs3O91SM6qn0SWXjanqAc4Jct4KpaBZm2lcXz1mDmU38J8KxYQtIzxoOvtELTi2XPX70I4ePrDt2APh7PxG7aT98Xx/uK0D7MfnOH5tmBARb5qmPbHZ/6oRAmf9kgQFgtfkVotlot9UyySRDomrHAcwHoPny5q2IhfnsMDOF8d5u9zqWEdt9JfCGfLLb0OS3PXiMfza7pq7+OHTnT48oXBJOtjM0xutM78JavQrIFKyfrpSegXM/RAnL7ipaqm0ojsmjiu0aEdz8FoHq0IXUP0yL7Dg+6zQGNPyAmD3oTxacetBqaIiuMkmowI6mm2qLuA5i2wb8/5AcvbRUx/DNEtymIEhng2nFxBUjBzyp1PbSRJ/+FgA6uHY7fwRTUfzNxv8Ogc7K7dyrlGuDAGQ+PrNEDmbMnCM=
-  file: "${FILE_TO_UPLOAD}"
+  file: bin/dinamo
+  skip_cleanup: true  
   on:
-    repo: bonsai-team/DiNAMO
-    branch: appvayor
+    # branch: appvayor
+    all_branches: true
+    tags: false
