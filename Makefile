@@ -1,7 +1,7 @@
 SRCDIR := src
 BUILDDIR := build
 EXECDIR := bin
-TARGET := bin/dinamo
+TARGET := bin/$(BINARY_NAME)
 INC := -I include
 
 SRCEXT := cpp
