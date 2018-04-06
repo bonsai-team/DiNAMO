@@ -64,7 +64,8 @@ matrix:
     compiler: gcc
     sudo: false
     env: 
-      - COMPILER=clang
+      - COMPILER=gcc
+      - OS=osx
 
 
 before_script:
