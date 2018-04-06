@@ -24,7 +24,7 @@ install:
 
 build_script:
   - bash -lc "exec 0</dev/null && cd $APPVEYOR_BUILD_FOLDER && make "
-  # - bash -lc "cd $APPVEYOR_BUILD_FOLDER && scripts/run_tests.sh"
+  # - bash -lc "cd $APPVEYOR_BUILD_FOLDER && scripts/run_tests.sh" ### RUN TESTS ON LINUX ONLY (WITH TRAVIS)
   - bash -lc true
 
 artifacts:
@@ -32,8 +32,8 @@ artifacts:
     name: Releases
 
 deploy:
-  release: DiNAMO-v$(appveyor_build_version)
-  description: 'Mac OS X and Windows 64 binaries'
+  release: DiNAMO-v$(APPVEYOR_REPO_TAG_NAME)
+  description: 'Mac OSX, Linux and Windows 64 binaries'
   provider: GitHub
   auth_token:
     secure: 4pbkaIiW4tf9KoszzJw02C1c5Levwbj1F2jmZIARZlmwdI67OSEiJFaQJ1EMHTdQ
