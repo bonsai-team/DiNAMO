@@ -24,7 +24,7 @@ install:
 
 build_script:
   - bash -lc "exec 0</dev/null && cd $APPVEYOR_BUILD_FOLDER && make "
-  # - bash -lc "cd $APPVEYOR_BUILD_FOLDER && scripts/run_tests.sh" ## RUN TESTS ON LINUX ONLY (WITH TRAVIS)
+  # - bash -lc "cd $APPVEYOR_BUILD_FOLDER && scripts/run_tests.sh" ###   RUN TESTS ON LINUX ONLY (WITH TRAVIS)
   - bash -lc true
 
 artifacts:
