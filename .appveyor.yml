@@ -32,7 +32,7 @@ artifacts:
     name: Releases
 
 deploy:
-  release: DiNAMO-v$(APPVEYOR_REPO_TAG_NAME)
+  release: DiNAMO-v$(APPVEYOR_REPO_TAG)
   description: 'Mac OSX, Linux and Windows 64 binaries'
   provider: GitHub
   auth_token:
