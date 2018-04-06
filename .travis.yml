@@ -64,7 +64,7 @@ matrix:
     compiler: clang
     sudo: false
     env: 
-      - COMPILER=clang++-3.7
+      - COMPILER=clang
 
 
 before_script:
