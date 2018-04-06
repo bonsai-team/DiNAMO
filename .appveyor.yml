@@ -39,7 +39,7 @@ deploy:
     secure: 4pbkaIiW4tf9KoszzJw02C1c5Levwbj1F2jmZIARZlmwdI67OSEiJFaQJ1EMHTdQ
   artifact: /dinamo/
   draft: true
-  prerelease: true
+  prerelease: false
   on:
     appveyor_repo_tag: false
     platform: x64
