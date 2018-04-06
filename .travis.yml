@@ -16,7 +16,9 @@ matrix:
         packages:
         - libboost-math-dev
         - g++-4.9
-    env: COMPILER=g++-4.9
+    env: 
+      - COMPILER=g++-4.9
+      - OS=linux
   - os: linux
     compiler: gcc
     addons:
@@ -26,7 +28,9 @@ matrix:
         packages:
         - libboost-math-dev
         - g++-5
-    env: COMPILER=g++-5
+    env: 
+      - COMPILER=g++-5
+      - OS=linux
   - os: linux
     compiler: clang
     addons:
@@ -37,7 +41,9 @@ matrix:
         packages:
         - libboost-math-dev
         - clang-3.6
-    env: COMPILER=clang++-3.6
+    env: 
+      - COMPILER=clang++-3.6
+      - OS=linux
   - os: linux
     compiler: clang
     addons:
@@ -48,15 +54,21 @@ matrix:
         packages:
         - libboost-math-dev
         - clang-3.7
-    env: COMPILER=clang++-3.7
+    env: 
+      - COMPILER=clang++-3.7
+      - OS=linux
+
+
   - os: osx
     osx_image: xcode8
     sudo: false
+
+
 before_script:
 - chmod ugo+x scripts/run_tests.sh
 script:
 - export CXX=${COMPILER}
-- export BINARY_NAME=dinamo-${COMPILER}
+- export BINARY_NAME=dinamo-${OS}
 - make
 
 after_success:
@@ -70,7 +82,9 @@ deploy:
   provider: releases
   api_key:
     secure: GuDQad/LFQWQIVelb7khj8fLRrMiIsDznfgPZIto+CRk/aCdLZfA46sEE+87dpWaqn0lW+NI8s4CAAXj+mGmd7eRzEOyfPFngWSSHxKkgQq2qiEKXNJktPifhWnELSBWJ0/YP9cXsEP0Ix5C9TKo0MWkKVv/l1xbu1ycM5vKrUrjQZffm4BqK/1RnydGOjId0eGwmo2VuMU/27OI+Q+v796Xqr3kAW0iNkiIKyBv3ocjE/Rjk1yPSPnPeNzwfzyENdNV9B+tpH6hgs3O91SM6qn0SWXjanqAc4Jct4KpaBZm2lcXz1mDmU38J8KxYQtIzxoOvtELTi2XPX70I4ePrDt2APh7PxG7aT98Xx/uK0D7MfnOH5tmBARb5qmPbHZ/6oRAmf9kgQFgtfkVotlot9UyySRDomrHAcwHoPny5q2IhfnsMDOF8d5u9zqWEdt9JfCGfLLb0OS3PXiMfza7pq7+OHTnT48oXBJOtjM0xutM78JavQrIFKyfrpSegXM/RAnL7ipaqm0ojsmjiu0aEdz8FoHq0IXUP0yL7Dg+6zQGNPyAmD3oTxacetBqaIiuMkmowI6mm2qLuA5i2wb8/5AcvbRUx/DNEtymIEhng2nFxBUjBzyp1PbSRJ/+FgA6uHY7fwRTUfzNxv8Ogc7K7dyrlGuDAGQ+PrNEDmbMnCM=
-  file: bin/${BINARY_NAME}
+  file: 
+    - bin/dinamo-linux
+    - bin/dinamo-osx
   skip_cleanup: 1  
   on:
     # branch: appvayor
