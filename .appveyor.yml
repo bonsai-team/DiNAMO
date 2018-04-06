@@ -28,7 +28,7 @@ build_script:
   - bash -lc true
 
 artifacts:
-  - path: "bin\${BINARY_NAME}"
+  - path: bin\%BINARY_NAME%
     name: Releases
 
 deploy:
