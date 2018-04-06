@@ -1,68 +1,104 @@
 notifications:
-    email: false
+  email: false
 
-###############################################
-
-env:
-  - secure: "cMkn0Em26i4QGIiJQ4FrvBaRqTe1mqeYAqCawpsjXQg8T3V8O7oDW67ZEq08A8GZlZ8IVUYpXOsOIkKcizWlVwwwIEH0GTxLXVAC3zYOMmVEts+ui58PQnwcZl3goGZ5oQDMFCaGKc84WsQ5qBVrK4OEEVcsw5kwNk3cmgc3nF/H1p7KgUL9sZtGoh6DwN4fLnJgwvYjsx1n/Unc7XuBy6Bb4sW09TOYyLUAlaTiuU3Eee3EZmKadYt1lDrv8d4GkEhBKeD1s9YTAPrC+f2t5PforO9BIVNibgk3PUcKnVyy6h8n2qWh4qHYT9KyFmqCCN2DuoWSXYj0igVxv8AM15Y89rIdJSqzw087PlK4QAI9j54EQCb8VK4p3Jvt1we0S+xxqzkxBOKgxdJx4LMuQz1dYlPoIVfoTHR5fWtgV/XLxXqa5rXOH7Lf9RFdGVI9jpa6nqVEXNAWLvR+b9ywPq59r1glgBXVnJSSMTvwXyfplP+Y+6AEok3vIQywou8bJ1uXzVy5epvNtolagbt74dM5MDcv+zga4/yLNpAZTuYB4u8qov+3ODWoRX+54X/LcheJw6Q+CsxAieJjnPCVDgK6itmzaHzj8wiBzaA01YbRzoLnumKJVzw5qm7MeJ4DWCQHmx+X2B2+rIt7OXlTyw+HexujV00M62FbZIEqV+I="
-
-###############################################
 
 sudo: require
 dist: trusty
 language: cpp
+
+
 matrix:
   include:
-    - compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - libboost-math-dev
-            - g++-4.9
-      env: COMPILER=g++-4.9
-    - compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - libboost-math-dev
-            - g++-5
-      env: COMPILER=g++-5
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.6
-          packages:
-            - libboost-math-dev
-            - clang-3.6
-      env: COMPILER=clang++-3.6
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.7
-          packages:
-            - libboost-math-dev
-            - clang-3.7
-      env: COMPILER=clang++-3.7
+  
+  - os: linux
+    compiler: gcc
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - libboost-math-dev
+        - g++-4.9
+    env: 
+      - COMPILER=g++-4.9
+      - OS=linux
+  
+  - os: linux
+    compiler: gcc
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - libboost-math-dev
+        - g++-5
+    env: 
+      - COMPILER=g++-5
+      - OS=linux
+  
+  - os: linux
+    compiler: clang
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-precise-3.6
+        packages:
+        - libboost-math-dev
+        - clang-3.6
+    env: 
+      - COMPILER=clang++-3.6
+      - OS=linux
+  
+  - os: linux
+    compiler: clang
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-precise-3.7
+        packages:
+        - libboost-math-dev
+        - clang-3.7
+    env: 
+      - COMPILER=clang++-3.7
+      - OS=linux
 
-################################################
 
-# making sure we use latest g++
+  - os: osx
+    osx_image: xcode8
+    compiler: clang
+    sudo: false
+    env: 
+      - COMPILER=clang++
+      - OS=osx
+
+
 before_script:
-  - chmod ugo+x scripts/run_tests.sh
+- chmod ugo+x scripts/run_tests.sh
+
 
 script:
-  - export CXX=${COMPILER}
-  - make
-  - scripts/run_tests.sh
+- export CXX=${COMPILER}
+- export BINARY_NAME=dinamo-${OS}
+- make
+- scripts/run_tests.sh
 
-after_success:
-  - chmod ugo+x scripts/travis_auto_merger.sh
-  - "BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO scripts/travis_auto_merger.sh"
+after_success: # MERGE IS DONE MANUALLY
+#- chmod ugo+x scripts/travis_auto_merger.sh
+#- BRANCH_TO_MERGE='unstable' BRANCH_TO_MERGE_INTO=master GITHUB_REPO=bonsai-team/DiNAMO  scripts/travis_auto_merger.sh
+
+before_deploy:
+# NOTHING TO DO
+
+deploy:
+  provider: releases
+  api_key:
+    secure: GuDQad/LFQWQIVelb7khj8fLRrMiIsDznfgPZIto+CRk/aCdLZfA46sEE+87dpWaqn0lW+NI8s4CAAXj+mGmd7eRzEOyfPFngWSSHxKkgQq2qiEKXNJktPifhWnELSBWJ0/YP9cXsEP0Ix5C9TKo0MWkKVv/l1xbu1ycM5vKrUrjQZffm4BqK/1RnydGOjId0eGwmo2VuMU/27OI+Q+v796Xqr3kAW0iNkiIKyBv3ocjE/Rjk1yPSPnPeNzwfzyENdNV9B+tpH6hgs3O91SM6qn0SWXjanqAc4Jct4KpaBZm2lcXz1mDmU38J8KxYQtIzxoOvtELTi2XPX70I4ePrDt2APh7PxG7aT98Xx/uK0D7MfnOH5tmBARb5qmPbHZ/6oRAmf9kgQFgtfkVotlot9UyySRDomrHAcwHoPny5q2IhfnsMDOF8d5u9zqWEdt9JfCGfLLb0OS3PXiMfza7pq7+OHTnT48oXBJOtjM0xutM78JavQrIFKyfrpSegXM/RAnL7ipaqm0ojsmjiu0aEdz8FoHq0IXUP0yL7Dg+6zQGNPyAmD3oTxacetBqaIiuMkmowI6mm2qLuA5i2wb8/5AcvbRUx/DNEtymIEhng2nFxBUjBzyp1PbSRJ/+FgA6uHY7fwRTUfzNxv8Ogc7K7dyrlGuDAGQ+PrNEDmbMnCM=
+  file: 
+    - bin/${BINARY_NAME}
+  skip_cleanup: 1  
+  on:
+    # branch: appvayor
+    all_branches: true
+    tags: true

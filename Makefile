@@ -1,14 +1,14 @@
 SRCDIR := src
 BUILDDIR := build
 EXECDIR := bin
-TARGET := bin/dinamo
+TARGET := bin/$(BINARY_NAME)
 INC := -I include
 
 SRCEXT := cpp
 SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
-CXXFLAGS := --std=c++14 -Wall -Ofast
+CXXFLAGS := --std=c++14 -Wall -Ofast -static
 
 all: $(TARGET)
 
