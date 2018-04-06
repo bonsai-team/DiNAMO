@@ -101,4 +101,4 @@ deploy:
   on:
     # branch: appvayor
     all_branches: true
-    tags: false
+    tags: true

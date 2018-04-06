@@ -41,5 +41,5 @@ deploy:
   draft: false
   prerelease: false
   on:
-    appveyor_repo_tag: false
+    appveyor_repo_tag: true
     platform: x64
