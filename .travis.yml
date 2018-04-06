@@ -60,9 +60,11 @@ matrix:
 
 
   - os: osx
-    osx_image: xcode9.2
+    osx_image: xcode8
     compiler: clang
     sudo: false
+    env: 
+      - COMPILER=clang++-3.7
 
 
 before_script:
