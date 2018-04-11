@@ -66,7 +66,7 @@ matrix:
 
 
   - os: osx
-    osx_image: xcode9
+    osx_image: xcode8.2
     compiler: clang
     sudo: false
     env: 
