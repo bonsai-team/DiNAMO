@@ -7,7 +7,8 @@ SRCEXT := cpp
 SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
-CXXFLAGS := --std=c++14 -Wall -Ofast -static
+CXXFLAGS := --std=c++14 -Wall -Ofast -static -static-libgcc -static-libstdc++
+
 
 TARGET := bin/dinamo
 
