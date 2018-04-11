@@ -8,7 +8,7 @@ SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
 CXXFLAGS := --std=c++14 -Wall -Ofast 
-LDFLAGS= -static  -static-libgcc -static-libstdc++ 
+LDFLAGS  =
 
 
 TARGET := bin/dinamo
@@ -19,7 +19,9 @@ else
 TARGET := bin/dinamo
 endif
 
-
+ifeq ($(BINARY_NAME),dinamo-windows-x64.exe)
+	LDFLAGS = -static -static-libgcc -static-libstdc++ 
+endif
 
 
 all: $(TARGET)
