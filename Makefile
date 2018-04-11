@@ -7,7 +7,8 @@ SRCEXT := cpp
 SOURCES := $(wildcard $(SRCDIR)/*.$(SRCEXT))
 OBJECTS := $(patsubst %.$(SRCEXT),$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
-CXXFLAGS := --std=c++14 -Wall -Ofast -static -static-libgcc -static-libstdc++
+CXXFLAGS := --std=c++14 -Wall -Ofast 
+LDFLAGS  =
 
 
 TARGET := bin/dinamo
@@ -18,7 +19,9 @@ else
 TARGET := bin/dinamo
 endif
 
-
+ifeq ($(BINARY_NAME),dinamo-windows-x64.exe)
+	LDFLAGS = -static -static-libgcc -static-libstdc++ 
+endif
 
 
 all: $(TARGET)
@@ -27,7 +30,7 @@ all: $(TARGET)
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@mkdir -p $(EXECDIR)
-	@echo " $(CXX) $^ -o $(TARGET) "; $(CXX) $^ -o $(TARGET)
+	@echo " $(CXX) $^ -o $(TARGET) "; $(CXX) $(LDFLAGS) $^ -o $(TARGET)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
