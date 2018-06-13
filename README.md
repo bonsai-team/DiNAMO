@@ -51,3 +51,10 @@ DiNAMO takes as input two fasta files, which contain respectively the positive d
 * do not display logs
 
         --no-log
+
+
+## References
+
+how to cite this tool:
+
+>C. Saad, L. Noé, H. Richard, J. Leclerc, M.-P. Buisine, H. Touzet, and M. Figeac. Dinamo: highly sensitive dna motif discovery in high-throughput sequencing data. BMC Bioinformatics, 19(1):223, Jun 2018. [https://doi.org/10.1186/s12859-018-2215-1](https://doi.org/10.1186/s12859-018-2215-1)
